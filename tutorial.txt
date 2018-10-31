@@ -1,0 +1,1 @@
+http://users.ece.utexas.edu/~patt/04s.382N/tutorial/verilog_manual.html
