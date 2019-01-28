@@ -29,7 +29,7 @@ output reg [16:0] f;
   
 always @ (ir) 
     case (ir[27:25]) 
-        3'b000 : decodeFamilySubcatagory000 (ir, f); 
+        3'b000 : f = 17'h00000;//uggghhh decodeFamilySubcatagory000 (ir, f); 
 
         3'b001 : begin
                     if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) f = 17'h00040; //f6
@@ -51,10 +51,10 @@ always @ (ir)
         3'b111 : f = 17'h00000; //not implementing these coprocessor instructions
     endcase 
 endmodule
-
+/*
 module decodeFamilySubcatagory000 (ir, f);
 input [31:0] ir;
 output reg [16:0] f;
     //blah
 endmodule
-
+*/
