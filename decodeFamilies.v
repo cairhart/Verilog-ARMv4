@@ -3,58 +3,81 @@
  */
 
 /* Decode Families Key:
- * HexMask    Index  Description
- * 17'h00001  f[0]   Data Processing Immediate 
- * 17'h00002  f[1]   Data Processing Immediate Shift 
- * 17'h00004  f[2]   Data Processing Register Shift
- * 17'h00008  f[3]   Multiply
- * 17'h00010  f[4]   Multiply Long
- * 17'h00020  f[5]   Move from Status Register
- * 17'h00040  f[6]   Move Immediate to Status Register
- * 17'h00080  f[7]   Move Register to Status Register
- * 17'h00100  f[8]   Branch/Exchange Instruction Set
- * 17'h00200  f[9]   Load/Store Immediate Offset
- * 17'h00400  f[10]  Load/Store Register Offset
- * 17'h00800  f[11]  Load/Store Halfword/Signed Byte Combined Offset
- * 17'h01000  f[12]  Load/Store Halfword/Signed Byte Shifted Offset
- * 17'h02000  f[13]  Swap/Swap Byte
- * 17'h04000  f[14]  Load/Store Multiple
- * 17'h08000  f[15]  Branch and Branch with Link
- * 17'h10000  f[16]  Undefined Instruction
+ * Index  Description
+ * f[0]   Data Processing Immediate 
+ * f[1]   Data Processing Immediate Shift 
+ * f[2]   Data Processing Register Shift
+ * f[3]   Multiply
+ * f[4]   Multiply Long
+ * f[5]   Move from Status Register
+ * f[6]   Move Immediate to Status Register
+ * f[7]   Move Register to Status Register
+ * f[8]   Load/Store Immediate Offset
+ * f[9]   Load/Store Register Offset
+ * f[10]  Load/Store Halfword/Signed Byte Combined Offset
+ * f[11]  Load/Store Halfword/Signed Byte Shifted Offset
+ * f[12]  Swap/Swap Byte
+ * f[13]  Load/Store Multiple
+ * f[14]  Branch and Branch with Link
+ * f[15]  Undefined Instruction
  */
 
 module decodeFamily (ir, f);
 input [31:0] ir; 
-output reg [16:0] f; 
+output reg [15:0] f; 
   
+wire [15:0] mask  = 16'h0001;
+wire [15:0] f_000 = 16'h0000;
+decodeFamilySubcatagory000 module000 (ir, f_000);
+
 always @ (ir) 
     case (ir[27:25]) 
-        3'b000 : f = 17'h00000;//uggghhh decodeFamilySubcatagory000 (ir, f); 
+        3'b000 : f = f_000; 
 
         3'b001 : begin
-                    if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) f = 17'h00040; //f6
-                    else f = 17'h00001; //f0
+                    if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) f = (mask << 6); //f6
+                    else f = (mask << 0); //f0
                  end
 
-        3'b010 : f = 17'h00200; //f9
+        3'b010 : f = (mask << 8); //f8
 
         3'b011 : begin
-                    if (ir[4] == 1'b0) f = 17'h00400; //f10
-                    else f = 17'h10000; //f16
+                    if (ir[4] == 1'b0) f = (mask << 9); //f9
+                    else f = (mask << 15); //f15
                  end
 
-        3'b100 : f = 17'h04000; //f14
+        3'b100 : f = (mask << 13); //f13
 
-        3'b101 : f = 17'h08000; //f15
+        3'b101 : f = (mask << 14); //f14
 
-        3'b110 : f = 17'h00000; //not implementing these coprocessor instructions
-        3'b111 : f = 17'h00000; //not implementing these coprocessor instructions
+        3'b110 : f = 16'h0000; //not implementing these coprocessor instructions
+        3'b111 : f = 16'h0000; //not implementing these coprocessor instructions
     endcase 
 endmodule
-/*
+
 module decodeFamilySubcatagory000 (ir, f);
 input [31:0] ir;
-output reg [16:0] f;
-    //blah
+output reg [15:0] f;
+
+wire [15:0] mask  = 16'h0001;
+
+always @ (ir) begin
+    if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) f = (mask << 3); //f3
+    else if ((ir[24:23] == 2'b01) && (ir[7:4] == 4'b1001)) f = (mask << 4); //f4
+    else if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b00)) begin
+        if (ir[7:4] == 4'b1001) f = (mask << 12); //f12
+        else f = (mask << 5); //f5
+    end
+    else if (((ir[24:23] == 2'b10)  && (ir[21:20] == 2'b10)) && (ir[4] == 1'b0)) f = (mask << 7); //f7
+    else if (ir[4] == 1'b0) f = (mask << 1); //f1
+    else begin
+        if (ir[7] == 1'b0) f = (mask << 2); //f2
+        else begin
+            if (ir[22] == 1'b0) f = (mask << 11); //f11
+            else f = (mask << 10); //f10
+        end
+    end
+end
+
 endmodule
-*/
+
