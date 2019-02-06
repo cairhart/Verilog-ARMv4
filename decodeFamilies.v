@@ -27,12 +27,26 @@ input [31:0] ir;
 output reg [15:0] f; 
   
 wire [15:0] mask  = 16'h0001;
-wire [15:0] f_000 = 16'h0000;
-decodeFamilySubcatagory000 module000 (ir, f_000);
 
 always @ (ir) 
     case (ir[27:25]) 
-        3'b000 : f = f_000; 
+        3'b000 : begin 
+                    if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) f = (mask << 3); //f3
+                    else if ((ir[24:23] == 2'b01) && (ir[7:4] == 4'b1001)) f = (mask << 4); //f4
+                    else if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b00)) begin
+                        if (ir[7:4] == 4'b1001) f = (mask << 12); //f12
+                        else f = (mask << 5); //f5
+                    end
+                    else if (((ir[24:23] == 2'b10)  && (ir[21:20] == 2'b10)) && (ir[4] == 1'b0)) f = (mask << 7); //f7
+                    else if (ir[4] == 1'b0) f = (mask << 1); //f1
+                    else begin
+                        if (ir[7] == 1'b0) f = (mask << 2); //f2
+                        else begin
+                            if (ir[22] == 1'b0) f = (mask << 11); //f11
+                            else f = (mask << 10); //f10
+                        end
+                    end
+                end
 
         3'b001 : begin
                     if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) f = (mask << 6); //f6
@@ -54,7 +68,7 @@ always @ (ir)
         3'b111 : f = 16'h0000; //not implementing these coprocessor instructions
     endcase 
 endmodule
-
+/*
 module decodeFamilySubcatagory000 (ir, f);
 input [31:0] ir;
 output reg [15:0] f;
@@ -80,4 +94,4 @@ always @ (ir) begin
 end
 
 endmodule
-
+*/
