@@ -1,5 +1,5 @@
 At time                    0, value = xx (x)
-At time                   17, value = 00 (0)
+t time                   17, value = 00 (0)
 At time                   35, value = 01 (1)
 At time                   45, value = 02 (2)
 At time                   55, value = 03 (3)
