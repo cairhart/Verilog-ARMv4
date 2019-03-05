@@ -3,9 +3,7 @@
 module StateMachine(
     input clk,
     input [15:0] family_bits,
-    input COND,
-
-    output [6:0] curr_state
+    input COND
 );
 
 reg   [6:0] address;
@@ -43,7 +41,5 @@ wire [6:0] next_state_address = (COND == 1 && EVCND == 1) ? non_fetch_address : 
 always @(posedge clk) begin
     address <= next_state_address;
 end
-
-assign curr_state = address;
 
 endmodule
