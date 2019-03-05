@@ -3,11 +3,18 @@
 module StateMachine(
     input clk,
     input [15:0] family_bits,
-    input COND
+    input COND,
+
+    output [6:0] curr_state
 );
 
 reg   [6:0] address;
 reg  [63:0] control_store [0:127];
+
+initial begin
+    address <= 7'd104;
+    $readmemb("cs_bits.mem", control_store);
+end
 
 wire [63:0] CS_BITS = control_store[address];
 wire        EVCND   = CS_BITS[13];
@@ -24,7 +31,7 @@ wire J0_toggle = ~MOD[1] &  MOD[0] & A;
 wire [6:0] jump_target = {J[6:3], J[2] | J2_toggle, J[1] | J1_toggle, J[0] | J0_toggle};
 
 wire [3:0] family_number;
-Encoder16To4 inst(
+Encoder16To4 _(
     .bits(family_bits),
     .number(family_number)
 );
@@ -36,5 +43,7 @@ wire [6:0] next_state_address = (COND == 1 && EVCND == 1) ? non_fetch_address : 
 always @(posedge clk) begin
     address <= next_state_address;
 end
+
+assign curr_state = address;
 
 endmodule
