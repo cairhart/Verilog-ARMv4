@@ -10,15 +10,15 @@ reg  [63:0] control_store [0:127];
 
 wire [63:0] CS_BITS = control_store[address];
 wire  [7:0] J       = CS_BITS[12:6];
-wire  [1:0] COND    = CS_BITS[5:4];
+wire  [1:0] MOD     = CS_BITS[5:4];
 wire        DEC     = CS_BITS[3];
 wire        L       = CS_BITS[2];
 wire        P       = CS_BITS[1];
 wire        A       = CS_BITS[0];
 
-wire J2_toggle =  COND[1] &  COND[0] & L;
-wire J1_toggle =  COND[1] & ~COND[0] & P;
-wire J0_toggle = ~COND[1] &  COND[0] & A;
+wire J2_toggle =  MOD[1] &  MOD[0] & L;
+wire J1_toggle =  MOD[1] & ~MOD[0] & P;
+wire J0_toggle = ~MOD[1] &  MOD[0] & A;
 wire [6:0] jump_target = {J[6:3], J[2] | J2_toggle, J[1] | J1_toggle, J[0] | J0_toggle};
 
 wire [3:0] family_number;
