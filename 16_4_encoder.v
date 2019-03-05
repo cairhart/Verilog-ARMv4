@@ -21,6 +21,7 @@ always @(*) begin
         16'h2000 : number <= 4'd13;
         16'h4000 : number <= 4'd14;
         16'h8000 : number <= 4'd15;
+        default  : number <= 4'd0;
     endcase
 end
 
