@@ -2,13 +2,15 @@
 
 module StateMachine(
     input clk,
-    input [15:0] family_bits
+    input [15:0] family_bits,
+    input COND
 );
 
 reg   [6:0] address;
 reg  [63:0] control_store [0:127];
 
 wire [63:0] CS_BITS = control_store[address];
+wire        EVCND   = CS_BITS[13];
 wire  [7:0] J       = CS_BITS[12:6];
 wire  [1:0] MOD     = CS_BITS[5:4];
 wire        DEC     = CS_BITS[3];
@@ -28,8 +30,11 @@ Encoder16To4 inst(
 );
 wire [6:0] decode_target = {family_number, 3'b0};
 
+wire [6:0] non_fetch_address = (DEC == 1) ? decode_target : jump_target;
+wire [6:0] next_state_address = (COND == 1 && EVCND == 1) ? non_fetch_address : 7'd104;
+
 always @(posedge clk) begin
-    address <= (DEC == 1) ? decode_target : jump_target;
+    address <= next_state_address;
 end
 
 endmodule
