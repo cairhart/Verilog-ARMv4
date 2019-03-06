@@ -6,7 +6,9 @@ module StateMachine(
     input COND,
     input L,
     input P,
-    input A
+    input A,
+
+    output [63:0] CS_BITS
 );
 
 reg   [6:0] address;
@@ -17,11 +19,11 @@ initial begin
     $readmemb("cs_bits.mem", control_store);
 end
 
-wire [63:0] CS_BITS = control_store[address];
-wire        EVCOND  = CS_BITS[10];
-wire  [7:0] J       = CS_BITS[9:3];
-wire  [1:0] MOD     = CS_BITS[2:1];
-wire        DEC     = CS_BITS[0];
+assign CS_BITS = control_store[address];
+wire  [7:0] J       = CS_BITS[63:57];
+wire  [1:0] MOD     = CS_BITS[56:55];
+wire        DEC     = CS_BITS[54];
+wire        EVCOND  = CS_BITS[53];
 
 wire J2_toggle =  MOD[1] &  MOD[0] & L;
 wire J1_toggle =  MOD[1] & ~MOD[0] & P;
