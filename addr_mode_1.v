@@ -100,16 +100,14 @@ end
 
 wire [11:0] pass_operand = (is_LSIO) ? IR[11:0] : {4'b0, IR[11:8], IR[3:0]};
 
-assign shifter_operand = ((is_LSIO == 1) || (is_LSHSBCO == 1)) ?
-                            pass_operand :
-                            (is_DPI == 1) ?
-                                rot_res[31:0] :
-                                shift_res[31:0];
+assign shifter_operand = ( (is_LSIO == 1) || (is_LSHSBCO == 1) )
+                       ? pass_operand
+                       : (is_DPI == 1) ? rot_res[31:0]
+                                       : shift_res[31:0];
 
-assign shifter_carry   = ((is_LSIO == 1) || (is_LSHSBCO == 1)) ?
-                            C : // TODO: find out what the proper carry should be, or if that even matters
-                            (is_DPI == 1) ?
-                                rot_res[32] :
-                                shift_res[32];
+assign shifter_carry = ((is_LSIO == 1) || (is_LSHSBCO == 1))
+                     ? C
+                     : (is_DPI == 1) ? rot_res[32]
+                                     : shift_res[32];
 
 endmodule
