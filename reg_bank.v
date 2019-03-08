@@ -1,4 +1,4 @@
-module RegFile(
+module RegBank(
     input clk,
     input latch_reg,
     input [3:0] Rd,
