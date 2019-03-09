@@ -26,7 +26,7 @@ wire [3:0] Rd = (PC_MUX == 1) ? 4'd15
 
 wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;
 
-RegBank _(
+RegBank reg_bank(
     // Inputs
     .clk(clk),
     .latch_reg(LATCH_REG),
@@ -42,8 +42,8 @@ RegBank _(
     .PC(PC)
 );
 
-assign A_BUS = (REG_GATE_A == 1) ? Rn_data : {32{1'bZ}};
-assign B_BUS = (REG_GATE_B == 1) ? Rm_data : {32{1'bZ}};
-assign C_BUS = (REG_GATE_C == 1) ? Rs_data : {32{1'bZ}};
+assign A_BUS = (REG_GATE_A == 1) ? Rn_data : 32'bZ;
+assign B_BUS = (REG_GATE_B == 1) ? Rm_data : 32'bZ;
+assign C_BUS = (REG_GATE_C == 1) ? Rs_data : 32'bZ;
 
 endmodule
