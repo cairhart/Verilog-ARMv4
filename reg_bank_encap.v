@@ -42,4 +42,8 @@ RegBank _(
     .PC(PC)
 );
 
+assign A_BUS = (REG_GATE_A == 1) ? Rn_data : {32{1'bZ}};
+assign B_BUS = (REG_GATE_B == 1) ? Rm_data : {32{1'bZ}};
+assign C_BUS = (REG_GATE_C == 1) ? Rs_data : {32{1'bZ}};
+
 endmodule
