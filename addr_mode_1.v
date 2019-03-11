@@ -17,9 +17,6 @@ module AddrMode1 (
 
     output [31:0] shifter_operand,
     output        shifter_carry
-
-    // used for testing, uncomment this whenever running the .do file
-    //output  [4:0] test_number
 );
 
 wire [7:0]  shift_amt = (is_DPRS == 1) ? Rs_LSB : {{3{1'b0}}, IR[11:7]};
