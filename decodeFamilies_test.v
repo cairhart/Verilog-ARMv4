@@ -134,7 +134,7 @@ initial begin
     #10
     $display("@%3d f: %4h", $time, f);
 
- //   $display($time, " << Testing all testing formulas with x = 1 >>");
+    $display("<< Testing all testing formulas with x = 1 >>");
     /* testing these testcases:
     32'b1111 0011 1111 1111 1111 1111 1111 1111  f0   Data Processing Immediate 
     32'b1111 0001 1111 1111 1111 1111 1110 1111  f1   Data Processing Immediate Shift 
@@ -154,87 +154,87 @@ initial begin
     32'b1111 0111 1111 1111 1111 1111 1111 1111  f15  Undefined Instruction
     */
 
-/*    
+    
     ir = 32'b11110011111111111111111111111111;  // f0   Data Processing Immediate 
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001111111111111111111101111;  // f1   Data Processing Immediate Shift 
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001111111111111111101111111;  // f2   Data Processing Register Shift
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110000001111111111111110011111;  // f3   Multiply
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110000111111111111111110011111;  // f4   Multiply Long
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001010011111111111111111111;  // f5   Move from Status Register
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110011011011111111111111111111;  // f6   Move Immediate to Status Register
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001011011111111111111101111;  // f7   Move Register to Status Register
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110101111111111111111111111111;  // f8   Load/Store Immediate Offset
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110111111111111111111111101111;  // f9   Load/Store Register Offset
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001111111111111111111111111;  // f10  Load/Store Halfword/Signed Byte Combined Offset
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001101111111111111111111111;  // f11  Load/Store Halfword/Signed Byte Shifted Offset
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110001010011111111111110011111;  // f12  Swap/Swap Byte
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11111001111111111111111111111111;  // f13  Load/Store Multiple
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11111011111111111111111111111111;  // f14  Branch and Branch with Link
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
+    $display("@%3d f: %4h", $time, f);
     
     ir = 32'b11110111111111111111111111111111;  // f15  Undefined Instruction
-    $display($time, " ir set to    : %h", ir);
+    $write("@%3d ir set to: %h -> ", $time, ir);
     #10
-    $display($time, " resulted in f: %8h", f);
-    */
+    $display("@%3d f: %4h", $time, f);
+    
 end
 
 endmodule
