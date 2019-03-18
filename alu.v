@@ -2,13 +2,12 @@ module alu(
            input [31:0] A,B,  // ALU 8-bit Inputs                 
            input [3:0] ALU_Sel,// ALU Selection
            output [63:0] ALU_Out, // ALU 8-bit Output
-           output CarryOut // Carry Out Flag
+					 output [3:0] NZCV
     );
     reg [63:0] ALU_Result;
-    wire [8:0] tmp;
     assign ALU_Out = ALU_Result; // ALU out
-    assign tmp = {1'b0,A} + {1'b0,B};
-    assign CarryOut = tmp[8]; // Carryout flag
+    reg [3:0] nzcv; // Carryout flag
+		assign NZCV = nzcv;
     always @(*)
     begin
         case(ALU_Sel)
@@ -18,33 +17,43 @@ module alu(
            ALU_Result = A ^ B ;
         4'b0010: // 
            ALU_Result = A - B;
-        4'b0011: // Division
+        4'b0011: // 
            ALU_Result = B - A;
-        4'b0100: // Logical shift left
-           ALU_Result = A<<1;
-         4'b0101: // Logical shift right
-           ALU_Result = A>>1;
-         4'b0110: // Rotate left
-           ALU_Result = {A[6:0],A[7]};
-         4'b0111: // Rotate right
-           ALU_Result = {A[0],A[7:1]};
-          4'b1000: //  Logical and 
+        4'b0100: // 
+           ALU_Result = A+B;
+         4'b0101: // 
+           ALU_Result = A+B+nzcv[1];
+         4'b0110: // SBC
+           ALU_Result = A-B-~(nzcv[1]);
+         4'b0111: // RSC
+           ALU_Result = B-A-~(nzcv[1]);
+          4'b1000: //  TST
            ALU_Result = A & B;
-          4'b1001: //  Logical or
+          4'b1001: //  TESTEQ
+           ALU_Result = A - B;
+          4'b1010: // Compare
+           ALU_Result = A - B;
+          4'b1011: //  Compare Negative
+           ALU_Result = B - A;
+          4'b1100: // Logical OR
            ALU_Result = A | B;
-          4'b1010: //  Logical xor 
-           ALU_Result = A ^ B;
-          4'b1011: //  Logical nor
-           ALU_Result = ~(A | B);
-          4'b1100: // Logical nand 
-           ALU_Result = ~(A & B);
-          4'b1101: // Logical xnor
-           ALU_Result = ~(A ^ B);
-          4'b1110: // Greater comparison
-           ALU_Result = (A>B)?8'd1:8'd0 ;
-          4'b1111: // Equal comparison   
-            ALU_Result = (A==B)?8'd1:8'd0 ;
+          4'b1101: // MOV
+           ALU_Result = B;
+          4'b1110: // BitClear
+           ALU_Result = 0;
+          4'b1111: // REVMOV   
+            ALU_Result = A;
           default: ALU_Result = A + B ; 
         endcase
+				nzcv[3] = ALU_Result[31];
+				if(ALU_Result == 32'h0000)
+					nzcv[2] = 1;
+				else
+					nzcv[2] = 0;
+				if(A > 0 && B > 0 && ALU_Result>>32 != 0)
+				begin
+					nzcv[0] = 1;
+					nzcv[1] = 1;
+				end
     end
 endmodule
