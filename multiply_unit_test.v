@@ -8,153 +8,82 @@ task check_status;
     input [31:0] expected;
     begin
         $write("t=%0t\t", $time);
-        $write("A_Bus=%d\t", mult.A);
-        $write("B_Bus=%d, ", mult.B);
-        $write("Gate_MUL=%b, ", mult.Gate_MUL);
-        $write("MUL_HiLo=%b, ", mult.MUL_HiLo);
+        $write("B_In=%d, ", mult.B_In);
+        $write("C=%d, ", mult.C);
+        $write("B_Out=%d\n", mult.B_Out);
+        $write("\tMUL_HiLo=%b, ", mult.MUL_HiLo);
         $write("LD_MUL=%b, ", mult.LD_MUL);
         $write("U=%b, ", mult.U);
         $write("\t");
-        if (mult.A == expected) $write("+ passed");
+        if (mult.B_Out == expected) $write("+ passed");
         else begin $write("- FAILED"); failcount = failcount + 1;  end
         $write("\n");
     end
 endtask
 
-wire [31:0] A_input_value;
-reg [31:0] A_output_value;
-wire [31:0] A_value;
-reg [31:0] B;                    
-reg Gate_MUL, MUL_HiLo, LD_MUL, U;
+reg [31:0] B_In, C;                    
+reg MUL_HiLo, LD_MUL, U;
+wire [31:0] B_Out;
 
 mul mult(
-    .A(A_value),
-    .B(B),
-    .Gate_MUL(Gate_MUL),
-    .MUL_HiLo(MUL_HiLo),
-    .LD_MUL(LD_MUL),
-    .U(U)
+    .B_In(B_In),
+    .C(C),                    
+    .MUL_HiLo(MUL_HiLo), 
+    .LD_MUL(LD_MUL), 
+    .U(U),
+    .B_Out(B_Out)               
 );
 
-
-assign A_input_value = A_value;
-assign A_value = (Gate_MUL)? A_output_value : 32'hZZZZZZZZ;
-
 initial begin
-    Gate_MUL = 0;
-    // use A_value as input here so you can read its current value
-    $display ("Current value: %x\n", A_value);
-    #100;
-    // now we switch to output signal: we write value 10101010 in it
-    Gate_MUL = 1;
-    A_output_value = 8'hAA;
-    #100;
-    $finish;
-end
-
-//////
-
-initial begin
-    A = 32'h00000000;
-    B = 32'h00000000;
-    Gate_MUL = 1'b0;
+    $display("Set LD_MUL to 0");
+    B_In = 0;
+    C    = 0;
     MUL_HiLo = 1'b0;
     LD_MUL = 1'b0;
     U = 1'b0;
     failcount = 0;
+    #10 check_status(-1);
 
-     #10 check_status(-1);
+    $display("Test changing inputs has no effect when LD_MUL is 0");
+    $display("Test changing U or HiLo has no effect when LD_MUL is 0");
+    $display("Set LD_MUL to 1, HiLo = 0 (Lo), U = 0 (unsigned)");
+    //5*5 = 25
+    //2,000*2,000 = 4,000,000
+    //4,000,000*4,000,000 = 1,246,822,400 
+    //                    = (0100 1010 0101 0001 0000 0000 0000 0000)_2
+    //2,500,000,000*2,000,000,000 = 1,156,841,472   
+    //                         = (0100 0100 1111 0100 0000 0000 0000 0000)_2
+    $display("Set LD_MUL to 1, HiLo = 1 (Hi), U = 0 (unsigned)");
+    //5*5 = 0
+    //2,000*2,000 = 0
+    //4,000,000*4,000,000 = 3,725 = (1110 1000 1101)_2
+    //2,500,000,000*2,000,000,000 = 1,164,153,218 
+    //                            = (0100 0101 0110 0011 1001 0001 1000 0010)_2
+    $display("Set LD_MUL to 1, HiLo = 0 (Lo), U = 1 (signed)");
+    //-3*3 = -9
+    //4*-4 = -16
+    //-5*-5 = 25
+    //-4,000,000 * 4,000,000 = -1,246,822,400 
+    //                       = (1011 0101 1010 1111 0000 0000 0000 0000)_2
+    //1,000,000,000 * -20 = -2,820,130,816 
+    //                   = (1010 0111 1110 1000 0011 1000 0000 0000)_2
+    //-2,500,000,000*-2,000,000,000 = 1,156,841,472   
+    //                         = (0100 0100 1111 0100 0000 0000 0000 0000)_2
+    $display("Set LD_MUL to 1, HiLo = 1 (Hi), U = 1 (signed)");
+    //-3*3 = -9
+    //4*-4 = -16
+    //-5*-5 = 25
+    //-4,000,000 * 4,000,000 = -3,725 
+    //                       = (1111 1111 1111 1111 1111 0001 0111 0011)_2
+    //1,000,000,000 * -20 = -4 = (1111 1111 1111 1111 1111 1111 1111 1100)_2
+    //-2,500,000,000*-2,000,000,000 = 1,164,153,218 
+    //                              = (0100 0101 0110 0011 1001 0001 1000 0010)_2
 
-/*
-    $display("skipping past decode");
-    $display("testing data processing");
-    #20 #20 #20 check_status(24);
-    #20 check_status(25);
-    #20 check_status(104);
-
-    family_bits = 16'h0010;
-
-    $display("skipping past decode");
-    $display("testing multiply");
-    #20 #20 #20 check_status(32);
-    #20 check_status(34);
-    #20 check_status(36);
-    #20 check_status(104);
-
-    A = 1;
-
-    $display("skipping past decode");
-    $display("testing multiply long");
-    #20 #20 #20 check_status(32);
-    #20 check_status(35);
-    #20 check_status(34);
-    #20 check_status(36);
-    #20 check_status(104);
-
-    family_bits = 16'h0020;
-
-    $display("skipping past decode");
-    $display("testing load/store word/unsigned byte (post-indexing)");
-    #20 #20 #20 check_status(40);
-    #20 check_status(41);
-    #20 check_status(42);
-    #20 check_status(44);
-    #20 check_status(104);
-
-    P = 1;
-
-    $display("skipping past decode");
-    $display("testing load/store word/unsigned byte (pre-indexing)");
-    #20 #20 #20 check_status(40);
-    #20 check_status(43);
-    #20 check_status(44);
-    #20 check_status(104);
-
-    family_bits = 16'h0040;
-    P = 0;
-
-    $display("skipping past decode");
-    $display("testing load/store halfword/signed byte (post-indexing)");
-    #20 #20 #20 check_status(48);
-    #20 check_status(49);
-    #20 check_status(50);
-    #20 check_status(52);
-    #20 check_status(104);
-
-    P = 1;
-
-    $display("skipping past decode");
-    $display("testing load/store halfword/signed byte (pre-indexing)");
-    #20 #20 #20 check_status(48);
-    #20 check_status(51);
-    #20 check_status(52);
-    #20 check_status(104);
-
-    family_bits = 16'h0080;
-
-    $display("skipping past decode");
-    $display("testing branch");
-    #20 #20 #20 check_status(56);
-    #20 check_status(57);
-    #20 check_status(104);
-
-    L = 1;
-
-    $display("skipping past decode");
-    $display("testing branch and link");
-    #20 #20 #20 check_status(56);
-    #20 check_status(61);
-    #20 check_status(57);
-    #20 check_status(104);
-
-    family_bits = 16'h0100;
-
-    $display("skipping past decode");
-    $display("testing swap");
-    #20 #20 #20 check_status(64);
-    #20 check_status(65);
-    #20 check_status(104);
-*/
+    //FUCK SIGNED NUMBERS
+    LD_MUL = 1'b1;
+    MUL_HiLo = 1'b1;
+    U = 1'b1;
+    #10 check_status(1164153218);
 
     $write("\n");
     if (failcount > 0) $write("%d tests failed\n", failcount);

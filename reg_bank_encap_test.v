@@ -4,6 +4,8 @@ module RegBankEncapsulation_Test;
 
 integer failcount;
 wire [31:0] A_BUS, B_BUS, C_BUS;
+wire [31:0] ST;
+wire [31:0] PC;
 
 task check_status;
 input [511:0] expected_reg_bits;
@@ -17,16 +19,19 @@ begin
     $write("t=%0t\n", $time);
     $write("--------\n");
     $write("\tRn=%0d, Rm=%0d, Rs=%0d\n", reg_bank_encap.reg_bank.Rn, reg_bank_encap.reg_bank.Rm, reg_bank_encap.reg_bank.Rs);
-    $write("\tRn_data=0x%0H, Rm_data=0x%0H, Rs_data=0x%0H, PC=0x%0H\n", reg_bank_encap.reg_bank.Rn_data, reg_bank_encap.reg_bank.Rm_data, reg_bank_encap.reg_bank.Rs_data, reg_bank_encap.reg_bank.PC);
+    $write("\tRn_data=0x%0H, Rm_data=0x%0H, Rs_data=0x%0H, PC=0x%0H, ST=%0d\n", reg_bank_encap.reg_bank.Rn_data, reg_bank_encap.reg_bank.Rm_data, reg_bank_encap.reg_bank.Rs_data, PC, ST);
     $write("\tRd=%0d, latch_reg=%0b, data_in=0x%0H\n", reg_bank_encap.reg_bank.Rd, reg_bank_encap.reg_bank.latch_reg, reg_bank_encap.reg_bank.data_in);
     $write("\n");
-    for (i = 0; i < 13; i = i + 1) begin
+    for (i = 0; i < 12; i = i + 1) begin
         expected_reg_bits_shifted = expected_reg_bits >> ((15-i) * 32);
         expected_reg_data = expected_reg_bits_shifted[31:0];
         $write("\t     R%-2d = 0x%H = %-d\t", i, reg_bank_encap.reg_bank.REG_DATA[i], reg_bank_encap.reg_bank.REG_DATA[i]);
         if (expected_reg_data == reg_bank_encap.reg_bank.REG_DATA[i]) $write("+ passed\n");
         else begin $write("- FAILED (expected 0x%H)\n", expected_reg_data); failcount = failcount + 1; end
     end
+    $write("\t(ST) R12 = 0x%H\t\t\t", reg_bank_encap.reg_bank.REG_DATA[12]);
+    if (expected_reg_bits[127:96] == reg_bank_encap.reg_bank.REG_DATA[12]) $write("+ passed\n");
+    else begin $write("- FAILED (expected 0x%H)\n", expected_reg_bits[95:64]); failcount = failcount + 1; end
     $write("\t(SP) R13 = 0x%H\t\t\t", reg_bank_encap.reg_bank.REG_DATA[13]);
     if (expected_reg_bits[95:64] == reg_bank_encap.reg_bank.REG_DATA[13]) $write("+ passed\n");
     else begin $write("- FAILED (expected 0x%H)\n", expected_reg_bits[95:64]); failcount = failcount + 1; end
@@ -53,9 +58,10 @@ endtask
 reg clk;
 reg LATCH_REG;
 reg PC_MUX;
+reg IR_RD_MUX;
+reg LSM_RD_MUX;
 reg RD_MUX;
 reg DATA_MUX;
-reg REG_GATE_A;
 reg REG_GATE_B;
 reg REG_GATE_C;
 reg [31:0] IR;
@@ -66,9 +72,10 @@ RegBankEncapsulation reg_bank_encap(
     .clk(clk),
     .LATCH_REG(LATCH_REG),
     .PC_MUX(PC_MUX),
+    .IR_RD_MUX(IR_RD_MUX),
+    .LSM_RD_MUX(LSM_RD_MUX),
     .RD_MUX(RD_MUX),
     .DATA_MUX(DATA_MUX),
-    .REG_GATE_A(REG_GATE_A),
     .REG_GATE_B(REG_GATE_B),
     .REG_GATE_C(REG_GATE_C),
     .IR(IR),
@@ -76,7 +83,9 @@ RegBankEncapsulation reg_bank_encap(
     // Outputs
     .A_BUS(A_BUS),
     .B_BUS(B_BUS),
-    .C_BUS(C_BUS)
+    .C_BUS(C_BUS),
+    .ST(ST),
+    .PC(PC)
 );
 
 always #10 clk = ~clk;
@@ -89,12 +98,13 @@ initial begin
 
     IR = 32'h00000000;
     LATCH_REG = 1;
-    REG_GATE_A = 0;
     REG_GATE_B = 0;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
-    RD_MUX = 1;
     PC_MUX = 0;
+    LSM_RD_MUX = 0;
+    IR_RD_MUX = 1;
+    RD_MUX = 0;
     DATA_MUX = 1;
 
     #1
@@ -112,12 +122,12 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3000      // R15
     },
-        32'bZ,        // A_BUS
+        32'd1,        // A_BUS
         32'bZ,        // B_BUS
         32'bZ         // C_BUS
     );
@@ -126,12 +136,11 @@ initial begin
 
     IR = 32'h0000000F;
     LATCH_REG = 1;
-    REG_GATE_A = 0;
     REG_GATE_B = 1;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
+    IR_RD_MUX = 1;
     RD_MUX = 1;
-    PC_MUX = 1;
     DATA_MUX = 0;
 
     #20
@@ -149,12 +158,12 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3004      // R15
     },
-        32'bZ,        // A_BUS
+        32'd1,        // A_BUS
         32'h3004,     // B_BUS
         32'bZ         // C_BUS
     );
@@ -164,12 +173,11 @@ initial begin
 
     IR = 32'h000F0000;
     LATCH_REG = 1;
-    REG_GATE_A = 1;
     REG_GATE_B = 0;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
+    IR_RD_MUX = 1;
     RD_MUX = 1;
-    PC_MUX = 1;
     DATA_MUX = 0;
 
     #20
@@ -187,9 +195,9 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
         32'h3008,     // A_BUS
@@ -201,12 +209,11 @@ initial begin
 
     IR = 32'h00000F00;
     LATCH_REG = 0;
-    REG_GATE_A = 0;
     REG_GATE_B = 0;
     REG_GATE_C = 1;
     ALU_BUS = 32'hDEADBEEF;
+    IR_RD_MUX = 1;
     RD_MUX = 1;
-    PC_MUX = 1;
     DATA_MUX = 0;
 
     #20
@@ -224,26 +231,25 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
-        32'bZ,        // A_BUS
+        32'd1,        // A_BUS
         32'bZ,        // B_BUS
         32'h3008      // C_BUS
     );
 
-    $display("try to put spoofed data from ALU (0xDEADBEEF) into R11. Gate nothing onto the buses\n");
+    $display("try to put spoofed data from ALU (0xDEADBEEF) into R11. Gate nothing onto B_BUS and C_BUS\n");
 
     IR = 32'h0000B000;
     LATCH_REG = 1;
-    REG_GATE_A = 0;
     REG_GATE_B = 0;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
-    RD_MUX = 1;
-    PC_MUX = 0;
+    IR_RD_MUX = 1;
+    RD_MUX = 0;
     DATA_MUX = 1;
 
     #20
@@ -261,12 +267,12 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
-        32'bZ,        // A_BUS
+        32'd1,        // A_BUS
         32'bZ,        // B_BUS
         32'bZ         // C_BUS
     );
@@ -277,12 +283,11 @@ initial begin
 
     IR = 32'h00085001;
     LATCH_REG = 1;
-    REG_GATE_A = 1;
     REG_GATE_B = 1;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
-    RD_MUX = 1;
-    PC_MUX = 0;
+    IR_RD_MUX = 1;
+    RD_MUX = 0;
     DATA_MUX = 1;
 
     #1
@@ -300,9 +305,9 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
         32'd9,        // A_BUS
@@ -315,12 +320,11 @@ initial begin
 
     IR = 32'h00085001;
     LATCH_REG = 1;
-    REG_GATE_A = 1;
     REG_GATE_B = 1;
     REG_GATE_C = 0;
     ALU_BUS = A_BUS + B_BUS;
-    RD_MUX = 1;
-    PC_MUX = 0;
+    IR_RD_MUX = 1;
+    RD_MUX = 0;
     DATA_MUX = 1;
 
     #20
@@ -338,9 +342,9 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
         32'd9,        // A_BUS
@@ -351,17 +355,16 @@ initial begin
     $display("now we're going to simulate R14 (LR) <- R2 + R7");
     $display("(this instruction reverses Rn and Rd in the bit layout)");
     $display("first we put R2 on the A_BUS and R7 on the B_BUS");
-    $write("(note that a multiply takes 2 cycles, and we're going to simulate that by delaying latching even");
+    $write("(note that a multiply takes 2 cycles, and we're going to simulate that by delaying latching even\n");
     $write("  though we aren't actually using a multiply unit to accurate spoof it's functionality)\n\n");
 
     IR = 32'h000E2007;
     LATCH_REG = 0;
-    REG_GATE_A = 1;
     REG_GATE_B = 1;
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
+    IR_RD_MUX = 0;
     RD_MUX = 0;
-    PC_MUX = 0;
     DATA_MUX = 1;
 
     #20
@@ -379,9 +382,9 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd13,       // R12
-        32'd14,       // R13
-        32'd15,       // R14
+        32'd4,        // R12
+        32'h3000,     // R13
+        32'h3000,     // R14
         32'h3008      // R15
     },
         32'd3,        // A_BUS
@@ -391,12 +394,11 @@ initial begin
 
     IR = 32'h000E2007;
     LATCH_REG = 1;
-    REG_GATE_A = 1;
     REG_GATE_B = 1;
     REG_GATE_C = 0;
     ALU_BUS = A_BUS * B_BUS;
+    IR_RD_MUX = 0;
     RD_MUX = 0;
-    PC_MUX = 0;
     DATA_MUX = 1;
 
     $display("A cycle has passed, so now, we latch!\n");
@@ -416,8 +418,8 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd13,       // R12
-        32'd14,       // R13
+        32'd4,        // R12
+        32'h3000,     // R13
         32'd24,       // R14
         32'h3008      // R15
     },

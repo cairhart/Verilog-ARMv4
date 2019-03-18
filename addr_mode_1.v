@@ -4,7 +4,7 @@
 `include "dp_shift_type_11.v"
 
 module AddrMode1 (
-    input  [11:0] IR,
+    input  [31:0] IR,
     input   [7:0] Rs_LSB,
     input  [31:0] Rm_data,
     input         is_DPI,       // data processing immediate
@@ -13,6 +13,8 @@ module AddrMode1 (
     input         is_LSIO,      // load/store immediate offset
     input         is_LSHSBCO,   // load/store halfword/signed byte combined offset
     input         is_LSHSBSO,   // load/store halfword/signed byte shifted offset
+    input         is_BL,        // branch/branch and link
+    input         is_pass_thru, // pass all 32 IR bits through
     input         C,
 
     output [31:0] shifter_operand,
@@ -95,16 +97,27 @@ always @(*) begin
     endcase
 end
 
-wire [11:0] pass_operand = (is_LSIO) ? IR[11:0] : {4'b0, IR[11:8], IR[3:0]};
+wire [31:0] load_imm = (is_LSIO == 0) ? {20'b0, IR[11:0]} : {24'b0, IR[11:8], IR[3:0]};
 
-assign shifter_operand = ( (is_LSIO == 1) || (is_LSHSBCO == 1) )
-                       ? pass_operand
-                       : (is_DPI == 1) ? rot_res[31:0]
-                                       : shift_res[31:0];
+wire [31:0] mux1 =  (is_DPI == 1)
+                    ? rot_res[31:0]
+                    : shift_res[31:0];
 
-assign shifter_carry = ((is_LSIO == 1) || (is_LSHSBCO == 1))
-                     ? C
-                     : (is_DPI == 1) ? rot_res[32]
+wire [31:0] mux2 =  ((is_LSIO == 1) || (is_LSHSBCO == 1))
+                    ? load_imm
+                    : mux1;
+
+wire [31:0] mux3 =  (is_BL == 1)
+                    ? {8'b0, IR[23:0]}
+                    : mux2;
+
+wire [31:0] mux4 =  (is_pass_thru == 1)
+                    ? IR[31:0]
+                    : mux3;
+
+assign shifter_operand = mux4;
+
+assign shifter_carry = (is_DPI == 1) ? rot_res[32]
                                      : shift_res[32];
 
 endmodule
