@@ -10,6 +10,7 @@ module RegBank(
     output [31:0] Rn_data,
     output [31:0] Rm_data,
     output [31:0] Rs_data,
+    output [31:0] ST,
     output [31:0] PC
 );
 
@@ -28,15 +29,16 @@ initial begin
     REG_DATA[ 9] = 16'd10;
     REG_DATA[10] = 16'd11;
     REG_DATA[11] = 16'd12;
-    REG_DATA[12] = 16'd13;
-    REG_DATA[13] = 16'd14;
-    REG_DATA[14] = 16'd15;
-    REG_DATA[15] = 16'h3000;
+    REG_DATA[12] = 16'd4;    // Stride initial value
+    REG_DATA[13] = 16'h3000; // SP initial value
+    REG_DATA[14] = 16'h3000; // LR initial value
+    REG_DATA[15] = 16'h3000; // PC initial value
 end
 
 assign Rn_data = REG_DATA[Rn];
 assign Rm_data = REG_DATA[Rm];
 assign Rs_data = REG_DATA[Rs];
+assign ST = REG_DATA[12];
 assign PC = REG_DATA[15];
 
 always @(posedge clk) begin
