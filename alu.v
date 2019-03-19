@@ -30,11 +30,11 @@ module alu(
           4'b1000: //  TST
            ALU_Result = A & B;
           4'b1001: //  TESTEQ
-           ALU_Result = A - B;
+           ALU_Result = A ^ B;
           4'b1010: // Compare
            ALU_Result = A - B;
           4'b1011: //  Compare Negative
-           ALU_Result = B - A;
+           ALU_Result = A + B;
           4'b1100: // Logical OR
            ALU_Result = A | B;
           4'b1101: // MOV
@@ -50,10 +50,13 @@ module alu(
 					nzcv[2] = 1;
 				else
 					nzcv[2] = 0;
-				if(A > 0 && B > 0 && ALU_Result>>32 != 0)
-				begin
+				if(A > 0 && B > 0 && ALU_Result>>31 != 0)
 					nzcv[0] = 1;
+				else
+					nzcv[0] = 0;
+				if(ALU_Result >> 32 != 0)
 					nzcv[1] = 1;
-				end
+				else
+				 	nzcv[0] = 0;
     end
 endmodule
