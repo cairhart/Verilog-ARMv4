@@ -1,10 +1,10 @@
 //-----------------------------------------------------
-// Design Name : ram_sp_sr_sw
-// File Name   : ram_sp_sr_sw.v
+// Design Name : basic_ram
+// File Name   : basic_ram.v
 // Function    : Synchronous read write RAM 
-// Coder       : Deepak Kumar Tala
+// Coder       : Carter Airhart
 //-----------------------------------------------------
-module ram_sp_sr_sw (
+module basic_ram (
 clk         , // Clock Input
 address     , // Address Input
 data        , // Data bi-directional
@@ -13,8 +13,8 @@ we          , // Write Enable/Read Enable
 oe            // Output Enable
 ); 
 
-parameter DATA_WIDTH = 8 ;
-parameter ADDR_WIDTH = 8 ;
+parameter DATA_WIDTH = 32 ;
+parameter ADDR_WIDTH = 32 ;
 parameter RAM_DEPTH = 1 << ADDR_WIDTH;
 
 //--------------Input Ports----------------------- 
