@@ -22,9 +22,10 @@
  * f[15]  Undefined Instruction
  */
 
-module decodeFamily (ir, f);
-input [31:0] ir; 
-output reg [15:0] f; 
+module decodeFamily (
+	input [31:0] ir,
+	output reg [15:0] f
+);
   
 wire [15:0] mask  = 16'h0001;
 
