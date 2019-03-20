@@ -9,6 +9,7 @@ clk         , // Clock Input
 address     , // Address Input
 data_output , // Data out
 data_input	, // Data in
+mem_done		, // memory is finished reading or writing
 cs          , // Chip Select
 we          , // Write Enable/Read Enable
 oe            // Output Enable
@@ -27,6 +28,7 @@ input                  we          ;
 input                  oe          ; 
 
 //--------------Output Ports----------------------- 
+output 									 mem_done;
 output [DATA_WIDTH-1:0]  data_output;
 
 //--------------Internal variables---------------- 
