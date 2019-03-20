@@ -7,25 +7,27 @@
 module basic_ram (
 clk         , // Clock Input
 address     , // Address Input
-data        , // Data bi-directional
+data_output , // Data out
+data_input	, // Data in
 cs          , // Chip Select
 we          , // Write Enable/Read Enable
 oe            // Output Enable
 ); 
 
 parameter DATA_WIDTH = 32 ;
-parameter ADDR_WIDTH = 32 ;
+parameter ADDR_WIDTH = 10 ;
 parameter RAM_DEPTH = 1 << ADDR_WIDTH;
 
 //--------------Input Ports----------------------- 
 input                  clk         ;
+input [DATA_WIDTH-1:0]  data_input ;
 input [ADDR_WIDTH-1:0] address     ;
 input                  cs          ;
 input                  we          ;
 input                  oe          ; 
 
-//--------------Inout Ports----------------------- 
-inout [DATA_WIDTH-1:0]  data       ;
+//--------------Output Ports----------------------- 
+output [DATA_WIDTH-1:0]  data_output;
 
 //--------------Internal variables---------------- 
 reg [DATA_WIDTH-1:0] data_out ;
@@ -36,14 +38,14 @@ reg                  oe_r;
 
 // Tri-State Buffer control 
 // output : When we = 0, oe = 1, cs = 1
-assign data = (cs && oe && !we) ? data_out : 8'bz; 
+assign data_output = (cs && oe && !we) ? data_out : 8'bz; 
 
 // Memory Write Block 
 // Write Operation : When we = 1, cs = 1
 always @ (posedge clk)
 begin : MEM_WRITE
    if ( cs && we ) begin
-       mem[address] = data;
+       mem[address] = data_input;
    end
 end
 

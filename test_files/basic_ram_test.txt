@@ -1,0 +1,4 @@
+file opened -2147483645
+captured data 2000a0e3
+captured data 1010a0e3
+captured data 0100a1e0
