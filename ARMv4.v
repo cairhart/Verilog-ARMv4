@@ -104,9 +104,17 @@ alu ALU(
     .B(am1_to_alu),
     .ALU_Sel(ir[24:21]),
     .ALU_Out({alu_bus_hi_UNUSED, alu_bus} ),
-    .NZCV() // TODO
+    .NZCV(nzcv_signals)
 
 );
+
+
+nzcv_unit(
+	.nzcv_input(nzcv_signals),
+	.s_input(ir[20]),
+	.opcode_input(ir[31:28]),
+	.operated(cond)
+)
 
 ram_sp_sr_sw BASIC_RAM(
 
