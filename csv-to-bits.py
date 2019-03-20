@@ -1,4 +1,12 @@
+import requests
 import csv
+
+response = requests.get('https://docs.google.com/spreadsheet/ccc?key=1rhBQTt5oVPLroZRGhvyMz-OPA4Pmn0lJI50SvAEbL9s&output=csv')
+print(response)
+assert response.status_code == 200, 'Wrong status code'
+states_csv = open(r"states.csv","w+")
+states_csv.write(str(response.content))
+states_csv.close()
 
 def stoi(str):
     return int(str) if str != '' else 0
