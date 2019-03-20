@@ -23,7 +23,6 @@ always #5 clk = !clk;
 
 initial begin
   data_file = $fopen("example_asm.obj", "r");
-	$display("file opened %d", data_file);
   if (data_file == `NULL) begin
     $display("data_file handle was NULL");
     $finish;
@@ -57,20 +56,6 @@ always @(negedge clk) begin
 	 end
 	 else
 	 begin
-	   we = 0;
-		 oe = 1;
-		 address = 0;
-#100
-		 mdr = data_output;
-		 $display("mdr for the last address is %x\n", mdr);
-		 address = 1;
-#100
-		 mdr = data_output;
-		 $display("mdr for the last address is %x\n", mdr);
-		 address = 2;
-#100
-		 mdr = data_output;
-		 $display("mdr for the last address is %x\n", mdr);
 		 $finish;
 	 end
 end
