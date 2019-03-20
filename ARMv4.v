@@ -3,19 +3,38 @@
 `include "32_bit_tsb.v"
 `include "addr_mode_1.v"
 `include "alu.v"
-`include "basic_ram.v"
+//`include "basic_ram.v"
 `include "decodeFamilies.v"
 `include "multiply_unit.v"
 `include "reg_bank_encap.v"
 `include "state_machine.v"
+`include "nzcv_unit.v"
 
 
 module ARMv4(
-	
+	input clk,
+	input [31:0] ram_data_out,
+	input rst,
+
+	output [31:0] ram_data_in, 
+	output cs, we, oe,
+	output [31:0] address,
+    output [31:0] ir_out,
+    output [63:0] cs_out,
+    output [15:0] dec_fam_out
 	
 );
 
+wire [31:0] address;
+wire [31:0] data_out;
+wire cs, we, oe;
 
+//assign cs = control_signals[40];
+assign cs = 1;
+assign we = 0;
+assign oe = 1;
+assign data_out = mwdr;
+assign address = 0;
 
 /**************************************************
  ********         Top Level Registers   ***********
@@ -51,6 +70,7 @@ wire [3:0]  reg_counter_to_rb;                      // register counter to regis
 wire [31:0] pc;                                     // Program counter output from the register bank (i.e. R15)
 wire [31:0] st;                                     
 wire        cond;                                   // COND signal based on condition codes
+wire [3:0] nzcv_signals;
 
 
 
@@ -109,16 +129,18 @@ alu ALU(
 );
 
 
-nzcv_unit(
+nzcv_unit NZCV_UNIT(
 	.nzcv_input(nzcv_signals),
 	.s_input(ir[20]),
 	.opcode_input(ir[31:28]),
 	.operated(cond)
-)
+);
 
-ram_sp_sr_sw BASIC_RAM(
+/*
+basic_ram BASIC_RAM(
 
 );
+*/
 
 decodeFamily DECODE_FAMILY(
 	.ir(ir),
@@ -135,7 +157,7 @@ mul MUL(
 );
 
 RegBankEncapsulation REG_BANK_ENCAP(
-	.clk(),     // TODO
+	.clk(clk),     // TODO
 	.LATCH_REG(control_signals[52]),
 	.IR_RD_MUX(control_signals[42]),
 	.LSM_RD_MUX(control_signals[41]),
@@ -156,8 +178,8 @@ RegBankEncapsulation REG_BANK_ENCAP(
 );
 
 StateMachine STATE_MACHINE(
-	.clk(),		// TODO 
-	.rst(),		// TODO 
+	.clk(clk),		// TODO 
+	.rst(rst),		// TODO 
 	.family_bits(decoder_output),
 	.COND(cond),
 	.L(ir[20]),
@@ -165,6 +187,16 @@ StateMachine STATE_MACHINE(
 	.A(ir[21]),
 	.CS_BITS(control_signals)
 );
+
+
+always @ (posedge clk) begin
+    ir = (control_signals[37]) ? ram_data_out : ir;
+    mrdr = (control_signals[36]) ? ram_data_out : mrdr;
+    mwdr = (control_signals[35]) ? b_bus : mwdr;
+
+end 
+
+
 
 endmodule
 
