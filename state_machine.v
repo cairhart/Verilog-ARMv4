@@ -3,7 +3,7 @@
 module StateMachine(
     input clk,
     input rst,
-    input [15:0] family_bits,
+    input [3:0] family_number,
     input COND,
     input L,
     input P,
@@ -31,11 +31,6 @@ wire J1_toggle =  MOD[1] & ~MOD[0] & P;
 wire J0_toggle = ~MOD[1] &  MOD[0] & A;
 wire [6:0] jump_target = {J[6:3], J[2] | J2_toggle, J[1] | J1_toggle, J[0] | J0_toggle};
 
-wire [3:0] family_number;
-Encoder16To4 _(
-    .bits(family_bits),
-    .number(family_number)
-);
 wire [6:0] decode_target = {family_number, 3'b0};
 
 wire [6:0] non_fetch_address = DEC ? decode_target : jump_target;

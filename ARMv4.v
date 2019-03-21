@@ -29,10 +29,9 @@ module ARMv4(
 	output [31:0] ram_data_in, 
 	output cs, we, oe,
 	output [31:0] address,
-    output [31:0] ir_out,
-    output [63:0] cs_out,
-    output [15:0] dec_fam_out
-	
+  output [31:0] ir_out,
+  output [63:0] cs_out,
+  output [15:0] dec_fam_out
 );
 
 wire [31:0] address;
@@ -68,7 +67,8 @@ wire [63:0] control_signals; // Left generic to ease modificaiton.
 /**************************************************
  ********         Decode Signals       ***********
  **************************************************/
-wire [15:0] decoder_output; // See decodeFamilies.v for description of this signal
+wire [15:0] decoder_fam_signals; // See decodeFamilies.v for description of this signal
+wire [3:0] decoder_fam_num; // See decodeFamilies.v for description of this signal
 	
 
 /**************************************************
@@ -117,13 +117,13 @@ AddrMode1 ADDR_MODE_1(
 	.IR(ir),
 	.Rs_LSB(c_bus[7:0]),
 	.Rm_data(b_bus),
-    .is_DPI(decoder_output[0]),       // data processing immediate
-    .is_DPIS(decoder_output[1]),      // data processing immediate shift
-    .is_DPRS(decoder_output[2]),      // data processing register shift
-    .is_LSIO(decoder_output[8]),      // load/store immediate offset
-    .is_LSHSBCO(decoder_output[10]),   // load/store halfword/signed byte combined offset
-    .is_LSHSBSO(decoder_output[11]),   // load/store halfword/signed byte shifted offset
-    .is_BL(decoder_output[14]),        // branch/branch and link
+    .is_DPI(decoder_fam_signals[0]),       // data processing immediate
+    .is_DPIS(decoder_fam_signals[1]),      // data processing immediate shift
+    .is_DPRS(decoder_fam_signals[2]),      // data processing register shift
+    .is_LSIO(decoder_fam_signals[8]),      // load/store immediate offset
+    .is_LSHSBCO(decoder_fam_signals[10]),   // load/store halfword/signed byte combined offset
+    .is_LSHSBSO(decoder_fam_signals[11]),   // load/store halfword/signed byte shifted offset
+    .is_BL(decoder_fam_signals[14]),        // branch/branch and link
     .is_pass_thru(control_signals[43]), // pass all 32 IR bits through
     .C(am1_carry_in),
 
@@ -158,7 +158,8 @@ basic_ram BASIC_RAM(
 
 decodeFamily DECODE_FAMILY(
 	.ir(ir),
-	.f(decoder_output)
+	.f_signals(decoder_fam_signals),
+  .f_num(decoder_fam_num)
 );
 
 
@@ -167,7 +168,7 @@ mar MAR(
     .MARMUX1(control_signals[33]),
     .MARMUX2(control_signals[32]),
     .PC(pc),
-    .ALU_bus(ALU_BUS),
+    .ALU_bus(alu_bus),
     .address(address)
 );
 
@@ -208,7 +209,7 @@ RegBankEncapsulation REG_BANK_ENCAP(
 StateMachine STATE_MACHINE(
 	.clk(clk),		// TODO 
 	.rst(rst),		// TODO 
-	.family_bits(decoder_output),
+	.family_number(decoder_fam_num),
 	.COND(cond),
 	.L(ir[20]),
 	.P(ir[24]),
