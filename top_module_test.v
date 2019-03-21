@@ -60,8 +60,8 @@ ARMv4 ARMV4(
 	.cs(arm_cs),
 	.we(arm_we),
 	.oe(arm_oe),
-	.rst(reset)
-
+	.rst(reset),
+	.ir_out(ir)
 );
 
 file_to_ram FILE_TO_RAM(

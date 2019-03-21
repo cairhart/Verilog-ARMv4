@@ -29,6 +29,8 @@ wire [31:0] address;
 wire [31:0] data_out;
 wire cs, we, oe;
 
+//C*O*D*E R*E*V*I*E*W
+//TODO Maybe we should add signals for this
 //assign cs = control_signals[40];
 assign cs = 1;
 assign we = 0;
@@ -36,6 +38,7 @@ assign oe = 1;
 assign data_out = mwdr;
 assign address = 0;
 assign cs_out = control_signals;
+assign ir_out = ir;
 
 /**************************************************
  ********         Top Level Registers   ***********
@@ -134,6 +137,7 @@ nzcv_unit NZCV_UNIT(
 	.nzcv_input(nzcv_signals),
 	.s_input(ir[20]),
 	.opcode_input(ir[31:28]),
+	.clk(clk),
 	.operated(cond)
 );
 
@@ -189,12 +193,10 @@ StateMachine STATE_MACHINE(
 	.CS_BITS(control_signals)
 );
 
-
 always @ (posedge clk) begin
     ir = (control_signals[37]) ? ram_data_out : ir;
     mrdr = (control_signals[36]) ? ram_data_out : mrdr;
     mwdr = (control_signals[35]) ? b_bus : mwdr;
-
 end 
 
 

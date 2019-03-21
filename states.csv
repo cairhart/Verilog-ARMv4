@@ -1,11 +1,6 @@
 ,Bit Positions -->,63:57,56:55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34:0,,,Misc. IR bits,,,,
-<<<<<<< HEAD
-,Num Signals -->,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Num Bits -->,7,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,35,, ,,,,,
-=======
 ,Num Signals -->,23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Num Bits -->,7,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,35,, ,,,,,64
->>>>>>> 68f1da5e001acab773d210177559bde9ea793c9f
 State,Description,J,MOD,DEC,EVCOND,LATCH_REG,RD_MUX,PC_MUX,DATA_MUX,REG_GATE_B,REG_GATE_C,LD_MUL,MUL_HILO,GATE_MUL,AM1_PASS_THRU,IR_RD_MUX,LSM_RD_MUX,CS,WE,OE,LD_IR,LD_MRDR,LD_MWDR,UNUSED,,,L,P,A,,
 0,"Data processing Immediate 
 Rd = Rn (OP) shift_imm",104,,,,,,,,,,,,0,,,,1,,,,,,,,,,,,,
