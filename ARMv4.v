@@ -137,6 +137,7 @@ nzcv_unit NZCV_UNIT(
 	.nzcv_input(nzcv_signals),
 	.s_input(ir[20]),
 	.opcode_input(ir[31:28]),
+	.clk(clk),
 	.operated(cond)
 );
 
@@ -191,9 +192,7 @@ StateMachine STATE_MACHINE(
 	.A(ir[21]),
 	.CS_BITS(control_signals)
 );
-// D*E*B*U*G N*O*T*E
-// If you print ir here its set to the right ir value
-// which means something is breaking when we try to set ir_out I think
+
 always @ (posedge clk) begin
     ir = (control_signals[37]) ? ram_data_out : ir;
     mrdr = (control_signals[36]) ? ram_data_out : mrdr;
