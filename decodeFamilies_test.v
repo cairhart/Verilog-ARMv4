@@ -26,22 +26,25 @@ module testDecodeFamilies;
 integer failcount;
 
 task check_status;
-    input [15:0] expected;
+    input [15:0] expected_signals;
+    input [3:0] expected_num;
     begin
         $write("t=%0t\t", $time);
         $write("ir=%h, ", DECODE_FAMILY.ir);
-        $write("f=%h ", DECODE_FAMILY.f);
+        $write("f_signals=%h, ", DECODE_FAMILY.f_signals);
+        $write("f_num=%d ", DECODE_FAMILY.f_num);
         $write("\t");
-        if (DECODE_FAMILY.f == expected) $write("+ passed");
+        if ((DECODE_FAMILY.f_signals == expected_signals) && (DECODE_FAMILY.f_num == expected_num)) $write("+ passed");
         else begin $write("- FAILED"); failcount = failcount + 1;  end
         $write("\n");
     end
 endtask
 
 reg [31:0] ir;
-wire [15:0] f;
+wire [15:0] f_signals;
+wire [3:0] f_num;
 
-decodeFamily DECODE_FAMILY (ir, f);
+decodeFamily DECODE_FAMILY (ir, f_signals, f_num);
 
 initial begin
     failcount = 0;
@@ -67,52 +70,52 @@ initial begin
     f15 32'b0000 0110 0000 0000 0000 0000 0001 0000 */
 
     ir = 32'b00000010000000000000000000000000;  // f[0]   Data Processing Immediate 
-    #10 check_status(16'h0001);
+    #10 check_status(16'h0001, 0);
     
     ir = 32'b00000000000000000000000000000000;  // f[1]   Data Processing Immediate Shift 
-    #10 check_status(16'h0002);
+    #10 check_status(16'h0002, 1);
     
     ir = 32'b00000000000000000000000000010000;  // f[2]   Data Processing Register Shift
-    #10 check_status(16'h0004);
+    #10 check_status(16'h0004, 2);
     
     ir = 32'b00000000000000000000000010010000;  // f[3]   Multiply
-    #10 check_status(16'h0008);
+    #10 check_status(16'h0008, 3);
     
     ir = 32'b00000000100000000000000010010000;  // f[4]   Multiply Long
-    #10 check_status(16'h0010);
+    #10 check_status(16'h0010, 4);
     
     ir = 32'b00000001000000000000000000000000;  // f[5]   Move from Status Register
-    #10 check_status(16'h0020);
+    #10 check_status(16'h0020, 5);
     
     ir = 32'b00000011001000000000000000000000;  // f[6]   Move Immediate to Status Register
-    #10 check_status(16'h0040);
+    #10 check_status(16'h0040, 6);
     
     ir = 32'b00000001001000000000000000000000;  // f[7]   Move Register to Status Register
-    #10 check_status(16'h0080);
+    #10 check_status(16'h0080, 7);
     
     ir = 32'b00000100000000000000000000000000;  // f[8]   Load/Store Immediate Offset
-    #10 check_status(16'h0100);
+    #10 check_status(16'h0100, 8);
     
     ir = 32'b00000110000000000000000000000000;  // f[9]   Load/Store Register Offset
-    #10 check_status(16'h0200);
+    #10 check_status(16'h0200, 9);
     
     ir = 32'b00000000010000000000000010010000;  // f[10]  Load/Store Halfword/Signed Byte Combined Offset
-    #10 check_status(16'h0400);
+    #10 check_status(16'h0400, 10);
     
     ir = 32'b00000000000000000000000011010000;  // f[11]  Load/Store Halfword/Signed Byte Shifted Offset
-    #10 check_status(16'h0800);
+    #10 check_status(16'h0800, 11);
     
     ir = 32'b00000001000000000000000010010000;  // f[12]  Swap/Swap Byte
-    #10 check_status(16'h1000);
+    #10 check_status(16'h1000, 12);
     
     ir = 32'b00001000000000000000000000000000;  // f[13]  Load/Store Multiple
-    #10 check_status(16'h2000);
+    #10 check_status(16'h2000, 13);
 
     ir = 32'b00001010000000000000000000000000;  // f[14]  Branch and Branch with Link
-    #10 check_status(16'h4000);
+    #10 check_status(16'h4000, 14);
     
     ir = 32'b00000110000000000000000000010000;  // f[15]  Undefined Instruction
-    #10 check_status(16'h8000);
+    #10 check_status(16'h8000, 15);
 
     $display("\n<< Testing all testing formulas with x = 1 >>");
     /* testing these testcases:
@@ -135,63 +138,53 @@ initial begin
     */
 
     ir = 32'b11110011111111111111111111111111;  // f0   Data Processing Immediate 
-    #10 check_status(16'h0001);
+    #10 check_status(16'h0001, 0);
     
     ir = 32'b11110001111111111111111111101111;  // f1   Data Processing Immediate Shift 
-    #10 check_status(16'h0002);
+    #10 check_status(16'h0002, 1);
     
     ir = 32'b11110001111111111111111101111111;  // f2   Data Processing Register Shift
-    #10 check_status(16'h0004);
+    #10 check_status(16'h0004, 2);
     
     ir = 32'b11110000001111111111111110011111;  // f3   Multiply
-    #10 check_status(16'h0008);
+    #10 check_status(16'h0008, 3);
     
     ir = 32'b11110000111111111111111110011111;  // f4   Multiply Long
-    #10 check_status(16'h0010);
+    #10 check_status(16'h0010, 4);
     
     ir = 32'b11110001010011111111111111111111;  // f5   Move from Status Register
-    #10 check_status(16'h0020);
+    #10 check_status(16'h0020, 5);
     
     ir = 32'b11110011011011111111111111111111;  // f6   Move Immediate to Status Register
-    #10 check_status(16'h0040);
+    #10 check_status(16'h0040, 6);
     
     ir = 32'b11110001011011111111111111101111;  // f7   Move Register to Status Register
-    #10 check_status(16'h0080);
+    #10 check_status(16'h0080, 7);
     
     ir = 32'b11110101111111111111111111111111;  // f8   Load/Store Immediate Offset
-    #10 check_status(16'h0100);
+    #10 check_status(16'h0100, 8);
     
     ir = 32'b11110111111111111111111111101111;  // f9   Load/Store Register Offset
-    #10 check_status(16'h0200);
+    #10 check_status(16'h0200, 9);
     
     ir = 32'b11110001111111111111111111111111;  // f10  Load/Store Halfword/Signed Byte Combined Offset
-    #10 check_status(16'h0400);
+    #10 check_status(16'h0400, 10);
     
     ir = 32'b11110001101111111111111111111111;  // f11  Load/Store Halfword/Signed Byte Shifted Offset
-    #10 check_status(16'h0800);
+    #10 check_status(16'h0800, 11);
     
     ir = 32'b11110001010011111111111110011111;  // f12  Swap/Swap Byte
-    #10 check_status(16'h1000);
+    #10 check_status(16'h1000, 12);
     
     ir = 32'b11111001111111111111111111111111;  // f13  Load/Store Multiple
-    #10 check_status(16'h2000);
+    #10 check_status(16'h2000, 13);
     
     ir = 32'b11111011111111111111111111111111;  // f14  Branch and Branch with Link
-    #10 check_status(16'h4000);
+    #10 check_status(16'h4000, 14);
     
     ir = 32'b11110111111111111111111111111111;  // f15  Undefined Instruction
-    #10 check_status(16'h8000);
+    #10 check_status(16'h8000, 15);
     
-    $display("\n<< Testing instructions from ./top_module_test.v >>");
-    ir = 32'h2000A0E3;
-    #10 check_status(16'h0000);
-
-    ir = 32'h1010A0E3;
-    #10 check_status(16'h0000);
-
-    ir = 32'h0100A1E0;
-    #10 check_status(16'h0000);
-
     $write("\n");
     if (failcount > 0) $write("%d tests failed\n", failcount);
     else $write("          all tests passed! :)\n");

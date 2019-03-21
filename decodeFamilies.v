@@ -1,4 +1,4 @@
-/* Rough Decode Logic for identifying decode families
+/* Decode Logic for Identifying Decode Families
  * Started By: Vickie
  */
 
@@ -24,75 +24,110 @@
 
 module decodeFamily (
 	input [31:0] ir,
-	output reg [15:0] f
+	output reg [15:0] f_signals,
+  output reg [3:0] f_num
 );
-  
+
 wire [15:0] mask  = 16'h0001;
+
+initial begin 
+  f_signals = 16'h0000;
+  f_num = 0;
+end
 
 always @ (ir) 
     case (ir[27:25]) 
         3'b000 : begin 
-                    if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) f = (mask << 3); //f3
-                    else if ((ir[24:23] == 2'b01) && (ir[7:4] == 4'b1001)) f = (mask << 4); //f4
-                    else if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b00)) begin
-                        if (ir[7:4] == 4'b1001) f = (mask << 12); //f12
-                        else f = (mask << 5); //f5
+                    if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) begin //f3 
+                      f_signals = (mask << 3); 
+                      f_num = 3;
                     end
-                    else if (((ir[24:23] == 2'b10)  && (ir[21:20] == 2'b10)) && (ir[4] == 1'b0)) f = (mask << 7); //f7
-                    else if (ir[4] == 1'b0) f = (mask << 1); //f1
+                    else if ((ir[24:23] == 2'b01) && (ir[7:4] == 4'b1001)) begin //f4
+                      f_signals = (mask << 4); 
+                      f_num = 4;
+                    end
+                    else if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b00)) begin
+                      if (ir[7:4] == 4'b1001) begin //f12
+                        f_signals = (mask << 12); 
+                        f_num = 12;
+                      end
+                      else begin //f5
+                        f_signals = (mask << 5); 
+                        f_num = 5;
+                      end
+                    end
+                    else if (((ir[24:23] == 2'b10)  && (ir[21:20] == 2'b10)) && (ir[4] == 1'b0)) begin //f7 
+                      f_signals = (mask << 7); 
+                      f_num = 7;
+                    end
+                    else if (ir[4] == 1'b0) begin //f1
+                      f_signals = (mask << 1); 
+                      f_num = 1;
+                    end
                     else begin
-                        if (ir[7] == 1'b0) f = (mask << 2); //f2
+                        if (ir[7] == 1'b0) begin //f2
+                          f_signals = (mask << 2); 
+                          f_num = 2;
+                        end
                         else begin
-                            if (ir[22] == 1'b0) f = (mask << 11); //f11
-                            else f = (mask << 10); //f10
+                            if (ir[22] == 1'b0) begin //f11
+                              f_signals = (mask << 11); 
+                              f_num = 11;
+                            end
+                            else begin //f10
+                              f_signals = (mask << 10); 
+                              f_num = 10;
+                            end
                         end
                     end
                 end
 
         3'b001 : begin
-                    if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) f = (mask << 6); //f6
-                    else f = (mask << 0); //f0
+                    if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b10)) begin //f6
+                      f_signals = (mask << 6); 
+                      f_num = 6;
+                    end
+                    else begin //f0
+                      f_signals = (mask << 0); 
+                      f_num = 0;
+                    end
                  end
 
-        3'b010 : f = (mask << 8); //f8
+        3'b010 : begin //f8
+                  f_signals = (mask << 8); 
+                  f_num = 8;
+                end
 
         3'b011 : begin
-                    if (ir[4] == 1'b0) f = (mask << 9); //f9
-                    else f = (mask << 15); //f15
+                    if (ir[4] == 1'b0) begin //f9
+                      f_signals = (mask << 9); 
+                      f_num = 9;
+                    end
+                    else begin //f15
+                      f_signals = (mask << 15); 
+                      f_num = 15;
+                    end
                  end
 
-        3'b100 : f = (mask << 13); //f13
+        3'b100 : begin //f13
+                   f_signals = (mask << 13); 
+                   f_num = 13;
+                 end
 
-        3'b101 : f = (mask << 14); //f14
+        3'b101 : begin //f14
+                   f_signals = (mask << 14); 
+                   f_num = 14;
+                 end
 
-        3'b110 : f = 16'h0000; //not implementing these coprocessor instructions
-        3'b111 : f = 16'h0000; //not implementing these coprocessor instructions
+        3'b110 : begin //not implementing these coprocessor instructions
+                   f_signals = 16'h0000; 
+                   f_num = 0;
+                 end
+
+        3'b111 : begin //not implementing these coprocessor instructions
+                   f_signals = 16'h0000; 
+                   f_num = 0;
+                 end
     endcase 
 endmodule
-/*
-module decodeFamilySubcatagory000 (ir, f);
-input [31:0] ir;
-output reg [15:0] f;
 
-wire [15:0] mask  = 16'h0001;
-
-always @ (ir) begin
-    if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) f = (mask << 3); //f3
-    else if ((ir[24:23] == 2'b01) && (ir[7:4] == 4'b1001)) f = (mask << 4); //f4
-    else if ((ir[24:23] == 2'b10) && (ir[21:20] == 2'b00)) begin
-        if (ir[7:4] == 4'b1001) f = (mask << 12); //f12
-        else f = (mask << 5); //f5
-    end
-    else if (((ir[24:23] == 2'b10)  && (ir[21:20] == 2'b10)) && (ir[4] == 1'b0)) f = (mask << 7); //f7
-    else if (ir[4] == 1'b0) f = (mask << 1); //f1
-    else begin
-        if (ir[7] == 1'b0) f = (mask << 2); //f2
-        else begin
-            if (ir[22] == 1'b0) f = (mask << 11); //f11
-            else f = (mask << 10); //f10
-        end
-    end
-end
-
-endmodule
-*/
