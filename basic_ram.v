@@ -12,27 +12,32 @@ data_input	, // Data in
 mem_done		, // memory is finished reading or writing
 cs          , // Chip Select
 we          , // Write Enable/Read Enable
-oe            // Output Enable
+oe          , // Output Enable
 ); 
 
-parameter DATA_WIDTH = 32 ;
-parameter ADDR_WIDTH = 10 ;
+parameter DATA_WIDTH = 8 ;
+parameter ADDR_WIDTH = 14 ;
 parameter RAM_DEPTH = 1 << ADDR_WIDTH;
+parameter WORD_SIZE = 4; // In Bytes (probably)
+parameter DATA_OUT_SIZE = DATA_WIDTH * WORD_SIZE;
 
 //--------------Input Ports----------------------- 
 input                  clk         ;
-input [DATA_WIDTH-1:0]  data_input ;
+input [DATA_OUT_SIZE-1:0] data_input  ;
 input [ADDR_WIDTH-1:0] address     ;
 input                  cs          ;
 input                  we          ;
 input                  oe          ; 
 
 //--------------Output Ports----------------------- 
-output 									 mem_done;
-output [DATA_WIDTH-1:0]  data_output;
+output 					mem_done;
+output [DATA_OUT_SIZE-1:0] data_output;
 
 //--------------Internal variables---------------- 
-reg [DATA_WIDTH-1:0] data_out ;
+reg [DATA_WIDTH-1:0] data_out0 ;
+reg [DATA_WIDTH-1:0] data_out1 ;
+reg [DATA_WIDTH-1:0] data_out2 ;
+reg [DATA_WIDTH-1:0] data_out3 ;
 reg [DATA_WIDTH-1:0] mem [0:RAM_DEPTH-1];
 reg                  oe_r;
 
@@ -40,14 +45,18 @@ reg                  oe_r;
 
 // Tri-State Buffer control 
 // output : When we = 0, oe = 1, cs = 1
-assign data_output = (cs && oe && !we) ? data_out : 8'bz; 
+assign data_output = (cs && oe && !we) ? 
+			{data_out3,data_out2,data_out1,data_out0} : 8'bz; 
 
 // Memory Write Block 
 // Write Operation : When we = 1, cs = 1
 always @ (posedge clk)
 begin : MEM_WRITE
    if ( cs && we ) begin
-       mem[address] = data_input;
+	 	mem[address] <= data_input[7:0];
+		mem[address+1] <= data_input[15:8];
+		mem[address+2] <= data_input[23:16];
+		mem[address+3] <= data_input[31:24];
    end
 end
 
@@ -56,7 +65,10 @@ end
 always @ (posedge clk)
 begin : MEM_READ
   if (cs && !we && oe) begin
-    data_out = mem[address];
+    data_out0 = mem[address];
+    data_out1 = mem[address+1];
+    data_out2 = mem[address+2];
+    data_out3 = mem[address+3];
     oe_r = 1;
   end else begin
     oe_r = 0;

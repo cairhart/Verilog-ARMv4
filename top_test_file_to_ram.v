@@ -70,7 +70,7 @@ initial begin
 		data_input = captured_data;
 		$display("Captured: 0x%4x at address %d\n", captured_data, address);
 #200
-		address = address + 1;
+		address = address + 4;
 	end
 	we = 0;
 	oe = 1;
@@ -78,11 +78,11 @@ initial begin
 #100
 	mdr = data_output;
 	$display("mdr for the last address is %x\n", mdr);
-	address = 1;
+	address = 4;
 #100
 	mdr = data_output;
 	$display("mdr for the last address is %x\n", mdr);
-	address = 2;
+	address = 8;
 #100
 	mdr = data_output;
 	$display("mdr for the last address is %x\n", mdr);

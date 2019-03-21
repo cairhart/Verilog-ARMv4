@@ -8,7 +8,7 @@ module StateMachine(
     input L,
     input P,
     input A,
-
+	input mem_ready,
     output [63:0] CS_BITS
 );
 
@@ -25,6 +25,7 @@ wire  [7:0] J       = CS_BITS[63:57];
 wire  [1:0] MOD     = CS_BITS[56:55];
 wire        DEC     = CS_BITS[54];
 wire        EVCOND  = CS_BITS[53];
+wire        CS	  	= CS_BITS[40];
 
 wire J2_toggle =  MOD[1] &  MOD[0] & L;
 wire J1_toggle =  MOD[1] & ~MOD[0] & P;
@@ -38,8 +39,7 @@ wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_
 
 always @(posedge clk) begin
     if (rst == 1) address <= 7'd104; // Reset to fetch state
-    else address <= next_state_address;
-    $display("State address =%d\n", address);
+    else if(!(CS && !mem_ready)) address <= next_state_address;
 end
 
 endmodule
