@@ -1,3 +1,5 @@
+//`include "basic_ram.v"
+
 module file_to_ram(
 	input clk,
 	input [31:0] data_output,
@@ -9,6 +11,9 @@ module file_to_ram(
 	output finished
 
 );
+
+
+
 integer               data_file    ; // file handler
 integer               scan_file    ; // file handler
 logic   signed [31:0] captured_data;
@@ -25,10 +30,25 @@ reg [31:0] mdr;
 wire [31:0] data_output;
 reg finished;
 integer address = 0;
+wire ready;
 `define NULL 0    
 
 
+/*
+basic_ram BASIC_RAM(
+	.clk(clk),
+	.address(address),
+	.data_output(data_output),
+    .data_input(data_input),
+    .mem_done(ready),
+    .cs(cs),
+    .we(we),
+    .oe(oe)
+);
+*/
+
 initial begin
+  $display("Starting file_to_ram\n");
   finished = 0;
   data_file = $fopen("example_asm.obj", "r");
 	$display("file opened %d", data_file);
@@ -48,7 +68,8 @@ initial begin
 		we = 1;
 		oe = 0;
 		data_input = captured_data;
-#100
+		$display("Captured: 0x%4x at address %d\n", captured_data, address);
+#200
 		address = address + 1;
 	end
 	we = 0;

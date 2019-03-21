@@ -1,3 +1,5 @@
+//`timescale 1 ns / 1 ps
+
 `include "ARMv4.v"
 `include "basic_ram.v"
 `include "top_test_file_to_ram.v"
@@ -23,9 +25,10 @@ wire [15:0] decode_fam;
 
 
 // RAM Wires
-reg [31:0]  ram_addr, ram_d_in;
+wire [31:0]  ram_addr;
+wire [31:0]  ram_d_in;
 wire [31:0] ram_d_out;
-reg		    ram_cs, ram_we, ram_oe;
+wire		    ram_cs, ram_we, ram_oe;
 wire        ram_m_ready;
 
 
@@ -39,27 +42,13 @@ wire        arm_cs, arm_we, arm_oe;
 
 
 // RAM Connections
-assign ld_d_in = ram_d_out;
+assign ld_d_out = ram_d_out;
 assign arm_d_out = ram_d_out;
-
-always @* begin
-    if(ld_file) begin
-        ram_addr = ld_addr;
-        ram_d_in = ld_d_out;
-        ram_cs = ld_cs;
-        ram_we = ld_we;
-        ram_oe = ld_oe;
-        
-    end
-    else begin
-        ram_addr = arm_addr;
-        ram_d_in = arm_d_in;
-        ram_cs = arm_cs;
-        ram_we = arm_we;
-        ram_oe = arm_oe;
-    end 
-
-end 
+assign ram_addr = ld_file ? ld_addr : arm_addr;
+assign ram_d_in = ld_file ? ld_d_in : arm_d_in;
+assign ram_cs = ld_file ? ld_cs : arm_cs;
+assign ram_we = ld_file ? ld_we : arm_we;
+assign ram_oe = ld_file ? ld_oe : arm_oe;
 
 
 // Module instances
@@ -86,6 +75,7 @@ file_to_ram FILE_TO_RAM(
     .finished(finished)
 );
 
+
 basic_ram BASIC_RAM(
 	.clk(clock),
 	.address(ram_addr),
@@ -97,20 +87,27 @@ basic_ram BASIC_RAM(
 	.oe(ram_oe)
 );
 
+
 initial begin
+    $display("Start\n");
     reset = 1;
     ld_file = 1;    
-    while(!finished);
+    $display("Loading memory\n");
+
+    while(!finished) begin
+        #200
+        $display("Finished = %d\n", finished);
+    end
+    $display("Finished loading memory\n");
+
     ld_file = 0;
     reset = 0;
+    #300
     $display("IR = 0x%4x\n", ir);
     $display("Decode family = 0x%4x\n", decode_fam);
     
-
-
-
+    $finish;
 end
-
 
 endmodule
  
