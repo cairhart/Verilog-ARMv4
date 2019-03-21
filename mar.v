@@ -2,7 +2,7 @@
 
 
 module mar(
-	input LATCH_MAR,
+	input LD_MAR,
 	input MARMUX1,
 	input MARMUX2,
 	input [31:0] PC,
@@ -14,7 +14,7 @@ reg [31:0] address;
 wire incr;
 
 
-always @(posedge LATCH_MAR) begin
+always @(posedge LD_MAR) begin
     address = (MARMUX2) ? ALU_bus : (MARMUX1) ? PC : address + 1;
 end
 

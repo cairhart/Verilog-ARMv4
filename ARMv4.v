@@ -142,6 +142,14 @@ alu ALU(
 );
 
 
+nzcv_unit NZCV_UNIT(
+	.nzcv_input(nzcv_signals),
+	.s_input(ir[20]),
+	.opcode_input(ir[31:28]),
+	.clk(clk),
+	.operated(cond)
+);
+
 /*
 basic_ram BASIC_RAM(
 
@@ -173,13 +181,6 @@ mul MUL(
 	.B_Out(mul_out)
 );
 
-
-nzcv_unit NZCV_UNIT(
-	.nzcv_input(nzcv_signals),
-	.s_input(ir[20]),
-	.opcode_input(ir[31:28]),
-	.operated(cond)
-);
 
 
 RegBankEncapsulation REG_BANK_ENCAP(
@@ -218,18 +219,13 @@ StateMachine STATE_MACHINE(
 // If you print ir here its set to the right ir value
 // which means something is breaking when we try to set ir_out I think
 
-task init_pc
-begin
-// Load starting address into PC
-// TODO done in register bank? 
-
-end
-endtask
 
 /**************************************************
  ********         Top Level Logic       ***********
  **************************************************/
 // Top level registers
+
+
 always @ (posedge clk) begin
     ir = (control_signals[37]) ? ram_data_out : ir;
     mrdr = (control_signals[36]) ? ram_data_out : mrdr;
