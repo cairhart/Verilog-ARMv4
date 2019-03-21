@@ -1,0 +1,430 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+32	dp_shift_type_00.v	/^wire [32:0] mux3_res = (shift_amt >= 32) ? {mux2_res, 32'b0} : mux1_res;$/;"	n
+32	dp_shift_type_01.v	/^wire [32:0] mux1_res = (is_DPIS == 1) ? {Rm_data[31], 32'b0} : {C, Rm_data};$/;"	n
+32	dp_shift_type_01.v	/^wire [32:0] mux4_res = (shift_amt >= 32) ? {mux3_res, 32'b0} : mux2_res;$/;"	n
+A	alu.v	/^           input [31:0] A,B,  \/\/ ALU 8-bit Inputs                 $/;"	p
+A	alu_test.v	/^  reg [31:0] A,B;$/;"	r
+A	state_machine.v	/^    input A,$/;"	p
+A	state_machine_test.v	/^reg A;$/;"	r
+ADC	example_asm.asm	/^ADC R0,R1,R1$/;"	l
+ADDR_WIDTH	basic_ram.v	/^parameter ADDR_WIDTH = 10 ;$/;"	c
+ALU_BUS	reg_bank_encap.v	/^    input [31:0] ALU_BUS,$/;"	p
+ALU_BUS	reg_bank_encap_test.v	/^reg [31:0] ALU_BUS;$/;"	r
+ALU_Out	alu.v	/^           output [63:0] ALU_Out, \/\/ ALU 8-bit Output$/;"	p
+ALU_Result	alu.v	/^    reg [63:0] ALU_Result;$/;"	r
+ALU_Sel	alu_test.v	/^	reg [3:0] ALU_Sel;$/;"	r
+ALU_out	alu_test.v	/^	wire [63:0] ALU_out;$/;"	n
+ARMv4	ARMv4.v	/^module ARMv4($/;"	m
+A_BUS	reg_bank_encap.v	/^    output [31:0] A_BUS,$/;"	p
+A_BUS	reg_bank_encap_test.v	/^wire [31:0] A_BUS, B_BUS, C_BUS;$/;"	n
+AddrMode1	addr_mode_1.v	/^module AddrMode1 ($/;"	m
+B	alu.v	/^           input [31:0] A,B,  \/\/ ALU 8-bit Inputs                 $/;"	p
+B	alu_test.v	/^  reg [31:0] A,B;$/;"	r
+B_BUS	reg_bank_encap_test.v	/^wire [31:0] A_BUS, B_BUS, C_BUS;$/;"	n
+B_In	multiply_unit.v	/^    input [31:0] B_In,$/;"	p
+B_In	multiply_unit_test.v	/^reg [31:0] B_In, C;                    $/;"	r
+B_Out	multiply_unit_test.v	/^wire [31:0] B_Out;$/;"	n
+C	dp_shift_type_00.v	/^    input         C,$/;"	p
+C	dp_shift_type_01.v	/^    input         C,$/;"	p
+C	dp_shift_type_10.v	/^    input         C,$/;"	p
+C	dp_shift_type_11.v	/^    input         C,$/;"	p
+C	dp_shift_type_11.v	/^wire [32:0] mux1_res = (shift_amt == 0) ? {Rm_data[0], C, Rm_data[31:1]}$/;"	n
+C	multiply_unit_test.v	/^reg [31:0] B_In, C;                    $/;"	r
+COND	state_machine_test.v	/^reg COND;$/;"	r
+C_BUS	reg_bank_encap.v	/^    output [31:0] C_BUS,$/;"	p
+C_BUS	reg_bank_encap_test.v	/^wire [31:0] A_BUS, B_BUS, C_BUS;$/;"	n
+DATA_MUX	reg_bank_encap.v	/^    input DATA_MUX,$/;"	p
+DATA_MUX	reg_bank_encap_test.v	/^reg DATA_MUX;$/;"	r
+DATA_WIDTH	basic_ram.v	/^parameter DATA_WIDTH = 32 ;$/;"	c
+DEC	state_machine.v	/^wire        DEC     = CS_BITS[54];$/;"	n
+DPShiftType00	dp_shift_type_00.v	/^module DPShiftType00($/;"	m
+DPShiftType01	dp_shift_type_01.v	/^module DPShiftType01($/;"	m
+DPShiftType10	dp_shift_type_10.v	/^module DPShiftType10($/;"	m
+DPShiftType11	dp_shift_type_11.v	/^module DPShiftType11($/;"	m
+EVCOND	state_machine.v	/^wire        EVCOND  = CS_BITS[53];$/;"	n
+Encoder16To4	16_4_encoder.v	/^module Encoder16To4($/;"	m
+Encoder16To4_Test	16_4_encoder_test.v	/^module Encoder16To4_Test;$/;"	m
+IR	addr_mode_1.v	/^                    ? {8'b0, IR[23:0]}$/;"	n
+IR	addr_mode_1.v	/^    input  [31:0] IR,$/;"	p
+IR	addr_mode_1.v	/^wire [31:0] load_imm = (is_LSIO == 0) ? {20'b0, IR[11:0]} : {24'b0, IR[11:8], IR[3:0]};$/;"	n
+IR	addr_mode_1.v	/^wire [7:0]  shift_amt = (is_DPRS == 1) ? Rs_LSB : {{3{1'b0}}, IR[11:7]};$/;"	n
+IR	reg_bank_encap_test.v	/^reg [31:0] IR;$/;"	r
+IR_RD_MUX	reg_bank_encap.v	/^    input IR_RD_MUX,$/;"	p
+IR_RD_MUX	reg_bank_encap_test.v	/^reg IR_RD_MUX;$/;"	r
+J	state_machine.v	/^wire  [7:0] J       = CS_BITS[63:57];$/;"	n
+J0_toggle	state_machine.v	/^wire J0_toggle = ~MOD[1] &  MOD[0] & A;$/;"	n
+J1_toggle	state_machine.v	/^wire J1_toggle =  MOD[1] & ~MOD[0] & P;$/;"	n
+J2_toggle	state_machine.v	/^wire J2_toggle =  MOD[1] &  MOD[0] & L;$/;"	n
+L	state_machine.v	/^    input L,$/;"	p
+L	state_machine_test.v	/^reg L;$/;"	r
+LATCH_REG	reg_bank_encap_test.v	/^reg LATCH_REG;$/;"	r
+LD_MUL	multiply_unit.v	/^    input MUL_HiLo, LD_MUL, U,$/;"	p
+LD_MUL	multiply_unit_test.v	/^reg MUL_HiLo, LD_MUL, U;$/;"	r
+LSM_RD_MUX	reg_bank_encap_test.v	/^reg LSM_RD_MUX;$/;"	r
+MOD	state_machine.v	/^wire  [1:0] MOD     = CS_BITS[56:55];$/;"	n
+MOV	example_asm.asm	/^MOV R0,#32$/;"	l
+MOV	example_asm.asm	/^MOV R1,#16$/;"	l
+MUL	multiply_unit.v	/^    reg [63:0] MUL;$/;"	r
+MUL_HiLo	multiply_unit.v	/^    input MUL_HiLo, LD_MUL, U,$/;"	p
+MUL_HiLo	multiply_unit_test.v	/^reg MUL_HiLo, LD_MUL, U;$/;"	r
+NULL	file_to_ram.v	/^`define NULL 0    $/;"	c
+NULL	file_to_ram_with_test.v	/^`define NULL 0    $/;"	c
+NULL	top_test_file_to_ram.v	/^`define NULL 0    $/;"	c
+P	state_machine_test.v	/^reg P;$/;"	r
+PC	reg_bank_encap.v	/^    output [31:0] PC$/;"	p
+PC	reg_bank_encap_test.v	/^wire [31:0] PC;$/;"	n
+PC_MUX	reg_bank_encap_test.v	/^reg PC_MUX;$/;"	r
+RAM_DEPTH	basic_ram.v	/^parameter RAM_DEPTH = 1 << ADDR_WIDTH;$/;"	c
+RD_MUX	reg_bank_encap.v	/^    input RD_MUX,$/;"	p
+RD_MUX	reg_bank_encap_test.v	/^reg RD_MUX;$/;"	r
+REG_DATA	reg_bank.v	/^reg [31:0] REG_DATA [0:15];$/;"	r
+REG_GATE_B	reg_bank_encap_test.v	/^reg REG_GATE_B;$/;"	r
+REG_GATE_C	reg_bank_encap.v	/^    input REG_GATE_C,$/;"	p
+REG_GATE_C	reg_bank_encap_test.v	/^reg REG_GATE_C;$/;"	r
+Rd	reg_bank.v	/^    input [3:0] Rd,$/;"	p
+Rd	reg_bank_encap.v	/^wire [3:0] Rd = (RD_MUX == 0) ? rd_mux_pre : (RD_MUX == 1) ? 4'd15 : (RD_MUX == 2) ? 4'd14 : 4'd14;$/;"	n
+RegBank	reg_bank.v	/^module RegBank($/;"	m
+RegBankEncapsulation	reg_bank_encap.v	/^module RegBankEncapsulation($/;"	m
+RegBankEncapsulation_Test	reg_bank_encap_test.v	/^module RegBankEncapsulation_Test;$/;"	m
+Rm	reg_bank.v	/^    input [3:0] Rm,$/;"	p
+Rm_data	addr_mode_1.v	/^    input  [31:0] Rm_data,$/;"	p
+Rm_data	dp_shift_type_00.v	/^wire [32:0] mux1_res = (shift_amt == 0) ? {C, Rm_data}$/;"	n
+Rm_data	dp_shift_type_01.v	/^                                        : {Rm_data[shift_amt - 1], Rm_data >> shift_amt};$/;"	n
+Rm_data	dp_shift_type_11.v	/^                        ? {Rm_data[31], Rm_data}$/;"	n
+Rm_data	dp_shift_type_11.v	/^wire [32:0] mux1_res = (shift_amt == 0) ? {Rm_data[0], C, Rm_data[31:1]}$/;"	n
+Rm_data	dp_shift_type_11.v	/^wire [32:0] mux2_res = (shift_amt == 0) ? {C, Rm_data}$/;"	n
+Rm_data	reg_bank.v	/^    output [31:0] Rm_data,$/;"	p
+Rm_data	reg_bank_encap.v	/^wire [31:0] Rn_data, Rm_data, Rs_data;$/;"	n
+Rm_data_double	dp_shift_type_11.v	/^wire [63:0] Rm_data_double = {Rm_data, Rm_data};$/;"	n
+Rm_data_sext	dp_shift_type_10.v	/^wire [63:0] Rm_data_sext = {{32{Rm_data[31]}}, Rm_data};$/;"	n
+Rn	reg_bank_encap.v	/^wire [3:0] Rn = (PC_MUX == 1)$/;"	n
+Rn_data	reg_bank_encap.v	/^wire [31:0] Rn_data, Rm_data, Rs_data;$/;"	n
+Rs_data	reg_bank_encap.v	/^wire [31:0] Rn_data, Rm_data, Rs_data;$/;"	n
+ST	reg_bank.v	/^    output [31:0] ST,$/;"	p
+ST	reg_bank_encap_test.v	/^wire [31:0] ST;$/;"	n
+StateMachine	state_machine.v	/^module StateMachine($/;"	m
+StateMachine_Test	state_machine_test.v	/^module StateMachine_Test;$/;"	m
+U	multiply_unit.v	/^    input MUL_HiLo, LD_MUL, U,$/;"	p
+U	multiply_unit_test.v	/^reg MUL_HiLo, LD_MUL, U;$/;"	r
+WIDTH	counter.v	/^  parameter WIDTH = 8;$/;"	c
+a_bus	ARMv4.v	/^wire [31:0] a_bus, b_bus, c_bus;$/;"	n
+address	ARMv4.v	/^wire [31:0] address;$/;"	n
+address	basic_ram.v	/^input [ADDR_WIDTH-1:0] address     ;$/;"	p
+address	file_to_ram.v	/^integer address = 0;$/;"	r
+address	file_to_ram_with_test.v	/^integer address = 0;$/;"	r
+address	state_machine.v	/^reg   [6:0] address;$/;"	r
+address	top_test_file_to_ram.v	/^	output [31:0] address,$/;"	p
+address	top_test_file_to_ram.v	/^integer address = 0;$/;"	r
+alu	alu.v	/^module alu($/;"	m
+alu_bus	ARMv4.v	/^wire [31:0] alu_bus;$/;"	n
+alu_bus_hi_UNUSED	ARMv4.v	/^wire [31:0] alu_bus_hi_UNUSED; \/\/ High 32 bits padding for the unused portion of the ALU output$/;"	n
+am1_carry_in	ARMv4.v	/^wire        am1_carry_in, am1_carry_out;            \/\/ addr1 carry in and out$/;"	n
+am1_carry_out	ARMv4.v	/^wire        am1_carry_in, am1_carry_out;            \/\/ addr1 carry in and out$/;"	n
+am1_to_alu	ARMv4.v	/^wire [31:0] am1_to_alu;                             \/\/ bus from addr1 module to ALU$/;"	n
+arm_addr	top_module_test.v	/^wire [31:0] arm_addr, arm_d_in, arm_d_out;$/;"	n
+arm_cs	top_module_test.v	/^wire        arm_cs, arm_we, arm_oe;$/;"	n
+arm_d_in	top_module_test.v	/^wire [31:0] arm_addr, arm_d_in, arm_d_out;$/;"	n
+arm_d_out	top_module_test.v	/^wire [31:0] arm_addr, arm_d_in, arm_d_out;$/;"	n
+arm_oe	top_module_test.v	/^wire        arm_cs, arm_we, arm_oe;$/;"	n
+arm_we	top_module_test.v	/^wire        arm_cs, arm_we, arm_oe;$/;"	n
+asr_output	dp_shift_type_10.v	/^wire [63:0] asr_output = Rm_data_sext >> shift_amt;$/;"	n
+b_bus	ARMv4.v	/^wire [31:0] a_bus, b_bus, c_bus;$/;"	n
+basic_ram	basic_ram.v	/^module basic_ram ($/;"	m
+bits	16_4_encoder.v	/^    input [15:0] bits,$/;"	p
+bits	16_4_encoder_test.v	/^reg [15:0] bits;$/;"	r
+c_bus	ARMv4.v	/^wire [31:0] a_bus, b_bus, c_bus;$/;"	n
+check_status	multiply_unit_test.v	/^task check_status;$/;"	t
+check_status	reg_bank_encap_test.v	/^task check_status;$/;"	t
+check_status	state_machine_test.v	/^task check_status;$/;"	t
+clk	ARMv4.v	/^	input clk,$/;"	p
+clk	alu_test.v	/^  reg clk = 0;$/;"	r
+clk	basic_ram.v	/^input                  clk         ;$/;"	p
+clk	counter.v	/^  input 	       clk, reset;$/;"	p
+clk	counter.v	/^  wire 	       clk, reset;$/;"	n
+clk	counter_test.v	/^  reg clk = 0;$/;"	r
+clk	decoder.v	/^input [31:0] ir, clk;$/;"	p
+clk	file_to_ram.v	/^reg clk = 0;$/;"	r
+clk	file_to_ram_with_test.v	/^reg clk = 0;$/;"	r
+clk	reg_bank.v	/^    input clk,$/;"	p
+clk	reg_bank_encap.v	/^    input clk,$/;"	p
+clk	reg_bank_encap_test.v	/^reg clk;$/;"	r
+clk	state_machine.v	/^    input clk,$/;"	p
+clk	state_machine_test.v	/^reg clk;$/;"	r
+clk	top_test_file_to_ram.v	/^	input clk,$/;"	p
+clock	top_module_test.v	/^reg clock = 0;$/;"	r
+code	dailyupdate.py	/^	code = int(input())$/;"	v
+cond	ARMv4.v	/^wire        cond;                                   \/\/ COND signal based on condition codes$/;"	n
+control_signals	ARMv4.v	/^wire [63:0] control_signals; \/\/ Left generic to ease modificaiton. $/;"	n
+control_signals	top_module_test.v	/^wire [63:0] control_signals;$/;"	n
+control_store	state_machine.v	/^reg  [63:0] control_store [0:127];$/;"	r
+counter	counter.v	/^module counter(out, clk, reset);$/;"	m
+cs	ARMv4.v	/^	output cs, we, oe,$/;"	p
+cs	ARMv4.v	/^wire cs, we, oe;$/;"	n
+cs	basic_ram.v	/^input                  cs          ;$/;"	p
+cs	file_to_ram.v	/^reg cs = 1;$/;"	r
+cs	file_to_ram_with_test.v	/^reg cs = 1;$/;"	r
+cs	top_test_file_to_ram.v	/^	output cs,$/;"	p
+cs	top_test_file_to_ram.v	/^reg cs = 1;$/;"	r
+d	sandbox.v	/^   input d, wen; $/;"	p
+d_latch	sandbox.v	/^module d_latch (d, q, qbar, wen); $/;"	m
+data_file	file_to_ram.v	/^integer               data_file    ; \/\/ file handler$/;"	r
+data_file	file_to_ram_with_test.v	/^integer               data_file    ; \/\/ file handler$/;"	r
+data_file	top_test_file_to_ram.v	/^integer               data_file    ; \/\/ file handler$/;"	r
+data_in	reg_bank.v	/^    input [31:0] data_in,$/;"	p
+data_in	reg_bank_encap.v	/^wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;$/;"	n
+data_input	basic_ram.v	/^input [DATA_WIDTH-1:0]  data_input ;$/;"	p
+data_input	file_to_ram.v	/^reg [31:0] data_input;$/;"	r
+data_input	file_to_ram_with_test.v	/^reg [31:0] data_input;$/;"	r
+data_input	top_test_file_to_ram.v	/^reg [31:0] data_input;$/;"	r
+data_out	ARMv4.v	/^wire [31:0] data_out;$/;"	n
+data_out	basic_ram.v	/^reg [DATA_WIDTH-1:0] data_out ;$/;"	r
+data_output	basic_ram.v	/^output [DATA_WIDTH-1:0]  data_output;$/;"	p
+data_output	file_to_ram.v	/^wire [31:0] data_output;$/;"	n
+data_output	file_to_ram_with_test.v	/^wire [31:0] data_output;$/;"	n
+data_output	top_test_file_to_ram.v	/^wire [31:0] data_output;$/;"	n
+dbar	sandbox.v	/^		wire dbar, r, s;$/;"	n
+dec_fam_out	ARMv4.v	/^    output [15:0] dec_fam_out$/;"	p
+decodeFamily	decodeFamilies.v	/^module decodeFamily ($/;"	m
+decodeFamily	decodeFamiliesParallel.v	/^module decodeFamily (ir, f);$/;"	m
+decode_fam	top_module_test.v	/^wire [15:0] decode_fam;$/;"	n
+decode_target	state_machine.v	/^wire [6:0] decode_target = {family_number, 3'b0};$/;"	n
+decoder	decoder.v	/^module decoder(out,clk,ir);$/;"	m
+decoder_output	ARMv4.v	/^wire [15:0] decoder_output; \/\/ See decodeFamilies.v for description of this signal$/;"	n
+expected	multiply_unit_test.v	/^    input [31:0] expected;$/;"	p
+expected	state_machine_test.v	/^input [6:0] expected;$/;"	p
+expected_A_BUS	reg_bank_encap_test.v	/^input [31:0] expected_A_BUS;$/;"	p
+expected_B_BUS	reg_bank_encap_test.v	/^input [31:0] expected_B_BUS;$/;"	p
+expected_C_BUS	reg_bank_encap_test.v	/^input [31:0] expected_C_BUS;$/;"	p
+expected_reg_bits	reg_bank_encap_test.v	/^input [511:0] expected_reg_bits;$/;"	p
+expected_reg_bits_shifted	reg_bank_encap_test.v	/^reg [511:0] expected_reg_bits_shifted;$/;"	r
+expected_reg_data	reg_bank_encap_test.v	/^reg [31:0] expected_reg_data;$/;"	r
+f	csv-to-bits.py	/^f = open('cs_bits.mem', 'w')$/;"	v
+f	decodeFamilies_test.v	/^wire [15:0] f;$/;"	n
+failcount	multiply_unit_test.v	/^integer failcount;$/;"	r
+failcount	reg_bank_encap_test.v	/^integer failcount;$/;"	r
+failcount	state_machine_test.v	/^integer failcount;$/;"	r
+family_bits	state_machine.v	/^    input [15:0] family_bits,$/;"	p
+family_bits	state_machine_test.v	/^reg [15:0] family_bits;$/;"	r
+family_number	state_machine.v	/^wire [3:0] family_number;$/;"	n
+file_to_ram	file_to_ram.v	/^module file_to_ram;$/;"	m
+file_to_ram	file_to_ram_with_test.v	/^module file_to_ram;$/;"	m
+file_to_ram	top_test_file_to_ram.v	/^module file_to_ram($/;"	m
+finished	file_to_ram.v	/^reg finished = 0;$/;"	r
+finished	file_to_ram_with_test.v	/^reg finished = 0;$/;"	r
+finished	top_module_test.v	/^wire finished;$/;"	n
+finished	top_test_file_to_ram.v	/^reg finished;$/;"	r
+i	16_4_encoder_test.v	/^integer i;$/;"	r
+i	reg_bank_encap_test.v	/^integer i;$/;"	r
+imm	addr_mode_1.v	/^wire [7:0] imm = IR[7:0];$/;"	n
+imm_double	addr_mode_1.v	/^wire [63:0] imm_double = {{24{1'b0}}, IR[7:0], {24{1'b0}}, IR[7:0]};$/;"	n
+in	32_bit_tsb.v	/^	input [31:0] in ,$/;"	p
+in0	sandbox.v	/^    input   in0, in1; $/;"	p
+in1	sandbox.v	/^    input   in0, in1; $/;"	p
+input	32_bit_tsb.v	/^	input gate,$/;"	p
+input	ARMv4.v	/^	input [31:0] ram_data_out,$/;"	p
+input	addr_mode_1.v	/^    input         C,$/;"	p
+input	addr_mode_1.v	/^    input         is_BL,        \/\/ branch\/branch and link$/;"	p
+input	addr_mode_1.v	/^    input         is_DPI,       \/\/ data processing immediate$/;"	p
+input	addr_mode_1.v	/^    input         is_DPRS,      \/\/ data processing register shift$/;"	p
+input	addr_mode_1.v	/^    input         is_LSHSBCO,   \/\/ load\/store halfword\/signed byte combined offset$/;"	p
+input	addr_mode_1.v	/^    input   [7:0] Rs_LSB,$/;"	p
+input	alu.v	/^           input [3:0] ALU_Sel,\/\/ ALU Selection$/;"	p
+input	dp_shift_type_00.v	/^    input         is_DPRS,$/;"	p
+input	dp_shift_type_00.v	/^    input  [31:0] Rm_data,$/;"	p
+input	dp_shift_type_01.v	/^    input         is_DPRS,$/;"	p
+input	dp_shift_type_01.v	/^    input  [31:0] Rm_data,$/;"	p
+input	dp_shift_type_10.v	/^    input         is_DPRS,$/;"	p
+input	dp_shift_type_10.v	/^    input  [31:0] Rm_data,$/;"	p
+input	dp_shift_type_11.v	/^    input         is_DPRS,$/;"	p
+input	dp_shift_type_11.v	/^    input  [31:0] Rm_data,$/;"	p
+input	multiply_unit.v	/^    input [31:0] C,                    $/;"	p
+input	nzcv_unit.v	/^					 input s_input,$/;"	p
+input	reg_bank.v	/^    input [3:0] Rn,$/;"	p
+input	reg_bank.v	/^    input [3:0] Rs,$/;"	p
+input	reg_bank.v	/^    input latch_reg,$/;"	p
+input	reg_bank_encap.v	/^    input LATCH_REG,$/;"	p
+input	reg_bank_encap.v	/^    input LSM_RD_MUX,$/;"	p
+input	reg_bank_encap.v	/^    input PC_MUX,$/;"	p
+input	reg_bank_encap.v	/^    input REG_GATE_B,$/;"	p
+input	reg_bank_encap.v	/^    input [ 3:0] REG_COUNTER,$/;"	p
+input	reg_bank_encap.v	/^    input [31:0] IR,$/;"	p
+input	state_machine.v	/^    input COND,$/;"	p
+input	state_machine.v	/^    input P,$/;"	p
+input	state_machine.v	/^    input rst,$/;"	p
+input	top_test_file_to_ram.v	/^	input [31:0] data_output,$/;"	p
+ir	ARMv4.v	/^reg [31:0] ir; \/\/ Instruction register$/;"	r
+ir	decodeFamilies.v	/^	input [31:0] ir,$/;"	p
+ir	decodeFamiliesParallel.v	/^input [31:0] ir; $/;"	p
+ir	decodeFamilies_test.v	/^reg [31:0] ir;$/;"	r
+ir	decoder.v	/^input [31:0] ir, clk;$/;"	p
+ir	top_module_test.v	/^wire [31:0] ir;$/;"	n
+ir_out	ARMv4.v	/^    output [31:0] ir_out,$/;"	p
+is_DPIS	addr_mode_1.v	/^    input         is_DPIS,      \/\/ data processing immediate shift$/;"	p
+is_DPIS	dp_shift_type_00.v	/^    input         is_DPIS,$/;"	p
+is_DPIS	dp_shift_type_01.v	/^    input         is_DPIS,$/;"	p
+is_DPIS	dp_shift_type_10.v	/^    input         is_DPIS,$/;"	p
+is_DPIS	dp_shift_type_11.v	/^    input         is_DPIS,$/;"	p
+is_LSHSBSO	addr_mode_1.v	/^    input         is_LSHSBSO,   \/\/ load\/store halfword\/signed byte shifted offset$/;"	p
+is_LSIO	addr_mode_1.v	/^    input         is_LSIO,      \/\/ load\/store immediate offset$/;"	p
+is_pass_thru	addr_mode_1.v	/^    input         is_pass_thru, \/\/ pass all 32 IR bits through$/;"	p
+jump_target	state_machine.v	/^wire [6:0] jump_target = {J[6:3], J[2] | J2_toggle, J[1] | J1_toggle, J[0] | J0_toggle};$/;"	n
+ld_addr	top_module_test.v	/^wire [31:0] ld_addr, ld_d_in, ld_d_out;$/;"	n
+ld_cs	top_module_test.v	/^wire        ld_cs, ld_we, ld_oe;$/;"	n
+ld_d_in	top_module_test.v	/^wire [31:0] ld_addr, ld_d_in, ld_d_out;$/;"	n
+ld_d_out	top_module_test.v	/^wire [31:0] ld_addr, ld_d_in, ld_d_out;$/;"	n
+ld_file	top_module_test.v	/^reg ld_file;$/;"	r
+ld_oe	top_module_test.v	/^wire        ld_cs, ld_we, ld_oe;$/;"	n
+ld_we	top_module_test.v	/^wire        ld_cs, ld_we, ld_oe;$/;"	n
+load_imm	addr_mode_1.v	/^wire [31:0] load_imm = (is_LSIO == 0) ? {20'b0, IR[11:0]} : {24'b0, IR[11:8], IR[3:0]};$/;"	n
+main	icarustutorial.v	/^module main;$/;"	m
+mask	decodeFamilies.v	/^wire [15:0] mask  = 16'h0001;$/;"	n
+mask	decodeFamiliesParallel.v	/^wire [15:0] mask  = 16'h0001;$/;"	n
+mdr	file_to_ram.v	/^reg [31:0] mdr;$/;"	r
+mdr	file_to_ram_with_test.v	/^reg [31:0] mdr;$/;"	r
+mdr	top_test_file_to_ram.v	/^reg [31:0] mdr;$/;"	r
+mem	basic_ram.v	/^reg [DATA_WIDTH-1:0] mem [0:RAM_DEPTH-1];$/;"	r
+mem_done	basic_ram.v	/^output 									 mem_done;$/;"	p
+mem_done	file_to_ram.v	/^wire mem_done;$/;"	n
+mem_done	file_to_ram_with_test.v	/^wire mem_done;$/;"	n
+mrdr	ARMv4.v	/^reg [31:0] mrdr,mwdr; \/\/ Memory Read and Memory Write registers$/;"	r
+mul	multiply_unit.v	/^module mul($/;"	m
+mul_out	ARMv4.v	/^wire [31:0] mul_out;                                \/\/ ouput from the multiply unit$/;"	n
+mul_test	multiply_unit_test.v	/^module mul_test;$/;"	m
+mux1	addr_mode_1.v	/^wire [31:0] mux1 =  (is_DPI == 1)$/;"	n
+mux1_res	dp_shift_type_00.v	/^wire [32:0] mux1_res = (shift_amt == 0) ? {C, Rm_data}$/;"	n
+mux1_res	dp_shift_type_01.v	/^wire [32:0] mux1_res = (is_DPIS == 1) ? {Rm_data[31], 32'b0} : {C, Rm_data};$/;"	n
+mux1_res	dp_shift_type_10.v	/^                        ? {Rm_data[31], mux1_res} : {Rm_data[shift_amt - 1], shift_res};$/;"	n
+mux1_res	dp_shift_type_10.v	/^wire [31:0] mux1_res = (Rm_data[31] == 1) ? 32'hffffffff : 32'h0;$/;"	n
+mux1_res	dp_shift_type_11.v	/^wire [32:0] mux1_res = (shift_amt == 0) ? {Rm_data[0], C, Rm_data[31:1]}$/;"	n
+mux2	addr_mode_1.v	/^wire [31:0] mux2 =  ((is_LSIO == 1) || (is_LSHSBCO == 1))$/;"	n
+mux2_res	dp_shift_type_00.v	/^wire mux2_res = (shift_amt > 32) ? 0 : Rm_data[0];$/;"	n
+mux2_res	dp_shift_type_01.v	/^wire [32:0] mux2_res = (shift_amt == 0) ? mux1_res$/;"	n
+mux2_res	dp_shift_type_10.v	/^wire [32:0] mux2_res = ((is_DPIS == 1 && shift_amt == 0) || (is_DPRS == 1 && shift_amt >= 32))$/;"	n
+mux2_res	dp_shift_type_11.v	/^wire [32:0] mux2_res = (shift_amt == 0) ? {C, Rm_data}$/;"	n
+mux3	addr_mode_1.v	/^wire [31:0] mux3 =  (is_BL == 1)$/;"	n
+mux3_res	dp_shift_type_00.v	/^wire [32:0] mux3_res = (shift_amt >= 32) ? {mux2_res, 32'b0} : mux1_res;$/;"	n
+mux3_res	dp_shift_type_01.v	/^wire mux3_res = (shift_amt > 32) ? 0 : Rm_data[0];$/;"	n
+mux3_res	dp_shift_type_11.v	/^wire [32:0] mux3_res = (shift_amt[7:5] != 0 && shift_amt[4:0] == 0)$/;"	n
+mux4	addr_mode_1.v	/^wire [31:0] mux4 =  (is_pass_thru == 1)$/;"	n
+mux4_res	dp_shift_type_01.v	/^wire [32:0] mux4_res = (shift_amt >= 32) ? {mux3_res, 32'b0} : mux2_res;$/;"	n
+mwdr	ARMv4.v	/^reg [31:0] mrdr,mwdr; \/\/ Memory Read and Memory Write registers$/;"	r
+nand2	sandbox.v	/^module  nand2$(out, in0, in1); $/;"	m
+next_state_address	state_machine.v	/^wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_address;$/;"	n
+nobreak	dailyupdate.py	/^nobreak = True$/;"	v
+non_fetch_address	state_machine.v	/^wire [6:0] non_fetch_address = (DEC == 1) ? decode_target : jump_target;$/;"	n
+number	16_4_encoder_test.v	/^wire  [3:0] number;$/;"	n
+nzcv	alu.v	/^    reg [3:0] nzcv; \/\/ Carryout flag$/;"	r
+nzcv	alu_test.v	/^	wire [3:0] nzcv;$/;"	n
+nzcv	nzcv_unit.v	/^    reg [3:0] nzcv;$/;"	r
+nzcv_input	nzcv_unit.v	/^           input [3:0] nzcv_input,\/\/ ALU Selection$/;"	p
+nzcv_signals	ARMv4.v	/^wire [3:0] nzcv_signals;$/;"	n
+nzcv_unit	nzcv_unit.v	/^module nzcv_unit($/;"	m
+oe	ARMv4.v	/^	output cs, we, oe,$/;"	p
+oe	ARMv4.v	/^wire cs, we, oe;$/;"	n
+oe	basic_ram.v	/^input                  oe          ; $/;"	p
+oe	file_to_ram.v	/^reg oe;$/;"	r
+oe	file_to_ram_with_test.v	/^reg oe;$/;"	r
+oe	top_test_file_to_ram.v	/^	output oe,$/;"	p
+oe	top_test_file_to_ram.v	/^reg oe;$/;"	r
+oe_r	basic_ram.v	/^reg                  oe_r;$/;"	r
+op1	multiply_unit.v	/^    reg [63:0] op1, op2;$/;"	r
+op2	multiply_unit.v	/^    reg [63:0] op1, op2;$/;"	r
+opcode_input	nzcv_unit.v	/^					 input [3:0] opcode_input,$/;"	p
+operate	nzcv_unit.v	/^		reg operate;$/;"	r
+out	32_bit_tsb.v	/^	output [31:0] out$/;"	p
+out	counter.v	/^  output [WIDTH-1 : 0] out;$/;"	p
+out	counter.v	/^  reg [WIDTH-1 : 0]   out;$/;"	r
+out	decoder.v	/^output [16:0] out;$/;"	p
+out	sandbox.v	/^	  output  out;$/;"	p
+output	16_4_encoder.v	/^    output reg [3:0] number$/;"	p
+output	ARMv4.v	/^	output [31:0] address,$/;"	p
+output	ARMv4.v	/^	output [31:0] ram_data_in, $/;"	p
+output	ARMv4.v	/^    output [63:0] cs_out,$/;"	p
+output	addr_mode_1.v	/^    output        shifter_carry$/;"	p
+output	alu.v	/^					 output [3:0] NZCV$/;"	p
+output	decodeFamilies.v	/^	output reg [15:0] f$/;"	p
+output	dp_shift_type_00.v	/^    output [32:0] shift_res_00$/;"	p
+output	dp_shift_type_01.v	/^    output [32:0] shift_res_01$/;"	p
+output	dp_shift_type_10.v	/^    output [32:0] shift_res_10$/;"	p
+output	dp_shift_type_11.v	/^    output [32:0] shift_res_11$/;"	p
+output	multiply_unit.v	/^    output [31:0] B_Out                    $/;"	p
+output	nzcv_unit.v	/^					 output operated$/;"	p
+output	reg_bank.v	/^    output [31:0] PC$/;"	p
+output	reg_bank.v	/^    output [31:0] Rn_data,$/;"	p
+output	reg_bank.v	/^    output [31:0] Rs_data,$/;"	p
+output	reg_bank_encap.v	/^    output [31:0] B_BUS,$/;"	p
+output	reg_bank_encap.v	/^    output [31:0] ST,$/;"	p
+output	state_machine.v	/^    output [63:0] CS_BITS$/;"	p
+output	top_test_file_to_ram.v	/^	output [31:0] data_input,$/;"	p
+output	top_test_file_to_ram.v	/^	output finished$/;"	p
+output	top_test_file_to_ram.v	/^	output we,$/;"	p
+pc	ARMv4.v	/^wire [31:0] pc;                                     \/\/ Program counter output from the register bank (i.e. R15)$/;"	n
+printString	game.py	/^def printString(inputed, wait=1, dellines=0):$/;"	f
+q	sandbox.v	/^	 output q, qbar;$/;"	p
+qbar	sandbox.v	/^	 output q, qbar;$/;"	p
+r	sandbox.v	/^		wire dbar, r, s;$/;"	n
+ram_addr	top_module_test.v	/^wire [31:0]  ram_addr;$/;"	n
+ram_cs	top_module_test.v	/^wire		    ram_cs, ram_we, ram_oe;$/;"	n
+ram_d_in	top_module_test.v	/^wire [31:0]  ram_d_in;$/;"	n
+ram_d_out	top_module_test.v	/^wire [31:0] ram_d_out;$/;"	n
+ram_m_ready	top_module_test.v	/^wire        ram_m_ready;$/;"	n
+ram_oe	top_module_test.v	/^wire		    ram_cs, ram_we, ram_oe;$/;"	n
+ram_we	top_module_test.v	/^wire		    ram_cs, ram_we, ram_oe;$/;"	n
+rd_mux_pre	reg_bank_encap.v	/^wire [3:0] rd_mux_pre = (LSM_RD_MUX == 1)$/;"	n
+ready	top_test_file_to_ram.v	/^wire ready;$/;"	n
+reg	decodeFamiliesParallel.v	/^output reg [15:0] f; $/;"	p
+reg_counter_to_rb	ARMv4.v	/^wire [3:0]  reg_counter_to_rb;                      \/\/ register counter to register bank$/;"	n
+reset	alu_test.v	/^	reg reset = 0;$/;"	r
+reset	counter.v	/^  input 	       clk, reset;$/;"	p
+reset	counter.v	/^  wire 	       clk, reset;$/;"	n
+reset	counter_test.v	/^  reg reset = 0;$/;"	r
+reset	top_module_test.v	/^reg reset;$/;"	r
+response	csv-to-bits.py	/^response = requests.get('https:\/\/docs.google.com\/spreadsheet\/ccc?key=1rhBQTt5oVPLroZRGhvyMz-OPA4Pmn0lJI50SvAEbL9s&output=csv')$/;"	v
+rot_amt	addr_mode_1.v	/^wire [4:0] rot_amt = IR[11:8] << 1;$/;"	n
+rot_carry	addr_mode_1.v	/^wire rot_carry = (rot_amt == 0) ? C : rot_value[31];$/;"	n
+rot_intermediate	addr_mode_1.v	/^wire [63:0] rot_intermediate = imm_double >> rot_amt;$/;"	n
+rot_res	addr_mode_1.v	/^wire [32:0] rot_res = {rot_carry, rot_value};$/;"	n
+rot_res	dp_shift_type_11.v	/^wire [31:0] rot_res = rotate_output[31:0];$/;"	n
+rot_value	addr_mode_1.v	/^wire [31:0] rot_value = rot_intermediate[31:0];$/;"	n
+rotate_output	dp_shift_type_11.v	/^wire [63:0] rotate_output = Rm_data_double >> shift_amt;$/;"	n
+rst	ARMv4.v	/^	input rst,$/;"	p
+rst	state_machine_test.v	/^reg rst;$/;"	r
+s	sandbox.v	/^		wire dbar, r, s;$/;"	n
+scan_file	file_to_ram.v	/^integer               scan_file    ; \/\/ file handler$/;"	r
+scan_file	file_to_ram_with_test.v	/^integer               scan_file    ; \/\/ file handler$/;"	r
+scan_file	top_test_file_to_ram.v	/^integer               scan_file    ; \/\/ file handler$/;"	r
+shift_amt	addr_mode_1.v	/^wire [7:0]  shift_amt = (is_DPRS == 1) ? Rs_LSB : {{3{1'b0}}, IR[11:7]};$/;"	n
+shift_amt	dp_shift_type_00.v	/^    input   [7:0] shift_amt,$/;"	p
+shift_amt	dp_shift_type_01.v	/^    input   [7:0] shift_amt,$/;"	p
+shift_amt	dp_shift_type_10.v	/^    input   [7:0] shift_amt,$/;"	p
+shift_amt	dp_shift_type_11.v	/^    input   [7:0] shift_amt,$/;"	p
+shift_code	addr_mode_1.v	/^wire [1:0]  shift_code = IR[6:5];$/;"	n
+shift_res	addr_mode_1.v	/^reg [32:0] shift_res;$/;"	r
+shift_res	dp_shift_type_10.v	/^wire [31:0] shift_res = asr_output[31:0];$/;"	n
+shift_res_00	addr_mode_1.v	/^wire [32:0] shift_res_00;$/;"	n
+shift_res_01	addr_mode_1.v	/^wire [32:0] shift_res_01;$/;"	n
+shift_res_10	addr_mode_1.v	/^wire [32:0] shift_res_10;$/;"	n
+shift_res_11	addr_mode_1.v	/^wire [32:0] shift_res_11;$/;"	n
+shifter_operand	addr_mode_1.v	/^    output [31:0] shifter_operand,$/;"	p
+st	ARMv4.v	/^wire [31:0] st;                                     $/;"	n
+states_csv	csv-to-bits.py	/^states_csv = open('states.csv','wb')$/;"	v
+stoi	csv-to-bits.py	/^def stoi(str):$/;"	f
+test	alu_test.v	/^module test;$/;"	m
+test	counter_test.v	/^module test;$/;"	m
+testDecodeFamilies	decodeFamilies_test.v	/^module testDecodeFamilies;$/;"	m
+top_module_test	top_module_test.v	/^module top_module_test;$/;"	m
+tsb_32_bit	32_bit_tsb.v	/^module tsb_32_bit ($/;"	m
+value	counter_test.v	/^  wire [7:0] value;$/;"	n
+we	ARMv4.v	/^	output cs, we, oe,$/;"	p
+we	ARMv4.v	/^wire cs, we, oe;$/;"	n
+we	basic_ram.v	/^input                  we          ;$/;"	p
+we	file_to_ram.v	/^reg we;$/;"	r
+we	file_to_ram_with_test.v	/^reg we;$/;"	r
+we	top_test_file_to_ram.v	/^reg we;$/;"	r
+wen	sandbox.v	/^   input d, wen; $/;"	p
+whatDoYouDo	game.py	/^def whatDoYouDo():$/;"	f
