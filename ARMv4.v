@@ -35,6 +35,7 @@ assign we = 0;
 assign oe = 1;
 assign data_out = mwdr;
 assign address = 0;
+assign cs_out = control_signals;
 
 /**************************************************
  ********         Top Level Registers   ***********

@@ -44,6 +44,8 @@ wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_
 always @(posedge clk) begin
     if (rst == 1) address <= 7'd104; // Reset to fetch state
     else address <= next_state_address;
+    $display("State address =%d\n", address);
 end
 
 endmodule
+
