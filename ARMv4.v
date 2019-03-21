@@ -5,10 +5,20 @@
 `include "alu.v"
 //`include "basic_ram.v"
 `include "decodeFamilies.v"
+`include "mar.v"
 `include "multiply_unit.v"
+`include "nzcv_unit.v"
 `include "reg_bank_encap.v"
 `include "state_machine.v"
-`include "nzcv_unit.v"
+
+
+
+/**************************************************
+ ********         Macros                ***********
+ **************************************************/
+// Misc. Macros
+`define START_ADDRESS 32'h0000
+// Control Signal Macros
 
 
 module ARMv4(
@@ -36,7 +46,6 @@ assign cs = 1;
 assign we = 0;
 assign oe = 1;
 assign data_out = mwdr;
-assign address = 0;
 assign cs_out = control_signals;
 assign ir_out = ir;
 
@@ -152,6 +161,17 @@ decodeFamily DECODE_FAMILY(
 	.f(decoder_output)
 );
 
+
+mar MAR(
+	.LD_MAR(control_signals[34]),
+    .MARMUX1(control_signals[33]),
+    .MARMUX2(control_signals[32]),
+    .PC(pc),
+    .ALU_bus(ALU_BUS),
+    .address(address)
+);
+
+
 mul MUL(
 	.B_In(b_bus),
 	.C(c_bus),
@@ -160,6 +180,8 @@ mul MUL(
 	.U( ir[22]),
 	.B_Out(mul_out)
 );
+
+
 
 RegBankEncapsulation REG_BANK_ENCAP(
 	.clk(clk),     // TODO
@@ -182,6 +204,7 @@ RegBankEncapsulation REG_BANK_ENCAP(
 
 );
 
+
 StateMachine STATE_MACHINE(
 	.clk(clk),		// TODO 
 	.rst(rst),		// TODO 
@@ -192,6 +215,16 @@ StateMachine STATE_MACHINE(
 	.A(ir[21]),
 	.CS_BITS(control_signals)
 );
+// D*E*B*U*G N*O*T*E
+// If you print ir here its set to the right ir value
+// which means something is breaking when we try to set ir_out I think
+
+
+/**************************************************
+ ********         Top Level Logic       ***********
+ **************************************************/
+// Top level registers
+
 
 always @ (posedge clk) begin
     ir = (control_signals[37]) ? ram_data_out : ir;
@@ -199,6 +232,11 @@ always @ (posedge clk) begin
     mwdr = (control_signals[35]) ? b_bus : mwdr;
 end 
 
+// Top Level initializaion
+initial begin
+    
+
+end
 
 
 endmodule
