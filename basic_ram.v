@@ -69,9 +69,21 @@ begin : MEM_WRITE
 	 2'b10:begin
 	 	mem[address] <= data_input[7:0];
 		mem[address+1] <= data_input[15:8];
+		mem[address+2] <= mem[address+2];
+		mem[address+3] <= mem[address+3];
 		end
-	 2'b00:
+	 2'b00:begin
 	 	mem[address] <= data_input[7:0];
+		mem[address+1] <= mem[address+2];
+		mem[address+2] <= mem[address+2];
+		mem[address+3] <= mem[address+3];
+        end
+	 default:begin
+        mem[address]   <= mem[address];
+		mem[address+1] <= mem[address+2];
+		mem[address+2] <= mem[address+2];
+		mem[address+3] <= mem[address+3];
+		end
 	 endcase;
    end
    mem_done = 1;
@@ -93,9 +105,21 @@ begin : MEM_READ
 	2'b10:begin
     data_out0 = mem[address];
     data_out1 = mem[address+1];
+    data_out2 = 8'h00;
+    data_out3 = 8'h00;
 	end
-	2'b00:
+	2'b00:begin
     data_out0 = mem[address];
+    data_out1 = 8'h00;
+    data_out2 = 8'h00;
+    data_out3 = 8'h00;
+    end
+    default:begin
+    data_out0 = 8'h00;
+    data_out1 = 8'h00;
+    data_out2 = 8'h00;
+    data_out3 = 8'h00;
+    end
 	endcase;
     oe_r = 1;
   end else begin
