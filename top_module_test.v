@@ -36,19 +36,22 @@ wire [31:0] ld_addr, ld_d_in, ld_d_out;
 wire        ld_cs, ld_we, ld_oe;
 
 
-wire [31:0] arm_addr, arm_d_in, arm_d_out;
+wire [31:0] arm_addr, arm_d_in;
 wire        arm_cs, arm_we, arm_oe;
+
+wire [1:0] ram_data_size;
+wire [1:0] arm_data_size;
 
 
 
 // RAM Connections
 assign ld_d_out = ram_d_out;
-assign arm_d_out = ram_d_out;
 assign ram_addr = ld_file ? ld_addr : arm_addr;
 assign ram_d_in = ld_file ? ld_d_in : arm_d_in;
 assign ram_cs = ld_file ? ld_cs : arm_cs;
 assign ram_we = ld_file ? ld_we : arm_we;
 assign ram_oe = ld_file ? ld_oe : arm_oe;
+assign ram_data_size = ld_file ? 2'b11 : arm_data_size;
 
 
 // Module instances
@@ -56,13 +59,14 @@ ARMv4 ARMV4(
 	.clk(clock),
 	.address(arm_addr),
 	.ram_data_in(arm_d_in),
-	.ram_data_out(arm_d_out),
+	.ram_data_into_mcu(ram_d_out),
 	.ram_ready(ram_m_ready),
 	.cs(arm_cs),
 	.we(arm_we),
 	.oe(arm_oe),
 	.rst(reset),
-	.ir_out(ir)
+	.ir_out(ir),
+	.data_size(arm_data_size)
 );
 
 file_to_ram FILE_TO_RAM(
@@ -85,11 +89,15 @@ basic_ram BASIC_RAM(
 	.mem_done_out(ram_m_ready),
 	.cs(ram_cs),
 	.we(ram_we),
-	.oe(ram_oe)
+	.oe(ram_oe),
+	.data_size(ram_data_size)
 );
 
 
 initial begin
+	$monitor("ir is %d",ir);
+	$monitor("data into mcu is %d",ram_d_out);
+	$monitor("data into mar is %d",ram_addr);
     $display("Start\n");
     reset = 1;
     ld_file = 1;    

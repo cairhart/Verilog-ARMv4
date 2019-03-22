@@ -10,6 +10,7 @@
 `include "nzcv_unit.v"
 `include "reg_bank_encap.v"
 `include "state_machine.v"
+`include "memory_controller.v"
 
 
 
@@ -23,7 +24,7 @@
 
 module ARMv4(
 	input clk,
-	input [31:0] ram_data_out,
+	input [31:0] ram_data_into_mcu,
 	input rst,
 
 	output [31:0] ram_data_in, 
@@ -32,7 +33,8 @@ module ARMv4(
 	output [31:0] address,
   output [31:0] ir_out,
   output [63:0] cs_out,
-  output [15:0] dec_fam_out
+  output [15:0] dec_fam_out,
+  output [1:0] data_size
 );
 
 wire [31:0] address;
@@ -85,6 +87,7 @@ wire [31:0] pc;                                     // Program counter output fr
 wire [31:0] st;                                     
 wire        cond;                                   // COND signal based on condition codes
 wire [3:0] nzcv_signals;
+wire [1:0] data_size;
 
 
 
@@ -94,6 +97,7 @@ wire [3:0] nzcv_signals;
 wire [31:0] a_bus, b_bus, c_bus;
 wire [31:0] alu_bus;
 wire [31:0] alu_bus_hi_UNUSED; // High 32 bits padding for the unused portion of the ALU output
+wire [31:0] ram_data_out; // see bottom right of the main hardware diagram cön
 
 
 
@@ -161,6 +165,16 @@ decodeFamily DECODE_FAMILY(
 	.ir(ir),
 	.f_signals(decoder_fam_signals),
   .f_num(decoder_fam_num)
+);
+
+mcu MCU(
+	.b(ir[22]),
+	.h(ir[5]),
+	.s(ir[6]),
+	.decode_families(decoder_fam_signals),
+	.data_from_mem(ram_data_into_mcu),
+	.data_size(data_size),
+	.data_to_cpu(ram_data_out)
 );
 
 

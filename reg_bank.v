@@ -30,9 +30,9 @@ initial begin
     REG_DATA[10] = 16'd11;
     REG_DATA[11] = 16'd12;
     REG_DATA[12] = 16'd4;    // Stride initial value
-    REG_DATA[13] = 16'h3000; // SP initial value
-    REG_DATA[14] = 16'h3000; // LR initial value
-    REG_DATA[15] = 16'h3000; // PC initial value
+    REG_DATA[13] = 16'h0000; // SP initial value
+    REG_DATA[14] = 16'h0000; // LR initial value
+    REG_DATA[15] = 16'h0000; // PC initial value
 end
 
 assign Rn_data = REG_DATA[Rn];

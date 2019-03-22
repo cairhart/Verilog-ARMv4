@@ -43,10 +43,10 @@ always @(negedge clk) begin
 	 scan_file = $fscanf(data_file, "%c", captured_data1); 
 	 scan_file = $fscanf(data_file, "%c", captured_data2); 
 	 scan_file = $fscanf(data_file, "%c", captured_data3); 
-	 captured_data = (captured_data0 << 24) | 
-	 								 (captured_data1 << 16) |
-									 (captured_data2 << 8) 	|
-									 (captured_data3);
+	 captured_data = (captured_data3 << 24) | 
+	 								 (captured_data2 << 16) |
+									 (captured_data1 << 8) 	|
+									 (captured_data0);
 	 if (!$feof(data_file)) begin
 		 we = 1;
 		 oe = 0;
