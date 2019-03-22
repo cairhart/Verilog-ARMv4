@@ -173,6 +173,8 @@ mcu MCU(
 	.s(ir[6]),
 	.decode_families(decoder_fam_signals),
 	.data_from_mem(ram_data_into_mcu),
+  .ld_ir(control_signals[37]),
+  .ld_mar_from_pc(control_signals[33]),
 	.data_size(data_size),
 	.data_to_cpu(ram_data_out)
 );
