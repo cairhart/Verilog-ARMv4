@@ -1,4 +1,3 @@
-//`include "basic_ram.v"
 
 module file_to_ram(
 	input clk,
@@ -11,8 +10,6 @@ module file_to_ram(
 	output finished
 
 );
-
-
 
 integer               data_file    ; // file handler
 integer               scan_file    ; // file handler
@@ -33,25 +30,10 @@ integer address = 0;
 wire ready;
 `define NULL 0    
 
-
-/*
-basic_ram BASIC_RAM(
-	.clk(clk),
-	.address(address),
-	.data_output(data_output),
-    .data_input(data_input),
-    .mem_done(ready),
-    .cs(cs),
-    .we(we),
-    .oe(oe)
-);
-*/
-
 initial begin
-  $display("Starting file_to_ram\n");
+  $display("Starting file_to_ram");
   finished = 0;
   data_file = $fopen("example_asm.obj", "r");
-	$display("file opened %d", data_file);
   if (data_file == `NULL) begin
     $display("data_file handle was NULL");
     $finish;
