@@ -13,6 +13,7 @@ mem_done_out		, // memory is finished reading or writing
 cs          , // Chip Select
 we          , // Write Enable/Read Enable
 oe          , // Output Enable
+data_size
 ); 
 
 parameter DATA_WIDTH = 8 ;
@@ -28,6 +29,7 @@ input [ADDR_WIDTH-1:0] address     ;
 input                  cs          ;
 input                  we          ;
 input                  oe          ; 
+input[1:0]			   data_size ;
 
 //--------------Output Ports----------------------- 
 output 					mem_done_out;
@@ -57,10 +59,20 @@ always @ (posedge clk)
 begin : MEM_WRITE
 	mem_done = 0;
    if ( cs && we ) begin
+	 case(data_size)
+	 2'b11:begin
 	 	mem[address] <= data_input[7:0];
 		mem[address+1] <= data_input[15:8];
 		mem[address+2] <= data_input[23:16];
 		mem[address+3] <= data_input[31:24];
+		end
+	 2'b10:begin
+	 	mem[address] <= data_input[7:0];
+		mem[address+1] <= data_input[15:8];
+		end
+	 2'b00:
+	 	mem[address] <= data_input[7:0];
+	 endcase;
    end
    mem_done = 1;
 end
@@ -71,10 +83,20 @@ always @ (posedge clk)
 begin : MEM_READ
 	mem_done = 0;
   if (cs && !we && oe) begin
+    case(data_size)
+    2'b11: begin
     data_out0 = mem[address];
     data_out1 = mem[address+1];
     data_out2 = mem[address+2];
     data_out3 = mem[address+3];
+	end
+	2'b10:begin
+    data_out0 = mem[address];
+    data_out1 = mem[address+1];
+	end
+	2'b00:
+    data_out0 = mem[address];
+	endcase;
     oe_r = 1;
   end else begin
     oe_r = 0;
