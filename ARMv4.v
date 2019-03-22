@@ -247,9 +247,11 @@ StateMachine STATE_MACHINE(
 
 
 always @ (posedge clk) begin
-  if(control_signals[37]) $display("ir ram_data_out: %x", ram_data_out);
-  if(control_signals[36]) $display("mrdr ram_data_out: %x", ram_data_out);
+    if(control_signals[37]) $display("ir ram_data_out: %x", ram_data_out);
+    if(control_signals[36]) $display("mrdr ram_data_out: %x", ram_data_out);
     ir = (control_signals[37]) ? ram_data_out : ir;
+    if(control_signals[37]) $display("**** ARMv4 ir: %x", ir);
+    if(control_signals[37]) $display("**** ARMv4 ir_out: %x", ir_out);
     mrdr = (control_signals[36]) ? ram_data_out : mrdr;
     mwdr = (control_signals[35]) ? b_bus : mwdr;
 end 
