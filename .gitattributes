@@ -1,0 +1,8 @@
+*.vvp linguist-generated=true
+*.csp linguist-generated=true
+*.mem linguist-generated=true
+*.obj linguist-generated=true
+tags linguist-generated=true
+vasmarm_std linguist-vendored
+
+
