@@ -57,6 +57,7 @@ ARMv4 ARMV4(
 	.address(arm_addr),
 	.ram_data_in(arm_d_in),
 	.ram_data_out(arm_d_out),
+	.ram_ready(ram_m_ready),
 	.cs(arm_cs),
 	.we(arm_we),
 	.oe(arm_oe),
@@ -81,7 +82,7 @@ basic_ram BASIC_RAM(
 	.address(ram_addr),
 	.data_output(ram_d_out),
 	.data_input(ram_d_in),
-	.mem_done(ram_m_ready),
+	.mem_done_out(ram_m_ready),
 	.cs(ram_cs),
 	.we(ram_we),
 	.oe(ram_oe)

@@ -27,6 +27,7 @@ module ARMv4(
 	input rst,
 
 	output [31:0] ram_data_in, 
+	input ram_ready,
 	output cs, we, oe,
 	output [31:0] address,
   output [31:0] ir_out,
@@ -214,6 +215,7 @@ StateMachine STATE_MACHINE(
 	.L(ir[20]),
 	.P(ir[24]),
 	.A(ir[21]),
+	.mem_ready(ram_ready),
 	.IR_20(ir[20]),
 	.CS_BITS(control_signals)
 );

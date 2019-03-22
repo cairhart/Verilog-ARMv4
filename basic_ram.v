@@ -9,7 +9,7 @@ clk         , // Clock Input
 address     , // Address Input
 data_output , // Data out
 data_input	, // Data in
-mem_done		, // memory is finished reading or writing
+mem_done_out		, // memory is finished reading or writing
 cs          , // Chip Select
 we          , // Write Enable/Read Enable
 oe          , // Output Enable
@@ -30,7 +30,7 @@ input                  we          ;
 input                  oe          ; 
 
 //--------------Output Ports----------------------- 
-output 					mem_done;
+output 					mem_done_out;
 output [DATA_OUT_SIZE-1:0] data_output;
 
 //--------------Internal variables---------------- 
@@ -40,6 +40,7 @@ reg [DATA_WIDTH-1:0] data_out2 ;
 reg [DATA_WIDTH-1:0] data_out3 ;
 reg [DATA_WIDTH-1:0] mem [0:RAM_DEPTH-1];
 reg                  oe_r;
+reg					 mem_done;
 
 //--------------Code Starts Here------------------ 
 
@@ -48,22 +49,27 @@ reg                  oe_r;
 assign data_output = (cs && oe && !we) ? 
 			{data_out3,data_out2,data_out1,data_out0} : 8'bz; 
 
+assign mem_done_out = mem_done;
+
 // Memory Write Block 
 // Write Operation : When we = 1, cs = 1
 always @ (posedge clk)
 begin : MEM_WRITE
+	mem_done = 0;
    if ( cs && we ) begin
 	 	mem[address] <= data_input[7:0];
 		mem[address+1] <= data_input[15:8];
 		mem[address+2] <= data_input[23:16];
 		mem[address+3] <= data_input[31:24];
    end
+   mem_done = 1;
 end
 
 // Memory Read Block 
 // Read Operation : When we = 0, oe = 1, cs = 1
 always @ (posedge clk)
 begin : MEM_READ
+	mem_done = 0;
   if (cs && !we && oe) begin
     data_out0 = mem[address];
     data_out1 = mem[address+1];
@@ -73,6 +79,7 @@ begin : MEM_READ
   end else begin
     oe_r = 0;
   end
+  mem_done = 1;
 end
 
 endmodule // End of Module ram_sp_sr_sw
