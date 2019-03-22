@@ -95,17 +95,18 @@ basic_ram BASIC_RAM(
 
 
 initial begin
-	$monitor("ir is %d",ir);
-	$monitor("data into mcu is %d",ram_d_out);
-	$monitor("data into mar is %d",ram_addr);
-    $display("Start\n");
+    $monitor("ir is %d",ir);
+    $monitor("data into mcu is %d",ram_d_out);
+    $monitor("data into mar is %d",ram_addr);
+
+    $display("<< Start Top Module Test >>");
     reset = 1;
     ld_file = 1;    
-    $display("Loading memory\n");
+    $display("Loading memory...");
 
     while(!finished) begin
         #200
-        $display("Finished = %d\n", finished);
+        $display("finished signal = %d", finished);
     end
     $display("Finished loading memory\n");
 

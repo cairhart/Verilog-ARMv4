@@ -54,9 +54,13 @@ wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_
 wire [6:0] next_state_final = ( address == 44 && IR_20 == 1) ? 7'd46: next_state_address;
 
 always @(posedge clk) begin
-    if (rst == 1) address <= 7'd104; // Reset to fetch state
-    else if(!(CS && !mem_ready)) address <= next_state_final;
-	$display("next state is %d\n", address);
+    if (rst == 1) begin 
+      address <= 7'd104; // Reset to fetch state
+    end
+    else if(!(CS && !mem_ready)) begin 
+      address <= next_state_final;
+      $display("next state: %d", address);
+    end
 end
 
 endmodule
