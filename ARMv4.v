@@ -214,6 +214,7 @@ StateMachine STATE_MACHINE(
 	.L(ir[20]),
 	.P(ir[24]),
 	.A(ir[21]),
+	.IR_20(ir[20]),
 	.CS_BITS(control_signals)
 );
 // D*E*B*U*G N*O*T*E

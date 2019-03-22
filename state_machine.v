@@ -8,6 +8,7 @@ module StateMachine(
     input L,
     input P,
     input A,
+	input IR_20,
 	input mem_ready,
     output [63:0] CS_BITS
 );
@@ -50,6 +51,7 @@ wire [6:0] decode_target = {family_number, 3'b0};
 
 wire [6:0] non_fetch_address = DEC ? decode_target : jump_target;
 wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_address;
+wire [6:0] next_state_final = ( address == 44 && IR_20 == 1) ? 7'd104 : non_fetch_address;
 
 always @(posedge clk) begin
     if (rst == 1) address <= 7'd104; // Reset to fetch state
