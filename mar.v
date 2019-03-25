@@ -13,9 +13,12 @@ module mar(
 reg [31:0] address;
 wire incr;
 
+initial begin
+  address = 0;
+end
 
 always @(posedge LD_MAR) begin
-    address = (MARMUX2) ? ALU_bus : (MARMUX1) ? PC : address + 1;
+    address = (MARMUX2) ? ALU_bus : (MARMUX1) ? PC : address + 4;
 end
 
 
