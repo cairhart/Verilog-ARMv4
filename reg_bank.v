@@ -1,5 +1,6 @@
 module RegBank(
     input clk,
+    input rst,
     input latch_reg,
     input [3:0] Rd,
     input [3:0] Rn,
@@ -42,7 +43,14 @@ assign ST = REG_DATA[12];
 assign PC = REG_DATA[15];
 
 always @(posedge clk) begin
-    if (latch_reg == 1) REG_DATA[Rd] <= data_in;
+    if (rst == 1) begin
+      REG_DATA[14] = 16'h0000; // LR initial value
+      REG_DATA[15] = 16'h0000; // PC initial value
+    end
+    else if (latch_reg == 1) begin 
+      REG_DATA[Rd] = data_in;
+      $display("R%d: %d", Rd, REG_DATA[Rd]);
+    end
 end
 
 endmodule

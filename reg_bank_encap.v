@@ -2,6 +2,7 @@
 
 module RegBankEncapsulation(
     input clk,
+    input rst,
     input LATCH_REG,
     input IR_RD_MUX,
     input LSM_RD_MUX,
@@ -43,6 +44,7 @@ wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;
 RegBank reg_bank(
     // Inputs
     .clk(clk),
+    .rst(rst),		 
     .latch_reg(LATCH_REG),
     .Rd(Rd),
     .Rn(Rn),

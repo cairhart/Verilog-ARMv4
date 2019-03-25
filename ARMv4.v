@@ -203,6 +203,7 @@ mul MUL(
 
 RegBankEncapsulation REG_BANK_ENCAP(
 	.clk(clk),     // TODO
+	.rst(rst),		// TODO 
 	.LATCH_REG(control_signals[52]),
 	.IR_RD_MUX(control_signals[42]),
 	.LSM_RD_MUX(control_signals[41]),
@@ -247,13 +248,12 @@ StateMachine STATE_MACHINE(
 
 
 always @ (posedge clk) begin
-    if(control_signals[37]) $display("ir ram_data_out: %x", ram_data_out);
-    if(control_signals[36]) $display("mrdr ram_data_out: %x", ram_data_out);
     ir = (control_signals[37]) ? ram_data_out : ir;
-    if(control_signals[37]) $display("**** ARMv4 ir: %x", ir);
-    if(control_signals[37]) $display("**** ARMv4 ir_out: %x", ir_out);
     mrdr = (control_signals[36]) ? ram_data_out : mrdr;
     mwdr = (control_signals[35]) ? b_bus : mwdr;
+    if(control_signals[52]) begin
+     // $display("A: %d, B: %d, C: %d, ALU: %d", a_bus, am1_to_alu, nzcv_signals[1], alu_bus);
+    end
 end 
 
 // Top Level initializaion
