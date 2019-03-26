@@ -4,17 +4,21 @@ module mcu(
 	input s,
 	input [15:0] decode_families,
 	input [31:0] data_from_mem,
-  input ld_ir,
-  input ld_mar_from_pc,
+	input ld_ir,
+	input ld_mar_from_pc,
 	
 	output [1:0] data_size,
-	output [31:0] data_to_cpu,
+	output [31:0] data_to_cpu
 
-  // debugging signals
-  output signed_data,
-  output byte,
+
+	//Debugging signals, uncomment to run the test bench
+	/*
+	,
+	output signed_data,
+	output byte,
 	output halfword,
-  output word
+	output word
+	*/
 );
 
 wire [1:0] data_size;
@@ -31,9 +35,9 @@ assign signed_data = (hw_sb & (~h | (h & s)));
 
 assign byte = (word_ub & b) | (hw_sb & ~h);
 assign halfword = (hw_sb & h);
-assign word = (word_ub & ~b);
+assign word = (word_ub & ~b) | (ld_mar_from_pc |  ld_ir);
 
-assign data_size = (ld_mar_from_pc | ld_ir) ? 2'b11 : { word, (halfword | word) }; //EDITED BY VICKIE
+assign data_size = { word, (halfword | word) };
 
 assign zext =   (data_size[1]) ? data_from_mem : 
                 (data_size[0]) ? { 16'h0000, data_from_mem[15:0]} : 
