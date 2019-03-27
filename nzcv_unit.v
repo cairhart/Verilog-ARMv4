@@ -10,9 +10,6 @@ module nzcv_unit(
 	always @(posedge clk)
 		nzcv = s_input ? nzcv_input : nzcv;
 
-	reg always_1 = 1;
-	reg always_0 = 0;
-	assign operated = always_1;
 /*	
 	assign operated = opcode_input[3] ? 
 						(opcode_input[2] ? 
@@ -34,42 +31,63 @@ module nzcv_unit(
 								(opcode_input[0]? !nzcv[1] : nzcv[1])
 								:(opcode_input[0]? !nzcv[2] : nzcv[2])));
 */
- /*   always @(*)
+
+assign operated = (opcode_input == 4'b0000) ? nzcv[2] :
+				  (opcode_input == 4'b0001) ? !nzcv[2]:
+				  (opcode_input == 4'b0010) ? nzcv[1]:
+				  (opcode_input == 4'b0011) ? !nzcv[1]:
+				  (opcode_input == 4'b0100) ? nzcv[3]:
+				  (opcode_input == 4'b0101) ? !nzcv[3]:
+				  (opcode_input == 4'b0110) ? nzcv[0]:
+				  (opcode_input == 4'b0111) ? !nzcv[0]:
+				  (opcode_input == 4'b1000) ? nzcv[1] && !nzcv[2]:
+				  (opcode_input == 4'b1001) ? !nzcv[1] || nzcv[2]:
+				  (opcode_input == 4'b1010) ? 
+				  	(nzcv[3] && nzcv[0]) || (!nzcv[3] && !nzcv[0]):
+				  (opcode_input == 4'b1011) ? 
+					(nzcv[3] && !nzcv[0]) || (!nzcv[3] && nzcv[0]):
+				  (opcode_input == 4'b1100) ? 
+					(nzcv[2] && (nzcv[3] || nzcv[0])) || (!nzcv[3] && !nzcv[0]):
+				  (opcode_input == 4'b1101) ? 
+					(nzcv[2] || (nzcv[3] && !nzcv[0])) || (!nzcv[3] && nzcv[0]):
+				  (opcode_input == 4'b1111) ? 0 : 1;
+/*
+   always @(*)
     begin
         case(opcode_input)
         4'b0000: // 
-			operate = nzcv[2];
+			operated = nzcv[2];
         4'b0001: // 
-			operate = !nzcv[2];
+			operated = !nzcv[2];
         4'b0010: // 
-			operate = nzcv[1];
+			operated = nzcv[1];
         4'b0011: // 
-			operate = !nzcv[1];
+			operated = !nzcv[1];
         4'b0100: // 
-			operate = nzcv[3];
+			operated = nzcv[3];
         4'b0101: // 
-			operate = !nzcv[3];
+			operated = !nzcv[3];
         4'b0110: // 
-			operate = nzcv[0];
+			operated = nzcv[0];
         4'b0111: // 
-			operate = !nzcv[0];
+			operated = !nzcv[0];
         4'b1000: //
-			operate = nzcv[1] && !nzcv[2];
+			operated = nzcv[1] && !nzcv[2];
         4'b1001: //
-			operate = !nzcv[1] || nzcv[2];
+			operated = !nzcv[1] || nzcv[2];
         4'b1010: //
-			operate = (nzcv[3] && nzcv[0]) || (!nzcv[3] && !nzcv[0]);
+			operated = (nzcv[3] && nzcv[0]) || (!nzcv[3] && !nzcv[0]);
         4'b1011: //
-			operate = (nzcv[3] && !nzcv[0]) || (!nzcv[3] && nzcv[0]);
+			operated = (nzcv[3] && !nzcv[0]) || (!nzcv[3] && nzcv[0]);
         4'b1100: //
-			operate = (nzcv[2] && (nzcv[3] || nzcv[0])) || (!nzcv[3] && !nzcv[0]);
+			operated = (nzcv[2] && (nzcv[3] || nzcv[0])) || (!nzcv[3] && !nzcv[0]);
         4'b1101: //
-			operate = (nzcv[2] || (nzcv[3] && !nzcv[0])) || (!nzcv[3] && nzcv[0]);
+			operated = (nzcv[2] || (nzcv[3] && !nzcv[0])) || (!nzcv[3] && nzcv[0]);
         4'b1110: //
-			operate = 1;
+			operated = 1'b1;
         4'b1111: //
-			operate = 0;
+			operated = 1'b0;
         endcase
     end
-	*/
+*/
 endmodule
