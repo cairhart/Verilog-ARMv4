@@ -110,7 +110,7 @@ initial begin
 
     ld_file = 0;
     reset = 0;
-    #125
+    #5000
     $display("IR = %x\n", ir);
     $display("Decode family = %x\n", decode_fam);
     

@@ -46,7 +46,7 @@ module alu(
           4'b1101: // MOV
            ALU_Result = B;
           4'b1110: // BitClear
-           ALU_Result = 0;
+           ALU_Result = A & ~(B);
           4'b1111: // REVMOV   
             ALU_Result = A;
           default: ALU_Result = A + B ; 

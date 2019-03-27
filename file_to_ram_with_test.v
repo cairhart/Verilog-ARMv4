@@ -22,7 +22,7 @@ always #5 clk = !clk;
 
 
 initial begin
-  data_file = $fopen("example_asm.obj", "r");
+  data_file = $fopen("asm_tests/addr_mode_1_f_1.obj", "r");
 	$display("file opened %d", data_file);
   if (data_file == `NULL) begin
     $display("data_file handle was NULL");
