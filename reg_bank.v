@@ -44,12 +44,11 @@ assign PC = REG_DATA[15];
 
 always @(posedge clk) begin
     if (rst == 1) begin
-      REG_DATA[14] = 16'h0000; // LR initial value
-      REG_DATA[15] = 16'h0000; // PC initial value
+        REG_DATA[14] = 16'h0000; // LR initial value
+        REG_DATA[15] = 16'h0000; // PC initial value
     end
-    else if (latch_reg == 1) begin 
-      REG_DATA[Rd] = data_in;
-      $display("R%d: %d", Rd, REG_DATA[Rd]);
+    else if (latch_reg == 1) begin
+        REG_DATA[Rd] = data_in;
     end
 end
 
