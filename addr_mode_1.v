@@ -14,7 +14,7 @@ module AddrMode1 (
     input         is_LSHSBCO,   // load/store halfword/signed byte combined offset
     input         is_LSHSBSO,   // load/store halfword/signed byte shifted offset
     input         is_BL,        // branch/branch and link
-    input         is_pass_thru, // pass all 32 IR bits through
+    input         is_pass_thru, // pass Rm_data through
     input         C,
 
     output [31:0] shifter_operand,
@@ -97,7 +97,7 @@ always @(*) begin
     endcase
 end
 
-wire [31:0] load_imm = (is_LSIO == 0) ? {20'b0, IR[11:0]} : {24'b0, IR[11:8], IR[3:0]};
+wire [31:0] load_imm = (is_LSIO == 1) ? {20'b0, IR[11:0]} : {24'b0, IR[11:8], IR[3:0]};
 
 wire [31:0] mux1 =  (is_DPI == 1)
                     ? rot_res[31:0]
@@ -112,7 +112,7 @@ wire [31:0] mux3 =  (is_BL == 1)
                     : mux2;
 
 wire [31:0] mux4 =  (is_pass_thru == 1)
-                    ? IR[31:0]
+                    ? Rm_data
                     : mux3;
 
 assign shifter_operand = mux4;
