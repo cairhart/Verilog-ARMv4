@@ -3,7 +3,10 @@
 module RegBankEncapsulation(
     input clk,
     input LATCH_REG,
+    input WRITE_BACK,
     input IR_RD_MUX,
+    input IR_RN_MUX,
+    input IR_RM_MUX,
     input LSM_RD_MUX,
     input RD_MUX,
     input PC_MUX,
@@ -26,9 +29,13 @@ wire [31:0] Rn_data, Rm_data, Rs_data;
 
 wire [3:0] Rn = (PC_MUX == 1)
                 ? 4'd15
-                : (IR_RD_MUX == 1)
+                : (IR_RN_MUX == 1)
                     ? IR[19:16]
                     : IR[15:12];
+
+wire [3:0] Rm = (IR_RM_MUX == 1)
+                ? IR[15:12]
+                : IR[3:0];
 
 wire [3:0] rd_mux_pre = (LSM_RD_MUX == 1)
                         ? REG_COUNTER
@@ -40,13 +47,15 @@ wire [3:0] Rd = (RD_MUX == 0) ? rd_mux_pre : (RD_MUX == 1) ? 4'd15 : (RD_MUX == 
 
 wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;
 
+wire latch_signal = LATCH_REG || (WRITE_BACK && IR[21]);
+
 RegBank reg_bank(
     // Inputs
     .clk(clk),
-    .latch_reg(LATCH_REG),
+    .latch_reg(latch_signal),
     .Rd(Rd),
     .Rn(Rn),
-    .Rm(IR[3:0]),
+    .Rm(Rm),
     .Rs(IR[11:8]),
     .data_in(data_in),
     // Outputs
