@@ -33,7 +33,7 @@ wire ready;
 initial begin
   $display("Starting file_to_ram");
   finished = 0;
-  data_file = $fopen("example_asm.obj", "r");
+  data_file = $fopen("asm_tests/addr_mode_1_f_1.obj", "r");
   if (data_file == `NULL) begin
     $display("data_file handle was NULL");
     $finish;

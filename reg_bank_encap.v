@@ -2,6 +2,7 @@
 
 module RegBankEncapsulation(
     input clk,
+    input rst,
     input LATCH_REG,
     input WRITE_BACK,
     input IR_RD_MUX,
@@ -53,6 +54,7 @@ RegBank reg_bank(
     // Inputs
     .clk(clk),
     .latch_reg(latch_signal),
+    .rst(rst),
     .Rd(Rd),
     .Rn(Rn),
     .Rm(Rm),

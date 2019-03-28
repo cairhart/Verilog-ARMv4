@@ -95,7 +95,7 @@ basic_ram BASIC_RAM(
 
 
 initial begin
-    $monitor("ir: %x\ndata into mar (ram_addr): %d\ndata into ram_addr (arm_addr): %d\ndata into mcu (ram_d_out): %x",ir, ram_addr, arm_addr, ram_d_out);
+    $monitor("ir: %x\nmar: %d", ir, ram_addr);
 
     $display("<< Start Top Module Test >>");
     reset = 1;
@@ -110,7 +110,7 @@ initial begin
 
     ld_file = 0;
     reset = 0;
-    #300
+    #5000
     $display("IR = %x\n", ir);
     $display("Decode family = %x\n", decode_fam);
     

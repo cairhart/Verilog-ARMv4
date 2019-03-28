@@ -5,9 +5,15 @@ module alu(
 					 output [3:0] NZCV
     );
     reg [63:0] ALU_Result;
-    assign ALU_Out = ALU_Result; // ALU out
     reg [3:0] nzcv; // Carryout flag
+
+    assign ALU_Out = ALU_Result; // ALU out
 		assign NZCV = nzcv;
+
+    initial begin
+      nzcv = 4'b0000;
+    end
+
     always @(*)
     begin
         case(ALU_Sel)
@@ -40,7 +46,7 @@ module alu(
           4'b1101: // MOV
            ALU_Result = B;
           4'b1110: // BitClear
-           ALU_Result = 0;
+           ALU_Result = A & ~(B);
           4'b1111: // REVMOV   
             ALU_Result = A;
           default: ALU_Result = A + B ; 
