@@ -37,7 +37,6 @@ StateMachine state_machine(
     // Inputs
     .clk(clk),
     .rst(rst),
-    .family_bits(family_bits),
     .COND(COND),
     .L(L),
     .P(P),
