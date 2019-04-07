@@ -55,7 +55,7 @@ assign ir_out = ir;
 /**************************************************
  ********         Top Level Registers   ***********
  **************************************************/
-reg [31:0] mrdr,mwdr; // Memory Read and Memory Write registers
+reg [31:0] mrdr, mwdr; // Memory Read and Memory Write registers
 reg [31:0] ir; // Instruction register
 
 
@@ -100,6 +100,7 @@ wire [31:0] alu_bus;
 wire [31:0] alu_bus_hi_UNUSED; // High 32 bits padding for the unused portion of the ALU output
 wire [31:0] ram_data_out; // see bottom right of the main hardware diagram cön
 
+assign b_bus = (`CTRL_ST_GATE_MRDR == 1) ? mrdr : 32'bz;
 
 
 
