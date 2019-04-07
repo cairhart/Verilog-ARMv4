@@ -9,7 +9,7 @@ module RegBankEncapsulation(
     input IR_RN_MUX,
     input IR_RM_MUX,
     input LSM_RD_MUX,
-    input RD_MUX,
+    input [1:0] RD_MUX,
     input PC_MUX,
     input DATA_MUX,
     input REG_GATE_B,
@@ -38,13 +38,15 @@ wire [3:0] Rm = (IR_RM_MUX == 1)
                 ? IR[15:12]
                 : IR[3:0];
 
-wire [3:0] rd_mux_pre = (LSM_RD_MUX == 1)
-                        ? REG_COUNTER
-                        : (IR_RD_MUX == 1)
-                            ? IR[15:12]
-                            : IR[19:16];
-
-wire [3:0] Rd = (RD_MUX == 0) ? rd_mux_pre : (RD_MUX == 1) ? 4'd15 : (RD_MUX == 2) ? 4'd14 : 4'd14;
+wire [3:0] Rd = (RD_MUX == 0)
+                ?   (IR_RD_MUX == 1)
+                    ?   IR[15:12]
+                    :   IR[19:16]
+                :   (RD_MUX == 1)
+                    ?   4'd15
+                    :   (RD_MUX == 2)
+                        ?   4'd14
+                        :   4'd14;
 
 wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;
 

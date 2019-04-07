@@ -206,7 +206,6 @@ RegBankEncapsulation REG_BANK_ENCAP(
 	.rst(rst),		// TODO
 	.LATCH_REG(control_signals[52]),
 	.IR_RD_MUX(control_signals[42]),
-	.LSM_RD_MUX(control_signals[41]),
 	.RD_MUX(control_signals[19:18]),
 	.PC_MUX(control_signals[50]),
 	.DATA_MUX(control_signals[49]),
