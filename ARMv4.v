@@ -11,6 +11,7 @@
 `include "reg_bank_encap.v"
 `include "state_machine.v"
 `include "memory_controller.v"
+`include "control_signal_defs.v"
 
 
 
@@ -111,7 +112,7 @@ wire [31:0] ram_data_out; // see bottom right of the main hardware diagram cön
 
 tsb_32_bit GATE_MUL_B (
     .in(mul_out),
-    .gate(control_signals[44]),
+    .gate(`CTRL_ST_GATE_MUL),
     .out(b_bus)
 );
 
@@ -129,7 +130,7 @@ AddrMode1 ADDR_MODE_1(
     .is_LSHSBCO(decoder_fam_signals[10]),   // load/store halfword/signed byte combined offset
     .is_LSHSBSO(decoder_fam_signals[11]),   // load/store halfword/signed byte shifted offset
     .is_BL(decoder_fam_signals[14]),        // branch/branch and link
-    .is_pass_thru(control_signals[43]), // pass all 32 IR bits through
+    .is_pass_thru(`CTRL_ST_AM1_PASS_THRU), // pass Rm_data through
     .C(am1_carry_in),
 
     .shifter_operand(am1_to_alu),
@@ -173,17 +174,17 @@ mcu MCU(
 	.s(ir[6]),
 	.decode_families(decoder_fam_signals),
 	.data_from_mem(ram_data_into_mcu),
-  .ld_ir(control_signals[37]),
-  .ld_mar_from_pc(control_signals[33]),
+  .ld_ir(`CTRL_ST_LD_IR),
+  .ld_mar_from_pc(`CTRL_ST_MARMUX1),
 	.data_size(data_size),
 	.data_to_cpu(ram_data_out)
 );
 
 
 mar MAR(
-	.LD_MAR(control_signals[34]),
-    .MARMUX1(control_signals[33]),
-    .MARMUX2(control_signals[32]),
+	.LD_MAR(`CTRL_ST_LD_MAR),
+    .MARMUX1(`CTRL_ST_MARMUX1),
+    .MARMUX2(`CTRL_ST_MARMUX2),
     .PC(pc),
     .ALU_bus(alu_bus),
     .address(address)
@@ -193,8 +194,8 @@ mar MAR(
 mul MUL(
 	.B_In(b_bus),
 	.C(c_bus),
-	.MUL_HiLo(control_signals[45]),
-	.LD_MUL(control_signals[46]),
+	.MUL_HiLo(`CTRL_ST_MUL_HILO),
+	.LD_MUL(`CTRL_ST_LD_MUL),
 	.U( ir[22]),
 	.B_Out(mul_out)
 );
@@ -204,14 +205,15 @@ mul MUL(
 RegBankEncapsulation REG_BANK_ENCAP(
 	.clk(clk),     // TODO
 	.rst(rst),		// TODO
-	.LATCH_REG(control_signals[52]),
-    .IR_RD_MUX(control_signals[42]),
-	.IR_RM_MUX(control_signals[22:21]),
-	.RD_MUX(control_signals[19:18]),
-	.PC_MUX(control_signals[50]),
-	.DATA_MUX(control_signals[49]),
-	.REG_GATE_B(control_signals[48]),
-	.REG_GATE_C(control_signals[47]),
+	.LATCH_REG(`CTRL_ST_LATCH_REG),
+    .IR_RD_MUX(`CTRL_ST_IR_RD_MUX),
+    .IR_RN_MUX(`CTRL_ST_IR_RN_MUX),
+	.IR_RM_MUX(`CTRL_ST_IR_RM_MUX),
+	.RD_MUX(`CTRL_ST_RD_MUX),
+	.PC_MUX(`CTRL_ST_PC_MUX),
+	.DATA_MUX(`CTRL_ST_DATA_MUX),
+	.REG_GATE_B(`CTRL_ST_REG_GATE_B),
+	.REG_GATE_C(`CTRL_ST_REG_GATE_C),
 	.IR(ir),
 	.ALU_BUS(alu_bus),
 	.REG_COUNTER(reg_counter_to_rb),    // TODO  will probably remove this signal
@@ -247,10 +249,10 @@ StateMachine STATE_MACHINE(
 
 
 always @ (posedge clk) begin
-    ir = (control_signals[37]) ? ram_data_out : ir;
-    mrdr = (control_signals[36]) ? ram_data_out : mrdr;
-    mwdr = (control_signals[35]) ? b_bus : mwdr;
-    if(control_signals[52]) begin
+    ir = (`CTRL_ST_LD_IR) ? ram_data_out : ir;
+    mrdr = (`CTRL_ST_LD_MRDR) ? ram_data_out : mrdr;
+    mwdr = (`CTRL_ST_LD_MWDR) ? b_bus : mwdr;
+    if(`CTRL_ST_LATCH_REG) begin
      // $display("A: %d, B: %d, C: %d, ALU: %d", a_bus, am1_to_alu, nzcv_signals[1], alu_bus);
     end
 end
