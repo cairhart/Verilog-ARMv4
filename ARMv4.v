@@ -27,7 +27,7 @@ module ARMv4(
 	input [31:0] ram_data_into_mcu,
 	input rst,
 
-	output [31:0] ram_data_in, 
+	output [31:0] ram_data_in,
 	input ram_ready,
 	output cs, we, oe,
 	output [31:0] address,
@@ -62,7 +62,7 @@ reg [31:0] ir; // Instruction register
 /**************************************************
  ********         Control Signals       ***********
  **************************************************/
-wire [63:0] control_signals; // Left generic to ease modificaiton. 
+wire [63:0] control_signals; // Left generic to ease modificaiton.
 // Check the state machine spreadsheet to see descriptions of control signals
 
 
@@ -72,7 +72,7 @@ wire [63:0] control_signals; // Left generic to ease modificaiton.
  **************************************************/
 wire [15:0] decoder_fam_signals; // See decodeFamilies.v for description of this signal
 wire [3:0] decoder_fam_num; // See decodeFamilies.v for description of this signal
-	
+
 
 /**************************************************
  ********         Inter-connection      ***********
@@ -84,7 +84,7 @@ wire [31:0] am1_to_alu;                             // bus from addr1 module to 
 wire        am1_carry_in, am1_carry_out;            // addr1 carry in and out
 wire [3:0]  reg_counter_to_rb;                      // register counter to register bank
 wire [31:0] pc;                                     // Program counter output from the register bank (i.e. R15)
-wire [31:0] st;                                     
+wire [31:0] st;
 wire        cond;                                   // COND signal based on condition codes
 wire [3:0] nzcv_signals;
 wire [1:0] data_size;
@@ -109,7 +109,7 @@ wire [31:0] ram_data_out; // see bottom right of the main hardware diagram cön
 // Naming convention: <gate_signal_name>_B
 
 
-tsb_32_bit GATE_MUL_B ( 
+tsb_32_bit GATE_MUL_B (
     .in(mul_out),
     .gate(control_signals[44]),
     .out(b_bus)
@@ -203,36 +203,35 @@ mul MUL(
 
 RegBankEncapsulation REG_BANK_ENCAP(
 	.clk(clk),     // TODO
-	.rst(rst),		// TODO 
+	.rst(rst),		// TODO
 	.LATCH_REG(control_signals[52]),
 	.IR_RD_MUX(control_signals[42]),
 	.LSM_RD_MUX(control_signals[41]),
-	.RD_MUX(control_signals[51]),
+	.RD_MUX(control_signals[19:18]),
 	.PC_MUX(control_signals[50]),
 	.DATA_MUX(control_signals[49]),
 	.REG_GATE_B(control_signals[48]),
 	.REG_GATE_C(control_signals[47]),
-	.IR(ir), 
+	.IR(ir),
 	.ALU_BUS(alu_bus),
 	.REG_COUNTER(reg_counter_to_rb),    // TODO  will probably remove this signal
 	.A_BUS(a_bus),
 	.B_BUS(b_bus),
 	.C_BUS(c_bus),
-	.ST(st), 
+	.ST(st),
 	.PC(pc)
 
 );
 
 
 StateMachine STATE_MACHINE(
-	.clk(clk),		// TODO 
-	.rst(rst),		// TODO 
+	.clk(clk),		// TODO
+	.rst(rst),		// TODO
 	.family_number(decoder_fam_num),
 	.COND(cond),
-	.L(ir[20]),
-	.P(ir[24]),
+	.PL(ir[24]),
 	.A(ir[21]),
-	.mem_ready(ram_ready),
+	.MEM_R(ram_ready),
 	.IR_20(ir[20]),
 	.CS_BITS(control_signals)
 );
@@ -254,11 +253,11 @@ always @ (posedge clk) begin
     if(control_signals[52]) begin
      // $display("A: %d, B: %d, C: %d, ALU: %d", a_bus, am1_to_alu, nzcv_signals[1], alu_bus);
     end
-end 
+end
 
 // Top Level initializaion
 initial begin
-    
+
 
 end
 
