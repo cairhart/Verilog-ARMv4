@@ -30,8 +30,8 @@ initial begin
     REG_DATA[ 9] = 16'd10;
     REG_DATA[10] = 16'd11;
     REG_DATA[11] = 16'd12;
-    REG_DATA[12] = 16'd4;    // Stride initial value
-    REG_DATA[13] = 16'h0000; // SP initial value
+    REG_DATA[12] = 16'd13;
+    REG_DATA[13] = 16'h8000; // SP initial value
     REG_DATA[14] = 16'h0000; // LR initial value
     REG_DATA[15] = 16'h0000; // PC initial value
 end
@@ -44,6 +44,7 @@ assign PC = REG_DATA[15];
 
 always @(posedge clk) begin
     if (rst == 1) begin
+        REG_DATA[13] = 16'h8000; // SP initial value
         REG_DATA[14] = 16'h0000; // LR initial value
         REG_DATA[15] = 16'h0000; // PC initial value
     end

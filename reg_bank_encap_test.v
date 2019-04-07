@@ -21,17 +21,15 @@ begin
     $write("\tRn=%0d, Rm=%0d, Rs=%0d\n", reg_bank_encap.reg_bank.Rn, reg_bank_encap.reg_bank.Rm, reg_bank_encap.reg_bank.Rs);
     $write("\tRn_data=0x%0H, Rm_data=0x%0H, Rs_data=0x%0H, PC=0x%0H, ST=%0d\n", reg_bank_encap.reg_bank.Rn_data, reg_bank_encap.reg_bank.Rm_data, reg_bank_encap.reg_bank.Rs_data, PC, ST);
     $write("\tRd=%0d, latch_reg=%0b, data_in=0x%0H\n", reg_bank_encap.reg_bank.Rd, reg_bank_encap.reg_bank.latch_reg, reg_bank_encap.reg_bank.data_in);
+    $write("\tPC_MUX=%0d, IR_RN_MUX=%0b\n", reg_bank_encap.PC_MUX, reg_bank_encap.IR_RN_MUX);
     $write("\n");
-    for (i = 0; i < 12; i = i + 1) begin
+    for (i = 0; i < 13; i = i + 1) begin
         expected_reg_bits_shifted = expected_reg_bits >> ((15-i) * 32);
         expected_reg_data = expected_reg_bits_shifted[31:0];
         $write("\t     R%-2d = 0x%H = %-d\t", i, reg_bank_encap.reg_bank.REG_DATA[i], reg_bank_encap.reg_bank.REG_DATA[i]);
         if (expected_reg_data == reg_bank_encap.reg_bank.REG_DATA[i]) $write("+ passed\n");
         else begin $write("- FAILED (expected 0x%H)\n", expected_reg_data); failcount = failcount + 1; end
     end
-    $write("\t(ST) R12 = 0x%H\t\t\t", reg_bank_encap.reg_bank.REG_DATA[12]);
-    if (expected_reg_bits[127:96] == reg_bank_encap.reg_bank.REG_DATA[12]) $write("+ passed\n");
-    else begin $write("- FAILED (expected 0x%H)\n", expected_reg_bits[95:64]); failcount = failcount + 1; end
     $write("\t(SP) R13 = 0x%H\t\t\t", reg_bank_encap.reg_bank.REG_DATA[13]);
     if (expected_reg_bits[95:64] == reg_bank_encap.reg_bank.REG_DATA[13]) $write("+ passed\n");
     else begin $write("- FAILED (expected 0x%H)\n", expected_reg_bits[95:64]); failcount = failcount + 1; end
@@ -59,8 +57,10 @@ reg clk;
 reg LATCH_REG;
 reg PC_MUX;
 reg IR_RD_MUX;
+reg IR_RN_MUX;
+reg IR_RM_MUX;
 reg LSM_RD_MUX;
-reg RD_MUX;
+reg [1:0] RD_MUX;
 reg DATA_MUX;
 reg REG_GATE_B;
 reg REG_GATE_C;
@@ -73,7 +73,8 @@ RegBankEncapsulation reg_bank_encap(
     .LATCH_REG(LATCH_REG),
     .PC_MUX(PC_MUX),
     .IR_RD_MUX(IR_RD_MUX),
-    .LSM_RD_MUX(LSM_RD_MUX),
+    .IR_RN_MUX(IR_RN_MUX),
+    .IR_RM_MUX(IR_RM_MUX),
     .RD_MUX(RD_MUX),
     .DATA_MUX(DATA_MUX),
     .REG_GATE_B(REG_GATE_B),
@@ -104,6 +105,8 @@ initial begin
     PC_MUX = 0;
     LSM_RD_MUX = 0;
     IR_RD_MUX = 1;
+    IR_RN_MUX = 1;
+    IR_RM_MUX = 0;
     RD_MUX = 0;
     DATA_MUX = 1;
 
@@ -122,10 +125,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3000      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0000      // R15
     },
         32'd1,        // A_BUS
         32'bZ,        // B_BUS
@@ -158,13 +161,13 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3004      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0004      // R15
     },
         32'd1,        // A_BUS
-        32'h3004,     // B_BUS
+        32'h0004,     // B_BUS
         32'bZ         // C_BUS
     );
 
@@ -195,12 +198,12 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
-        32'h3008,     // A_BUS
+        32'h0008,     // A_BUS
         32'bZ,        // B_BUS
         32'bZ         // C_BUS
     );
@@ -231,14 +234,14 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'd12,       // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
         32'd1,        // A_BUS
         32'bZ,        // B_BUS
-        32'h3008      // C_BUS
+        32'h0008      // C_BUS
     );
 
     $display("try to put spoofed data from ALU (0xDEADBEEF) into R11. Gate nothing onto B_BUS and C_BUS\n");
@@ -267,10 +270,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
         32'd1,        // A_BUS
         32'bZ,        // B_BUS
@@ -305,10 +308,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
         32'd9,        // A_BUS
         32'd2,        // B_BUS
@@ -342,10 +345,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
         32'd9,        // A_BUS
         32'd2,        // B_BUS
@@ -364,6 +367,7 @@ initial begin
     REG_GATE_C = 0;
     ALU_BUS = 32'hDEADBEEF;
     IR_RD_MUX = 0;
+    IR_RN_MUX = 0;
     RD_MUX = 0;
     DATA_MUX = 1;
 
@@ -382,10 +386,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd4,        // R12
-        32'h3000,     // R13
-        32'h3000,     // R14
-        32'h3008      // R15
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'h0000,     // R14
+        32'h0008      // R15
     },
         32'd3,        // A_BUS
         32'd8,        // B_BUS
@@ -418,10 +422,10 @@ initial begin
         32'd10,       // R9
         32'd11,       // R10
         32'hDEADBEEF, // R11
-        32'd4,        // R12
-        32'h3000,     // R13
+        32'd13,       // R12
+        32'h8000,     // R13
         32'd24,       // R14
-        32'h3008      // R15
+        32'h0008      // R15
     },
         32'd3,        // A_BUS
         32'd8,        // B_BUS
