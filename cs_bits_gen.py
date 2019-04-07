@@ -16,21 +16,20 @@ def_file = open('control_signal_defs.v', 'w')
 
 with open('tmp.csv') as csvfile:
     csvreader = csv.reader(csvfile)
+
     num_signals = int(next(csvreader)[2])
     bit_positions = [x for x in next(csvreader)[2:num_signals+2]]
     signal_widths = [int(x) for x in next(csvreader)[2:num_signals+2]]
     signal_names = [x for x in next(csvreader)[2:num_signals+2]]
-    next(csvreader)
-    state = 0
+
     for i in range(num_signals):
         def_file.write('`define CTRL_ST_{name} control_signals[{pos}]\n'.format(name=signal_names[i], pos=bit_positions[i]))
+
     for row in csvreader:
         for i in range(num_signals):
-            signal_width = signal_widths[i]
             signal_data = stoi(row[2+i])
-            mem_file.write('{data:0{width}b}'.format(width=signal_width, data=signal_data))
+            mem_file.write('{data:0{width}b}'.format(width=signal_widths[i], data=signal_data))
         mem_file.write('\n')
-        state = state + 1
 
 mem_file.close()
 def_file.close()

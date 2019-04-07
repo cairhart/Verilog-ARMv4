@@ -41,6 +41,7 @@ reg clk;
 reg rst;
 reg [3:0] family_number;
 reg COND;
+reg ST;
 reg P;
 reg A;
 reg IR_20;
@@ -51,6 +52,7 @@ StateMachine state_machine(
     .clk(clk),
     .rst(rst),
     .COND(COND),
+    .ST(ST),
     .PL(P),
     .A(A),
     .IR_20(IR_20),
@@ -63,6 +65,7 @@ always #10 clk = ~clk;
 initial begin
     family_number = 4'd0;
     COND = 1;
+    ST = 0;
     P = 0;
     A = 0;
     clk = 0;
@@ -134,12 +137,12 @@ initial begin
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
-    $display("testing load/store word/unsigned byte (post-indexing)\n");
+    $display("testing load (post-indexing)\n");
     #20 #20 #20 check_status(40);
     #20 check_status(41);
     #20 check_status(42);
     #20 check_status(44);
-    #20 check_status(45);
+    #20 check_status(48);
     #20 check_status(104);
 
     P = 1;
@@ -147,25 +150,25 @@ initial begin
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
-    $display("testing load/store word/unsigned byte (pre-indexing)\n");
+    $display("testing load (pre-indexing)\n");
     #20 #20 #20 check_status(40);
     #20 check_status(43);
     #20 check_status(44);
-    #20 check_status(45);
+    #20 check_status(48);
     #20 check_status(104);
 
-    family_number = 4'd9;
     P = 0;
+    ST = 1;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
-    $display("testing load/store halfword/signed byte (post-indexing)\n");
+    $display("testing store (post-indexing)\n");
     #20 #20 #20 check_status(40);
     #20 check_status(41);
     #20 check_status(42);
     #20 check_status(44);
-    #20 check_status(45);
+    #20 check_status(52);
     #20 check_status(104);
 
     P = 1;
@@ -173,11 +176,11 @@ initial begin
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
-    $display("testing load/store halfword/signed byte (pre-indexing)\n");
+    $display("testing store (pre-indexing)\n");
     #20 #20 #20 check_status(40);
     #20 check_status(43);
     #20 check_status(44);
-    #20 check_status(45);
+    #20 check_status(52);
     #20 check_status(104);
 
     family_number = 4'd14;

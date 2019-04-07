@@ -232,6 +232,7 @@ StateMachine STATE_MACHINE(
 	.rst(rst),		// TODO
 	.family_number(decoder_fam_num),
 	.COND(cond),
+    .ST(ir[20]),
 	.PL(ir[24]),
 	.A(ir[21]),
 	.MEM_R(ram_ready),
