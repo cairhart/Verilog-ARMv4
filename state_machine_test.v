@@ -11,48 +11,64 @@ begin
     $write("state=%d\t", state_machine.address);
     $write("EVCOND=%d, ", state_machine.EVCOND);
     $write("COND=%d, ", state_machine.COND);
-    $write("J=%d, ", state_machine.J);
     $write("MOD=%b, ", state_machine.MOD);
     $write("DEC=%b, ", state_machine.DEC);
-    $write("L=%b, ", state_machine.L);
-    $write("P=%b, ", state_machine.P);
+    $write("P/L=%b, ", state_machine.PL);
     $write("A=%b, ", state_machine.A);
-    $write("next_state=%b", state_machine.next_state_address);
-    $write("\t");
-    if (state_machine.address == expected) $write("+ passed");
-    else begin $write("- FAILED"); failcount = failcount + 1;  end
+    $write("IR_20=%b, ", state_machine.IR_20);
+    $write("MEM_R=%b", state_machine.MEM_R);
+    $write("\t\t");
+    if (state_machine.address == expected) $write("+ pass");
+    else begin
+        $write("- FAIL (expected state=%0d)", expected);
+        failcount = failcount + 1;
+    end
     $write("\n");
+    $write("\t\t\t");
+    $write("J=%d, ", state_machine.J);
+    $write("jump_target=%d, ", state_machine.jump_target);
+    $write("decode_target=%d, ", state_machine.decode_target);
+    $write("non_fetch_address=%d, ", state_machine.non_fetch_address);
+    $write("\n");
+    $write("\t\t\t");
+    $write("next_state_address=%d, ", state_machine.next_state_address);
+    $write("next_state_final=%d", state_machine.next_state_final);
+    $write("\n\n");
 end
 endtask
 
 reg clk;
 reg rst;
-reg [15:0] family_bits;
+reg [3:0] family_number;
 reg COND;
-reg L;
 reg P;
 reg A;
+reg IR_20;
+reg MEM_R;
 
 StateMachine state_machine(
     // Inputs
     .clk(clk),
     .rst(rst),
     .COND(COND),
-    .L(L),
-    .P(P),
-    .A(A)
+    .PL(P),
+    .A(A),
+    .IR_20(IR_20),
+    .MEM_R(MEM_R),
+    .family_number(family_number)
 );
 
 always #10 clk = ~clk;
 
 initial begin
-    family_bits = 0;
+    family_number = 4'd0;
     COND = 1;
-    L = 0;
     P = 0;
     A = 0;
     clk = 0;
     rst = 0;
+    IR_20 = 0;
+    MEM_R = 1;
     failcount = 0;
 
     $display("testing fetching, decode, and data processing\n");
@@ -62,7 +78,7 @@ initial begin
     #20 check_status(0);
     #20 check_status(104);
 
-    family_bits = 16'h0008;
+    family_number = 4'd3;
 
     $display("\ntesting reset to fetch\n");
     rst = 1;
@@ -91,7 +107,7 @@ initial begin
 
     A = 0;
 
-    family_bits = 16'h0010;
+    family_number = 4'd4;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
@@ -113,7 +129,7 @@ initial begin
     #20 check_status(37);
     #20 check_status(104);
 
-    family_bits = 16'h0020;
+    family_number = 4'd8;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
@@ -123,6 +139,7 @@ initial begin
     #20 check_status(41);
     #20 check_status(42);
     #20 check_status(44);
+    #20 check_status(45);
     #20 check_status(104);
 
     P = 1;
@@ -134,19 +151,21 @@ initial begin
     #20 #20 #20 check_status(40);
     #20 check_status(43);
     #20 check_status(44);
+    #20 check_status(45);
     #20 check_status(104);
 
-    family_bits = 16'h0040;
+    family_number = 4'd9;
     P = 0;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
     $display("testing load/store halfword/signed byte (post-indexing)\n");
-    #20 #20 #20 check_status(48);
-    #20 check_status(49);
-    #20 check_status(50);
-    #20 check_status(52);
+    #20 #20 #20 check_status(40);
+    #20 check_status(41);
+    #20 check_status(42);
+    #20 check_status(44);
+    #20 check_status(45);
     #20 check_status(104);
 
     P = 1;
@@ -155,12 +174,15 @@ initial begin
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
     $display("testing load/store halfword/signed byte (pre-indexing)\n");
-    #20 #20 #20 check_status(48);
-    #20 check_status(51);
-    #20 check_status(52);
+    #20 #20 #20 check_status(40);
+    #20 check_status(43);
+    #20 check_status(44);
+    #20 check_status(45);
     #20 check_status(104);
 
-    family_bits = 16'h0080;
+    family_number = 4'd14;
+
+    P = 0;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
@@ -170,18 +192,18 @@ initial begin
     #20 check_status(57);
     #20 check_status(104);
 
-    L = 1;
+    P = 1;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
     $display("skipping past decode");
     $display("testing branch and link\n");
     #20 #20 #20 check_status(56);
-    #20 check_status(61);
+    #20 check_status(59);
     #20 check_status(57);
     #20 check_status(104);
 
-    family_bits = 16'h0100;
+    family_number = 4'd12;
 
     $display("\nresetting to fetch");
     rst = 1; #20 rst = 0;
@@ -189,6 +211,7 @@ initial begin
     $display("testing swap\n");
     #20 #20 #20 check_status(64);
     #20 check_status(65);
+    #20 check_status(66);
     #20 check_status(104);
 
     $write("\n");
