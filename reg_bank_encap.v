@@ -7,7 +7,7 @@ module RegBankEncapsulation(
     input WRITE_BACK,
     input IR_RD_MUX,
     input IR_RN_MUX,
-    input IR_RM_MUX,
+    input [1:0] IR_RM_MUX,
     input LSM_RD_MUX,
     input [1:0] RD_MUX,
     input PC_MUX,
@@ -34,9 +34,13 @@ wire [3:0] Rn = (PC_MUX == 1)
                     ? IR[19:16]
                     : IR[15:12];
 
-wire [3:0] Rm = (IR_RM_MUX == 1)
-                ? IR[15:12]
-                : IR[3:0];
+wire [3:0] Rm = (IR_RM_MUX == 0)
+                ?   IR[3:0]
+                :   (IR_RM_MUX == 1)
+                    ?   IR[15:12]
+                    :   (IR_RM_MUX == 2)
+                        ?   IR[19:16]
+                        :   IR[19:16];
 
 wire [3:0] Rd = (RD_MUX == 0)
                 ?   (IR_RD_MUX == 1)
