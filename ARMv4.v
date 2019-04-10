@@ -254,6 +254,8 @@ always @ (posedge clk) begin
     ir = (`CTRL_ST_LD_IR) ? ram_data_out : ir;
     mrdr = (`CTRL_ST_LD_MRDR) ? ram_data_out : mrdr;
     mwdr = (`CTRL_ST_LD_MWDR) ? b_bus : mwdr;
+	//$display("Family signal is %d\n",decoder_fam_num);
+    $display("decoder family is %d\n",decoder_fam_num);
     if(`CTRL_ST_LATCH_REG) begin
      // $display("A: %d, B: %d, C: %d, ALU: %d", a_bus, am1_to_alu, nzcv_signals[1], alu_bus);
     end
