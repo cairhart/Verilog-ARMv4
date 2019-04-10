@@ -1,3 +1,4 @@
+`include "macro_definitions.v"
 
 module file_to_ram(
 	input clk,
@@ -28,7 +29,6 @@ wire [31:0] data_output;
 reg finished;
 integer address = 0;
 wire ready;
-`define NULL 0    
 
 initial begin
   $display("Starting file_to_ram");

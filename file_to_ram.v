@@ -1,3 +1,5 @@
+`include "macro_definitions.v"
+
 module file_to_ram;
 integer               data_file    ; // file handler
 integer               scan_file    ; // file handler
@@ -17,7 +19,6 @@ wire [31:0] data_output;
 wire mem_done;
 reg finished = 0;
 integer address = 0;
-`define NULL 0    
 always #5 clk = !clk;
 
 

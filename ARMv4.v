@@ -11,16 +11,13 @@
 `include "reg_bank_encap.v"
 `include "state_machine.v"
 `include "memory_controller.v"
-`include "control_signal_defs.v"
+`include "macro_definitions.v"
 
 
 
 /**************************************************
  ********         Macros                ***********
  **************************************************/
-// Misc. Macros
-`define START_ADDRESS 32'h0000
-// Control Signal Macros
 
 
 module ARMv4(
