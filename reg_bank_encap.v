@@ -17,6 +17,9 @@ module RegBankEncapsulation(
     input [31:0] IR,
     input [31:0] ALU_BUS,
     input [ 3:0] REG_COUNTER,
+    input is_DPI,
+    input is_DPIS,
+    input is_DPRS,
 
     output [31:0] A_BUS,
     output [31:0] B_BUS,
@@ -54,7 +57,8 @@ wire [3:0] Rd = (RD_MUX == 0)
 
 wire [31:0] data_in = (DATA_MUX == 1) ? ALU_BUS : PC + 4;
 
-wire latch_signal = LATCH_REG || (WRITE_BACK && IR[21]);
+wire is_CMP_Family = (is_DPI | is_DPIS | is_DPRS) & IR[24] & ~IR[23];
+wire latch_signal = (LATCH_REG & ~is_CMP_Family) | (WRITE_BACK & IR[21]);
 
 RegBank reg_bank(
     // Inputs
