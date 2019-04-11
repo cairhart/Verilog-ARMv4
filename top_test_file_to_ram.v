@@ -1,3 +1,4 @@
+`include "macro_definitions.v"
 
 module file_to_ram(
 	input clk,
@@ -28,12 +29,11 @@ wire [31:0] data_output;
 reg finished;
 integer address = 0;
 wire ready;
-`define NULL 0    
 
 initial begin
   $display("Starting file_to_ram");
   finished = 0;
-  data_file = $fopen("asm_tests/addr_mode_1_f_1.obj", "r");
+  data_file = $fopen("asm_tests/cont_test_1.obj", "r");
   if (data_file == `NULL) begin
     $display("data_file handle was NULL");
     $finish;
