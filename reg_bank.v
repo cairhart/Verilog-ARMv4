@@ -50,7 +50,7 @@ always @(posedge clk) begin
     end
     else if (latch_reg == 1) begin
         REG_DATA[Rd] = data_in;
-		$display("Latching in %d value %d \n",Rd,data_in);
+        $display("Latching in %d value %d \n",Rd,data_in);
     end
 end
 
