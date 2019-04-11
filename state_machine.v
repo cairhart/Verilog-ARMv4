@@ -37,7 +37,7 @@ wire [3:0] family_smasher = (family_number == 5 ||
                              family_number ==  6 ||
                              family_number ==  7 ||
                              family_number == 15)
-                             ? 4'b1111
+                             ? 4'b1110
                              : (family_number == 8 ||
                                 family_number ==  9 ||
                                 family_number == 10 ||
