@@ -60,10 +60,10 @@ wire [6:0] next_state_final = (address == 44 && IR_20 == 1) ? 7'd46: next_state_
 always @(posedge clk) begin
     if (family_smasher == 4'b1111) $finish;
     if (rst == 1) begin
-      address <= 7'd104; // Reset to fetch state
+        address <= 7'd104; // Reset to fetch state
     end
     else if(!(CS && !MEM_R)) begin
-      address <= next_state_final;
+        address <= next_state_final;
     end
 end
 
