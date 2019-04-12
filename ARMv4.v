@@ -86,7 +86,7 @@ wire [31:0] st;
 wire        cond;                                   // COND signal based on condition codes
 wire [3:0] nzcv_signals;
 wire [1:0] data_size;
-
+wire [3:0] alu_operation;
 
 
 /**************************************************
@@ -136,10 +136,18 @@ AddrMode1 ADDR_MODE_1(
 
 );
 
+alu_operation_mux ALU_OPERATION_MUX(
+    .alu_op_mux(`CTRL_ST_ALU_OP_MUX),
+    .ir_op(ir[24:21]),
+    .cs_op(`CTRL_ST_ALU_OP),
+    .u(ir[23]),
+    .alu_operation(alu_operation)
+);
+
 alu ALU(
     .A(a_bus),
     .B(am1_to_alu),
-    .ALU_Sel(ir[24:21]),
+    .ALU_Sel(alu_operation),
     .ALU_Out({alu_bus_hi_UNUSED, alu_bus} ),
     .NZCV(nzcv_signals)
 
