@@ -37,7 +37,7 @@ wire [3:0] family_smasher = (family_number == 5 ||
                              family_number ==  6 ||
                              family_number ==  7 ||
                              family_number == 15)
-                             ? 4'b1111
+                             ? 4'b1110
                              : (family_number == 8 ||
                                 family_number ==  9 ||
                                 family_number == 10 ||
@@ -58,13 +58,13 @@ wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_
 wire [6:0] next_state_final = (address == 44 && IR_20 == 1) ? 7'd46: next_state_address;
 
 always @(posedge clk) begin
-    $display("decoder family is %d\n",family_smasher);
+    $display("decoder family is %d\n", family_smasher);
     if (family_smasher == 4'b1111) $finish;
     if (rst == 1) begin
-      address <= 7'd104; // Reset to fetch state
+        address <= 7'd104; // Reset to fetch state
     end
     else if(!(CS && !MEM_R)) begin
-      address <= next_state_final;
+        address <= next_state_final;
     end
 end
 

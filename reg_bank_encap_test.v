@@ -22,6 +22,7 @@ begin
     $write("\tRn_data=0x%0H, Rm_data=0x%0H, Rs_data=0x%0H, PC=0x%0H, ST=%0d\n", reg_bank_encap.reg_bank.Rn_data, reg_bank_encap.reg_bank.Rm_data, reg_bank_encap.reg_bank.Rs_data, PC, ST);
     $write("\tRd=%0d, latch_reg=%0b, data_in=0x%0H\n", reg_bank_encap.reg_bank.Rd, reg_bank_encap.reg_bank.latch_reg, reg_bank_encap.reg_bank.data_in);
     $write("\tPC_MUX=%0d, IR_RN_MUX=%0b\n", reg_bank_encap.PC_MUX, reg_bank_encap.IR_RN_MUX);
+    $write("\tis_DPI=%0d, is_DPIS=%0d, is_DPRS=%0d\n", reg_bank_encap.is_DPI, reg_bank_encap.is_DPIS, reg_bank_encap.is_DPRS);
     $write("\n");
     for (i = 0; i < 13; i = i + 1) begin
         expected_reg_bits_shifted = expected_reg_bits >> ((15-i) * 32);
@@ -58,7 +59,7 @@ reg LATCH_REG;
 reg PC_MUX;
 reg IR_RD_MUX;
 reg IR_RN_MUX;
-reg IR_RM_MUX;
+reg [1:0] IR_RM_MUX;
 reg LSM_RD_MUX;
 reg [1:0] RD_MUX;
 reg DATA_MUX;
@@ -66,6 +67,9 @@ reg REG_GATE_B;
 reg REG_GATE_C;
 reg [31:0] IR;
 reg [31:0] ALU_BUS;
+reg is_DPI;
+reg is_DPIS;
+reg is_DPRS;
 
 RegBankEncapsulation reg_bank_encap(
     // Inputs
@@ -81,6 +85,9 @@ RegBankEncapsulation reg_bank_encap(
     .REG_GATE_C(REG_GATE_C),
     .IR(IR),
     .ALU_BUS(ALU_BUS),
+    .is_DPI(is_DPI),
+    .is_DPIS(is_DPIS),
+    .is_DPRS(is_DPRS),
     // Outputs
     .A_BUS(A_BUS),
     .B_BUS(B_BUS),
@@ -109,6 +116,9 @@ initial begin
     IR_RM_MUX = 0;
     RD_MUX = 0;
     DATA_MUX = 1;
+    is_DPI = 0;
+    is_DPIS = 0;
+    is_DPRS = 0;
 
     #1
 
@@ -429,6 +439,45 @@ initial begin
     },
         32'd3,        // A_BUS
         32'd8,        // B_BUS
+        32'bZ         // C_BUS
+    );
+
+    $display("we now want to make sure that if the current instruction is CMP that we don't");
+    $display("  latch the value on the ALU bus, even though LATCH_REG is asserted");
+
+    IR = 32'h015B9000;
+    LATCH_REG = 1;
+    is_DPI = 1;
+    REG_GATE_B = 0;
+    REG_GATE_C = 0;
+    ALU_BUS = 32'hDEADBEEF;
+    IR_RD_MUX = 1;
+    IR_RN_MUX = 1;
+    RD_MUX = 0;
+    DATA_MUX = 1;
+
+    #20
+
+    check_status({
+        32'd1,        // R0
+        32'd2,        // R1
+        32'd3,        // R2
+        32'd4,        // R3
+        32'd5,        // R4
+        32'd11,       // R5
+        32'd7,        // R6
+        32'd8,        // R7
+        32'd9,        // R8
+        32'd10,       // R9
+        32'd11,       // R10
+        32'hDEADBEEF, // R11
+        32'd13,       // R12
+        32'h8000,     // R13
+        32'd24,       // R14
+        32'h0008      // R15
+    },
+        32'hDEADBEEF,        // A_BUS
+        32'dZ,        // B_BUS
         32'bZ         // C_BUS
     );
 
