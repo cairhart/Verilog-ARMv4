@@ -32,7 +32,6 @@ begin
     $write("\n");
     $write("\t\t\t");
     $write("next_state_address=%d, ", state_machine.next_state_address);
-    $write("next_state_final=%d", state_machine.next_state_final);
     $write("\n\n");
 end
 endtask
