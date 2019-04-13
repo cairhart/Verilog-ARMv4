@@ -55,7 +55,6 @@ wire [6:0] decode_target = {family_smasher, 3'b0};
 
 wire [6:0] non_fetch_address = (DEC == 1) ? decode_target : jump_target;
 wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_address;
-wire [6:0] next_state_final = (address == 44 && IR_20 == 1) ? 7'd46: next_state_address;
 
 always @(posedge clk) begin
     $display("decoder family is %d\n", family_smasher);
@@ -64,7 +63,7 @@ always @(posedge clk) begin
         address <= 7'd104; // Reset to fetch state
     end
     else if(!(CS && !MEM_R)) begin
-        address <= next_state_final;
+        address <= next_state_address;
     end
 end
 
