@@ -42,7 +42,7 @@ wire J1_toggle =  (MOD[1] & ~MOD[0] & PL) | (VEC_OP_BR & OP[0]);
 wire J0_toggle = ~MOD[1] &  MOD[0] & A;
 wire [6:0] jump_target = {J[6:4], J[3] | J3_toggle, J[2] | J2_toggle, J[1] | J1_toggle, J[0] | J0_toggle};
 
-wire [3:0] family_smasher = (family_number == 5 ||
+wire [3:0] family_code = (family_number == 5 ||
                              family_number ==  6 ||
                              family_number ==  7 ||
                              family_number == 15)
@@ -60,14 +60,14 @@ wire [3:0] family_smasher = (family_number == 5 ||
                                        ? 4'b0111
                                        : family_number;
 
-wire [6:0] decode_target = {family_smasher, 3'b0};
+wire [6:0] decode_target = {family_code, 3'b0};
 
 wire [6:0] non_fetch_address = (DEC == 1) ? decode_target : jump_target;
 wire [6:0] next_state_address = (COND == 0 && EVCOND == 1) ? 7'd104 : non_fetch_address;
 wire [6:0] next_state_final = (RM_CNTR_JMP == 1 && RM_CNTR_DONE == 1) ? 7'd104: next_state_address;
 
 always @(posedge clk) begin
-    if (family_smasher == 4'b1111) $finish;
+    if (family_code == 4'b1111) $finish;
     if (rst == 1) begin
         address <= 7'd104; // Reset to fetch state
     end
