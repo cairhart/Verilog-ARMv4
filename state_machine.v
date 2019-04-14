@@ -8,7 +8,6 @@ module StateMachine(
     input ST,
     input PL,
     input A,
-    input IR_20,
     input MEM_R,
     output [63:0] CS_BITS
 );

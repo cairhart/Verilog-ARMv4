@@ -54,7 +54,6 @@ StateMachine state_machine(
     .ST(ST),
     .PL(P),
     .A(A),
-    .IR_20(IR_20),
     .MEM_R(MEM_R),
     .family_number(family_number)
 );
