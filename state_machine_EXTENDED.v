@@ -44,21 +44,22 @@ wire [6:0] jump_target = {J[6:4], J3_toggled, J2_toggled, J1_toggled, J0_toggled
 
 wire [3:0] family_code = (family_number == 5 ||
                              family_number ==  6 ||
-                             family_number ==  7 ||
-                             family_number == 15)
-                             ? 4'b1110
-                             : (family_number == 8 ||
-                                family_number ==  9 ||
-                                family_number == 10 ||
-                                family_number == 11)
-                                ? 4'b0101
-                                : (family_number == 12)
-                                  ? 4'b1000
-                                  : (family_number == 13)
-                                    ? 4'b1001
-                                    : (family_number == 14)
-                                       ? 4'b0111
-                                       : family_number;
+                             family_number ==  7)
+                             ? 4'b1111
+                             : (family_number == 15)
+                                 ? 4'b1110
+                                 : (family_number == 8 ||
+                                    family_number ==  9 ||
+                                    family_number == 10 ||
+                                    family_number == 11)
+                                    ? 4'b0101
+                                    : (family_number == 12)
+                                      ? 4'b1000
+                                      : (family_number == 13)
+                                        ? 4'b1001
+                                        : (family_number == 14)
+                                           ? 4'b0111
+                                           : family_number;
 
 wire [6:0] decode_target = {family_code, 3'b0};
 wire dt2_toggled = decode_target[2] | (is_VEC & OP[1]);
