@@ -12,7 +12,7 @@
 `include "state_machine.v"
 `include "memory_controller.v"
 `include "macro_definitions.v"
-
+`include "alu_op_mux.v"
 
 
 /**************************************************
@@ -241,7 +241,6 @@ StateMachine STATE_MACHINE(
 	.PL(ir[24]),
 	.A(ir[21]),
 	.MEM_R(ram_ready),
-	.IR_20(ir[20]),
 	.CS_BITS(control_signals)
 );
 // D*E*B*U*G N*O*T*E
