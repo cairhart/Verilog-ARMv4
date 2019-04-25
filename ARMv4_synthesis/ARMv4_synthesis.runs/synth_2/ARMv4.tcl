@@ -38,6 +38,7 @@ read_verilog -library xil_defaultlib {
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/mar.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/nzcv_unit.v}
+  {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank_encap.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/state_machine.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/macro_definitions.v}
@@ -51,6 +52,9 @@ read_verilog -library xil_defaultlib {
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc {{D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.srcs/constrs_1/new/top_constr.xdc}}
+set_property used_in_implementation false [get_files {{D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.srcs/constrs_1/new/top_constr.xdc}}]
+
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 

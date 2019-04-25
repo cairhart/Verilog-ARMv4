@@ -27,9 +27,6 @@ module mul(
     reg [63:0] op1, op2;
     reg [63:0] MUL;
 
-    initial begin 
-        MUL = -1;
-    end
 
     always @(*) begin
         op1 = (({{32{B_In[31]}}, {B_In}} & {64{U}}) | ({{32{1'b0}}, {B_In}} & {64{!U}})); //B_In is sext or zext
