@@ -21,33 +21,20 @@
 
 
 module ARMv4(
-	input clk,
-	input [31:0] ram_data_into_mcu,
-	input rst,
-
-	output [31:0] ram_data_in,
-	input ram_ready,
-	output cs, we, oe,
-	output [31:0] address,
-  output [31:0] ir_out,
-  output [63:0] cs_out,
-  output [15:0] dec_fam_out,
-  output [1:0] data_size
+    input clk,
+    input [31:0] ram_data_into_mcu,
+    input rst,
+    
+    input ram_ready,
+    output wire cs, we, oe,
+    output wire [31:0] address,
+    output [31:0] ir_out,
+    output [63:0] cs_out,
+    output wire [1:0] data_size
 );
 
-wire [31:0] address;
 wire [31:0] data_out;
-wire cs, we, oe;
 
-//C*O*D*E R*E*V*I*E*W
-//TODO Maybe we should add signals for this
-//assign cs = control_signals[40];
-assign cs = 1;
-assign we = 0;
-assign oe = 1;
-assign data_out = mwdr;
-assign cs_out = control_signals;
-assign ir_out = ir;
 
 /**************************************************
  ********         Top Level Registers   ***********
@@ -85,7 +72,6 @@ wire [31:0] pc;                                     // Program counter output fr
 wire [31:0] st;
 wire        cond;                                   // COND signal based on condition codes
 wire [3:0] nzcv_signals;
-wire [1:0] data_size;
 wire [3:0] alu_operation;
 
 
@@ -265,11 +251,17 @@ always @ (posedge clk) begin
     end
 end
 
-// Top Level initializaion
-initial begin
 
+//C*O*D*E R*E*V*I*E*W
+//TODO Maybe we should add signals for this
+//assign cs = control_signals[40];
+assign cs = 1;
+assign we = 0;
+assign oe = 1;
+assign data_out = mwdr;
+assign cs_out = control_signals;
+assign ir_out = ir;
 
-end
 
 
 endmodule

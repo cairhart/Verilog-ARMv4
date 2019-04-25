@@ -7,8 +7,8 @@ module mcu(
 	input ld_ir,
 	input ld_mar_from_pc,
 	
-	output [1:0] data_size,
-	output [31:0] data_to_cpu
+	output wire [1:0] data_size,
+	output wire [31:0] data_to_cpu
 
 
 	//Debugging signals, uncomment to run the test bench
@@ -21,8 +21,7 @@ module mcu(
 	*/
 );
 
-wire [1:0] data_size;
-wire [31:0] data_to_cpu;
+
 
 wire word_ub, hw_sb, signed_data, byte, halfword, word;
 

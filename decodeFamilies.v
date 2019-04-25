@@ -35,7 +35,7 @@ initial begin
   f_num = 0;
 end
 
-always @ (ir) 
+always @ (ir, mask) 
     case (ir[27:25]) 
         3'b000 : begin 
                     if ((ir[24:22] == 3'b000) && (ir[7:4] == 4'b1001)) begin //f3 

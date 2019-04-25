@@ -13,7 +13,7 @@
 `define CTRL_ST_GATE_MUL control_signals[44]
 `define CTRL_ST_AM1_PASS_THRU control_signals[43]
 `define CTRL_ST_IR_RD_MUX control_signals[42]
-`define CTRL_ST_unused control_signals[41]
+`define CTRL_ST_unused_1 control_signals[41]
 `define CTRL_ST_CS control_signals[40]
 `define CTRL_ST_WE control_signals[39]
 `define CTRL_ST_OE control_signals[38]

@@ -7,10 +7,9 @@ module mar(
 	input MARMUX2,
 	input [31:0] PC,
 	input [31:0] ALU_bus,
-	output [31:0] address
+	output reg [31:0] address
 );
 
-reg [31:0] address;
 wire incr;
 
 initial begin
