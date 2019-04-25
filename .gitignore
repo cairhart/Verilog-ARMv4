@@ -1,2 +1,3 @@
 *.out
 .*.sw*
+./ARMv4_synthesis/ARMv4_synthesis.runs/
