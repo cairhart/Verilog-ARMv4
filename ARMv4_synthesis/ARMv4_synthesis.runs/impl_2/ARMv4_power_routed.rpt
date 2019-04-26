@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Thu Apr 25 15:26:05 2019
+| Date             : Fri Apr 26 07:02:07 2019
 | Host             : Thomas-MSI running 64-bit major release  (build 9200)
 | Command          : report_power -file ARMv4_power_routed.rpt -pb ARMv4_power_summary_routed.pb -rpx ARMv4_power_routed.rpx
 | Design           : ARMv4
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.283        |
+| Total On-Chip Power (W)  | 1.304        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.118        |
+| Dynamic (W)              | 0.138        |
 | Device Static (W)        | 1.165        |
 | Effective TJA (C/W)      | 0.7          |
 | Max Ambient (C)          | 99.1         |
@@ -53,18 +53,18 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        3 |       --- |             --- |
-| CLB Logic      |     0.007 |     3205 |       --- |             --- |
-|   LUT as Logic |     0.006 |     1933 |    423403 |            0.46 |
+| CLB Logic      |     0.008 |     3205 |       --- |             --- |
+|   LUT as Logic |     0.008 |     1935 |    423403 |            0.46 |
 |   CARRY8       |    <0.001 |       46 |     65340 |            0.07 |
 |   Register     |    <0.001 |      702 |    846806 |            0.08 |
 |   BUFG         |    <0.001 |        2 |        88 |            2.27 |
 |   Others       |     0.000 |       21 |       --- |             --- |
 |   F7/F8 Muxes  |     0.000 |      204 |    522720 |            0.04 |
-| Signals        |     0.010 |     3175 |       --- |             --- |
-| DSPs           |     0.003 |       10 |      1590 |            0.63 |
-| I/O            |     0.094 |      168 |       668 |           25.15 |
+| Signals        |     0.014 |     3175 |       --- |             --- |
+| DSPs           |     0.004 |       10 |      1590 |            0.63 |
+| I/O            |     0.108 |      168 |       668 |           25.15 |
 | Static Power   |     1.165 |          |           |                 |
-| Total          |     1.283 |          |           |                 |
+| Total          |     1.304 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,14 +74,14 @@ Table of Contents
 +-----------------+-------------+-----------+-------------+------------+
 | Source          | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------------+-------------+-----------+-------------+------------+
-| Vccint          |       0.900 |     0.340 |       0.027 |      0.314 |
-| Vccint_io       |       0.900 |     0.102 |       0.003 |      0.099 |
+| Vccint          |       0.900 |     0.347 |       0.033 |      0.314 |
+| Vccint_io       |       0.900 |     0.103 |       0.003 |      0.099 |
 | Vccbram         |       0.900 |     0.004 |       0.000 |      0.004 |
 | Vccaux          |       1.800 |     0.338 |       0.000 |      0.338 |
-| Vccaux_io       |       1.800 |     0.101 |       0.028 |      0.073 |
-| Vcco33          |       3.300 |     0.007 |       0.000 |      0.007 |
+| Vccaux_io       |       1.800 |     0.102 |       0.030 |      0.073 |
+| Vcco33          |       3.300 |     0.007 |       0.001 |      0.007 |
 | Vcco25          |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18          |       1.800 |     0.022 |       0.022 |      0.000 |
+| Vcco18          |       1.800 |     0.028 |       0.028 |      0.000 |
 | Vcco15          |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135         |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12          |       1.200 |     0.000 |       0.000 |      0.000 |
@@ -151,7 +151,7 @@ Table of Contents
 +-------------+--------+-----------------+
 | Clock       | Domain | Constraint (ns) |
 +-------------+--------+-----------------+
-| sys_clk_pin | clk    |            10.0 |
+| sys_clk_pin | clk    |             8.0 |
 +-------------+--------+-----------------+
 
 
@@ -164,13 +164,13 @@ Table of Contents
 +------------------+-----------+
 | Name             | Power (W) |
 +------------------+-----------+
-| ARMv4            |     0.118 |
+| ARMv4            |     0.138 |
 |   MAR            |     0.002 |
-|   MUL            |     0.003 |
-|   REG_BANK_ENCAP |     0.007 |
-|     reg_bank     |     0.007 |
-|   STATE_MACHINE  |     0.010 |
-|   clk_IBUF_inst  |     0.002 |
+|   MUL            |     0.004 |
+|   REG_BANK_ENCAP |     0.008 |
+|     reg_bank     |     0.008 |
+|   STATE_MACHINE  |     0.013 |
+|   clk_IBUF_inst  |     0.003 |
 +------------------+-----------+
 
 

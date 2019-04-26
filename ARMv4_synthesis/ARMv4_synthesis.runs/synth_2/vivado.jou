@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Thu Apr 25 15:17:53 2019
-# Process ID: 4396
+# Start of session at: Fri Apr 26 06:53:25 2019
+# Process ID: 12068
 # Current directory: D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.runs/synth_2
 # Command line: vivado.exe -log ARMv4.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ARMv4.tcl
 # Log file: D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.runs/synth_2/ARMv4.vds

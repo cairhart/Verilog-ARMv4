@@ -34,8 +34,10 @@ set_property ip_output_repo {d:/School Work/Senior Design/project_repo/Verilog-A
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/32_bit_tsb.v}
+  {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/decodeFamilies.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/mar.v}
+  {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/memory_controller.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/nzcv_unit.v}
   {D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank.v}
