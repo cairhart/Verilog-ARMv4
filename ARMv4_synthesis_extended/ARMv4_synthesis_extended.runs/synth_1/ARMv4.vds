@@ -1,0 +1,726 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Apr 26 07:30:21 2019
+# Process ID: 22052
+# Current directory: D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis_extended/ARMv4_synthesis_extended.runs/synth_1
+# Command line: vivado.exe -log ARMv4.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ARMv4.tcl
+# Log file: D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis_extended/ARMv4_synthesis_extended.runs/synth_1/ARMv4.vds
+# Journal file: D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis_extended/ARMv4_synthesis_extended.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source ARMv4.tcl -notrace
+Command: synth_design -top ARMv4 -part xczu17eg-ffve1924-3-e
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu17eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu17eg'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 3208 
+WARNING: [Synth 8-2306] macro CTRL_ST_unused redefined [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/control_signal_defs.v:47]
+WARNING: [Synth 8-2306] macro CTRL_ST_unused redefined [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/control_signal_defs.v:6]
+WARNING: [Synth 8-2306] macro CTRL_ST_unused redefined [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/control_signal_defs.v:47]
+WARNING: [Synth 8-2490] overwriting previous definition of module tsb_32_bit [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/32_bit_tsb.v:3]
+WARNING: [Synth 8-2490] overwriting previous definition of module DPShiftType00 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_00.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module DPShiftType01 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_01.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module DPShiftType10 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_10.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module DPShiftType11 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_11.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module AddrMode1 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/addr_mode_1.v:6]
+WARNING: [Synth 8-2490] overwriting previous definition of module alu [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module alu_operation_mux [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu_op_mux.v:2]
+WARNING: [Synth 8-2490] overwriting previous definition of module decodeFamily [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/decodeFamilies.v:25]
+WARNING: [Synth 8-2490] overwriting previous definition of module mar [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/mar.v:4]
+WARNING: [Synth 8-2490] overwriting previous definition of module mul [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v:21]
+WARNING: [Synth 8-2490] overwriting previous definition of module nzcv_unit [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/nzcv_unit.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module RegBank [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module RegBankEncapsulationEXTENDED [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank_encap_EXTENDED.v:3]
+WARNING: [Synth 8-2490] overwriting previous definition of module Encoder16To4 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/16_4_encoder.v:1]
+WARNING: [Synth 8-2490] overwriting previous definition of module StateMachineEXTENDED [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/state_machine_EXTENDED.v:3]
+WARNING: [Synth 8-2490] overwriting previous definition of module mcu [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/memory_controller.v:1]
+WARNING: [Synth 8-2306] macro CTRL_ST_unused redefined [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/control_signal_defs.v:6]
+WARNING: [Synth 8-2306] macro CTRL_ST_unused redefined [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/control_signal_defs.v:47]
+WARNING: [Synth 8-2611] redeclaration of ansi port address is not allowed [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:40]
+WARNING: [Synth 8-2611] redeclaration of ansi port cs is not allowed [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:42]
+WARNING: [Synth 8-2611] redeclaration of ansi port we is not allowed [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:42]
+WARNING: [Synth 8-2611] redeclaration of ansi port oe is not allowed [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:42]
+WARNING: [Synth 8-2611] redeclaration of ansi port data_size is not allowed [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:90]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 377.113 ; gain = 115.164
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'ARMv4' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:24]
+INFO: [Synth 8-6157] synthesizing module 'tsb_32_bit' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/32_bit_tsb.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'tsb_32_bit' (1#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/32_bit_tsb.v:3]
+INFO: [Synth 8-6157] synthesizing module 'AddrMode1' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/addr_mode_1.v:6]
+INFO: [Synth 8-6157] synthesizing module 'DPShiftType00' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_00.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'DPShiftType00' (2#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_00.v:1]
+INFO: [Synth 8-6157] synthesizing module 'DPShiftType01' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_01.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'DPShiftType01' (3#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_01.v:1]
+INFO: [Synth 8-6157] synthesizing module 'DPShiftType10' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_10.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'DPShiftType10' (4#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_10.v:1]
+INFO: [Synth 8-6157] synthesizing module 'DPShiftType11' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_11.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'DPShiftType11' (5#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/dp_shift_type_11.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'AddrMode1' (6#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/addr_mode_1.v:6]
+INFO: [Synth 8-6157] synthesizing module 'alu_operation_mux' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu_op_mux.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'alu_operation_mux' (7#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu_op_mux.v:2]
+INFO: [Synth 8-6157] synthesizing module 'alu' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v:1]
+INFO: [Synth 8-226] default block is never used [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (8#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'nzcv_unit' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/nzcv_unit.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'nzcv_unit' (9#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/nzcv_unit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decodeFamily' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/decodeFamilies.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'decodeFamily' (10#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/decodeFamilies.v:25]
+INFO: [Synth 8-6157] synthesizing module 'mcu' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/memory_controller.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mcu' (11#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/memory_controller.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mar' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/mar.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'mar' (12#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/mar.v:4]
+INFO: [Synth 8-6157] synthesizing module 'mul' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v:21]
+INFO: [Synth 8-6155] done synthesizing module 'mul' (13#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v:21]
+INFO: [Synth 8-6157] synthesizing module 'RegBankEncapsulationEXTENDED' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank_encap_EXTENDED.v:3]
+INFO: [Synth 8-6157] synthesizing module 'RegBank' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'RegBank' (14#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'RegBankEncapsulationEXTENDED' (15#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/reg_bank_encap_EXTENDED.v:3]
+INFO: [Synth 8-6157] synthesizing module 'StateMachineEXTENDED' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/state_machine_EXTENDED.v:3]
+INFO: [Synth 8-3876] $readmem data file 'cs_bits.mem' is read successfully [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/state_machine_EXTENDED.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'StateMachineEXTENDED' (16#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/state_machine_EXTENDED.v:3]
+WARNING: [Synth 8-6014] Unused sequential element mwdr_reg was removed.  [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:50]
+WARNING: [Synth 8-3848] Net ram_data_in in module/entity ARMv4 does not have driver. [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:29]
+WARNING: [Synth 8-3848] Net dec_fam_out in module/entity ARMv4 does not have driver. [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:36]
+WARNING: [Synth 8-3848] Net am1_carry_in in module/entity ARMv4 does not have driver. [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:84]
+INFO: [Synth 8-6155] done synthesizing module 'ARMv4' (17#1) [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:24]
+WARNING: [Synth 8-3917] design ARMv4 has port cs driven by constant 1
+WARNING: [Synth 8-3917] design ARMv4 has port we driven by constant 0
+WARNING: [Synth 8-3917] design ARMv4 has port oe driven by constant 1
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[31]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[30]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[29]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[28]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[27]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[26]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[25]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[22]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[20]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[7]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[6]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[5]
+WARNING: [Synth 8-3331] design RegBankEncapsulationEXTENDED has unconnected port IR[4]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[15]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[14]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[13]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[12]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[7]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[6]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[5]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[4]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[3]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[2]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[1]
+WARNING: [Synth 8-3331] design mcu has unconnected port decode_families[0]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[31]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[30]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[29]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[28]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[19]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[18]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[17]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[16]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[15]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[14]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[13]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[12]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[11]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[10]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[9]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[8]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[3]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[2]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[1]
+WARNING: [Synth 8-3331] design decodeFamily has unconnected port ir[0]
+WARNING: [Synth 8-3331] design DPShiftType11 has unconnected port is_DPRS
+WARNING: [Synth 8-3331] design DPShiftType01 has unconnected port is_DPRS
+WARNING: [Synth 8-3331] design DPShiftType00 has unconnected port is_DPRS
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[31]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[30]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[29]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[28]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[27]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[26]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[25]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port IR[24]
+WARNING: [Synth 8-3331] design AddrMode1 has unconnected port is_LSHSBSO
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[31]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[30]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[29]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[28]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[27]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[26]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[25]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[24]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[23]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[22]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[21]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[20]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[19]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[18]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[17]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[16]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[15]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[14]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[13]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[12]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[11]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[10]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[9]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[8]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[7]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[6]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[5]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[4]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[3]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[2]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[1]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port ram_data_in[0]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[15]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[14]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[13]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[12]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[11]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[10]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[9]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[8]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[7]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[6]
+WARNING: [Synth 8-3331] design ARMv4 has unconnected port dec_fam_out[5]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 415.973 ; gain = 154.023
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+WARNING: [Synth 8-3295] tying undriven pin ADDR_MODE_1:C to constant 0 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_EXTENDED.v:122]
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 415.973 ; gain = 154.023
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 415.973 ; gain = 154.023
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xczu17eg-ffve1924-3-e
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.srcs/constrs_1/new/top_constr.xdc]
+Finished Parsing XDC File [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.srcs/constrs_1/new/top_constr.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis/ARMv4_synthesis.srcs/constrs_1/new/top_constr.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/ARMv4_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/ARMv4_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1615.258 ; gain = 0.000
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1615.258 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1615.258 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1615.258 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.258 ; gain = 1353.309
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu17eg-ffve1924-3-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.258 ; gain = 1353.309
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.258 ; gain = 1353.309
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5545] ROM "nzcv" won't be mapped to RAM because address size (64) is larger than maximum supported(25)
+INFO: [Synth 8-5544] ROM "f_signals" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_num" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_signals" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_num" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_signals" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_signals" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_signals" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_num" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_num" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "f_num" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[0]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[1]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[2]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[3]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[4]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[5]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[6]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[7]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[8]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[9]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[10]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[11]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[12]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[13]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[14]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "REG_DATA_reg[15]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "control_store" won't be mapped to RAM because it is too sparse
+WARNING: [Synth 8-327] inferring latch for variable 'nzcv_reg' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/alu.v:11]
+WARNING: [Synth 8-327] inferring latch for variable 'MUL_reg' [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v:34]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:33 . Memory (MB): peak = 1615.258 ; gain = 1353.309
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     64 Bit       Adders := 2     
+	   4 Input     64 Bit       Adders := 2     
+	   2 Input     33 Bit       Adders := 2     
+	   2 Input     32 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 3     
+	   2 Input      4 Bit       Adders := 3     
++---XORs : 
+	   2 Input     64 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 19    
+	                4 Bit    Registers := 4     
++---Multipliers : 
+	                64x64  Multipliers := 1     
++---Muxes : 
+	   2 Input     64 Bit        Muxes := 2     
+	 129 Input     64 Bit        Muxes := 1     
+	   2 Input     33 Bit        Muxes := 9     
+	   4 Input     33 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 14    
+	   9 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 1     
+	   6 Input     13 Bit        Muxes := 1     
+	   4 Input     12 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 5     
+	   4 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 13    
+	   8 Input      4 Bit        Muxes := 1     
+	   9 Input      4 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 5     
+	   2 Input      3 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 17    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module ARMv4 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
+Module DPShiftType00 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 2     
+Module DPShiftType01 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 3     
+Module DPShiftType10 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 2     
+Module DPShiftType11 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 2     
+Module AddrMode1 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input     33 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 5     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module alu 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     64 Bit       Adders := 2     
+	   4 Input     64 Bit       Adders := 2     
+	   2 Input     33 Bit       Adders := 2     
++---XORs : 
+	   2 Input     64 Bit         XORs := 1     
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 1     
+Module nzcv_unit 
+Detailed RTL Component Info : 
++---Registers : 
+	                4 Bit    Registers := 1     
+Module decodeFamily 
+Detailed RTL Component Info : 
++---Muxes : 
+	   9 Input     16 Bit        Muxes := 1     
+	   6 Input     13 Bit        Muxes := 1     
+	   4 Input     12 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   8 Input      4 Bit        Muxes := 1     
+	   9 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+Module mcu 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input     16 Bit        Muxes := 1     
+Module mar 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module mul 
+Detailed RTL Component Info : 
++---Multipliers : 
+	                64x64  Multipliers := 1     
++---Muxes : 
+	   2 Input     64 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 1     
+Module RegBank 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 16    
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 16    
+Module RegBankEncapsulationEXTENDED 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
++---Registers : 
+	                4 Bit    Registers := 3     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   4 Input      4 Bit        Muxes := 4     
+	   2 Input      4 Bit        Muxes := 7     
+	   2 Input      3 Bit        Muxes := 1     
+Module StateMachineEXTENDED 
+Detailed RTL Component Info : 
++---Muxes : 
+	 129 Input     64 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 4     
+	   4 Input      7 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 4     
+	   4 Input      4 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1590 (col length:264)
+BRAMs: 1592 (col length: RAMB18 264 RAMB36 132)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5545] ROM "nzcv" won't be mapped to RAM because address size (64) is larger than maximum supported(25)
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 16 [D:/School Work/Senior Design/project_repo/Verilog-ARMv4/multiply_unit.v:34]
+DSP Report: Generating DSP MUL0, operation Mode is: A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: PCIN+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: Generating DSP MUL0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+DSP Report: operator MUL0 is absorbed into DSP MUL0.
+WARNING: [Synth 8-3917] design ARMv4 has port cs driven by constant 1
+WARNING: [Synth 8-3917] design ARMv4 has port we driven by constant 0
+WARNING: [Synth 8-3917] design ARMv4 has port oe driven by constant 1
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 1615.258 ; gain = 1353.309
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping  Report (see note below)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|mul         | A*B            | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 14     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 18     | 14     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|mul         | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:09 ; elapsed = 00:01:19 . Memory (MB): peak = 2109.469 ; gain = 1847.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:23 ; elapsed = 00:01:33 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:31 ; elapsed = 00:01:41 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:33 ; elapsed = 00:01:43 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:33 ; elapsed = 00:01:43 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:34 ; elapsed = 00:01:44 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:34 ; elapsed = 00:01:44 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:34 ; elapsed = 00:01:44 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:34 ; elapsed = 00:01:45 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |BUFG            |     3|
+|2     |CARRY8          |    42|
+|3     |DSP_ALU         |    10|
+|4     |DSP_A_B_DATA    |    10|
+|5     |DSP_C_DATA      |    10|
+|6     |DSP_MULTIPLIER  |    10|
+|7     |DSP_M_DATA      |    10|
+|8     |DSP_OUTPUT      |    10|
+|9     |DSP_PREADD      |    10|
+|10    |DSP_PREADD_DATA |    10|
+|11    |LUT1            |     2|
+|12    |LUT2            |   306|
+|13    |LUT3            |   188|
+|14    |LUT4            |   217|
+|15    |LUT5            |   260|
+|16    |LUT6            |  1220|
+|17    |MUXF7           |   142|
+|18    |MUXF8           |    64|
+|19    |FDRE            |   627|
+|20    |FDSE            |     4|
+|21    |LD              |    65|
+|22    |IBUF            |    35|
+|23    |OBUF            |   133|
+|24    |OBUFT           |    48|
++------+----------------+------+
+
+Report Instance Areas: 
++------+--------------------+-----------------------------+------+
+|      |Instance            |Module                       |Cells |
++------+--------------------+-----------------------------+------+
+|1     |top                 |                             |  3436|
+|2     |  ALU               |alu                          |     9|
+|3     |  MUL               |mul                          |   221|
+|4     |    MUL0            |MUL0_funnel                  |     8|
+|5     |    MUL0__0         |MUL0_funnel__1               |     8|
+|6     |    MUL0__1         |MUL0_funnel__2               |     8|
+|7     |    MUL0__2         |MUL0_funnel__3               |     8|
+|8     |    MUL0__3         |MUL0_funnel__4               |     8|
+|9     |    MUL0__4         |MUL0_funnel__5               |     8|
+|10    |    MUL0__5         |MUL0_funnel__6               |     8|
+|11    |    MUL0__6         |MUL0_funnel__7               |     8|
+|12    |    MUL0__7         |MUL0_funnel__8               |     8|
+|13    |    MUL0__8         |MUL0_funnel__9               |     8|
+|14    |  ALU_OPERATION_MUX |alu_operation_mux            |     4|
+|15    |  MAR               |mar                          |    42|
+|16    |  NZCV_UNIT         |nzcv_unit                    |    14|
+|17    |  REG_BANK_ENCAP    |RegBankEncapsulationEXTENDED |  1806|
+|18    |    reg_bank        |RegBank                      |  1778|
+|19    |  STATE_MACHINE     |StateMachineEXTENDED         |  1052|
++------+--------------------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:34 ; elapsed = 00:01:45 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 80 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:12 ; elapsed = 00:01:25 . Memory (MB): peak = 2255.789 ; gain = 794.555
+Synthesis Optimization Complete : Time (s): cpu = 00:01:35 ; elapsed = 00:01:45 . Memory (MB): peak = 2255.789 ; gain = 1993.840
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 361 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2255.789 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 113 instances were transformed.
+  BUFG => BUFGCE: 3 instances
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD_DATA, DSP_PREADD): 10 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 35 instances
+  LD => LDCE: 65 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+80 Infos, 140 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:40 ; elapsed = 00:01:51 . Memory (MB): peak = 2255.789 ; gain = 2003.715
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2255.789 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'D:/School Work/Senior Design/project_repo/Verilog-ARMv4/ARMv4_synthesis_extended/ARMv4_synthesis_extended.runs/synth_1/ARMv4.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file ARMv4_utilization_synth.rpt -pb ARMv4_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Apr 26 07:32:22 2019...

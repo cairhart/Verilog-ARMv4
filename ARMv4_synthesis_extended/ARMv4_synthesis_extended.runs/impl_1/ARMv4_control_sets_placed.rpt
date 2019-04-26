@@ -1,0 +1,94 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Fri Apr 26 08:06:50 2019
+| Host         : Thomas-MSI running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file ARMv4_control_sets_placed.rpt
+| Design       : ARMv4
+| Device       : xczu17eg
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    27 |
+| Unused register locations in slices containing registers |     4 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      1 |            1 |
+|      3 |            1 |
+|      4 |            5 |
+|    16+ |           20 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              97 |           21 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |             100 |           31 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             519 |          136 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++---------------------------+------------------------------------+--------------------------------+------------------+----------------+
+|        Clock Signal       |            Enable Signal           |        Set/Reset Signal        | Slice Load Count | Bel Load Count |
++---------------------------+------------------------------------+--------------------------------+------------------+----------------+
+|  STATE_MACHINE/ir_reg[24] |                                    |                                |                1 |              1 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/address_reg[0]_26[0] | rst_IBUF_inst/O                |                2 |              3 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/address_reg[0]_26[0] | NZCV_UNIT/SS[0]                |                2 |              4 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[2]       |                                |                1 |              4 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[4]       |                                |                2 |              4 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[8]       |                                |                1 |              4 |
+|  clk_IBUF_BUFG            | ir_out_OBUF[20]                    |                                |                4 |              4 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/E[0]                 | rst_IBUF_inst/O                |               14 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[29]      |                                |               13 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[21][0]        | rst_IBUF_inst/O                |               15 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[21]_0[0]      | rst_IBUF_inst/O                |               14 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[19]_0         | STATE_MACHINE/address_reg[3]_3 |               15 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_0         | STATE_MACHINE/address_reg[3]_1 |               18 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_4         | STATE_MACHINE/ir_reg[12]_6     |               19 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[19]           | STATE_MACHINE/address_reg[3]_4 |               11 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_1         | STATE_MACHINE/address_reg[3]_8 |               17 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[17]_2         | STATE_MACHINE/address_reg[3]_5 |               19 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_3         | STATE_MACHINE/ir_reg[12]_5     |               16 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[17]_1         | STATE_MACHINE/ir_reg[17]_5     |               14 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[19]_1         | STATE_MACHINE/address_reg[3]_2 |               16 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[17]_0         | STATE_MACHINE/ir_reg[17]_4     |               18 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[17]_3         | STATE_MACHINE/address_reg[3]_9 |               15 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_2         | STATE_MACHINE/address_reg[3]_6 |               16 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[17]           | STATE_MACHINE/address_reg[3]_7 |               18 |             32 |
+|  cs_out_OBUF_BUFG[34]     |                                    |                                |               11 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[30]      |                                |               12 |             52 |
+|  cs_out_OBUF_BUFG[46]     |                                    |                                |                9 |             64 |
++---------------------------+------------------------------------+--------------------------------+------------------+----------------+
+
+
