@@ -39,12 +39,19 @@ wire [31:0] address;
 wire [31:0] data_out;
 wire cs, we, oe;
 
-//C*O*D*E R*E*V*I*E*W
-//TODO Maybe we should add signals for this
-//assign cs = control_signals[40];
-assign cs = 1;
-assign we = 0;
-assign oe = 1;
+
+
+/**************************************************
+ ********         Control Signals       ***********
+ **************************************************/
+wire [63:0] control_signals; // Left generic to ease modificaiton.
+// Check the state machine spreadsheet to see descriptions of control signals
+// And use definitions from control_store_signal_defs.v
+
+
+assign cs = `CTRL_ST_CS;
+assign we = `CTRL_ST_WE;
+assign oe = `CTRL_ST_OE;
 assign data_out = mwdr;
 assign cs_out = control_signals;
 assign ir_out = ir;
@@ -56,12 +63,6 @@ reg [31:0] mrdr, mwdr; // Memory Read and Memory Write registers
 reg [31:0] ir; // Instruction register
 
 
-
-/**************************************************
- ********         Control Signals       ***********
- **************************************************/
-wire [63:0] control_signals; // Left generic to ease modificaiton.
-// Check the state machine spreadsheet to see descriptions of control signals
 
 
 
@@ -148,6 +149,7 @@ alu ALU(
     .A(a_bus),
     .B(am1_to_alu),
     .ALU_Sel(alu_operation),
+	.rst(rst),
     .ALU_Out({alu_bus_hi_UNUSED, alu_bus} ),
     .NZCV(nzcv_signals)
 
@@ -209,8 +211,8 @@ mul MUL(
 
 
 RegBankEncapsulation REG_BANK_ENCAP(
-	.clk(clk),     // TODO
-	.rst(rst),		// TODO
+	.clk(clk),  
+	.rst(rst),
 	.LATCH_REG(`CTRL_ST_LATCH_REG),
     .IR_RD_MUX(`CTRL_ST_IR_RD_MUX),
     .IR_RN_MUX(`CTRL_ST_IR_RN_MUX),
@@ -233,8 +235,8 @@ RegBankEncapsulation REG_BANK_ENCAP(
 
 
 StateMachine STATE_MACHINE(
-	.clk(clk),		// TODO
-	.rst(rst),		// TODO
+	.clk(clk),
+	.rst(rst),
 	.family_number(decoder_fam_num),
 	.COND(cond),
     .ST(ir[20]),
@@ -265,11 +267,6 @@ always @ (posedge clk) begin
     end
 end
 
-// Top Level initializaion
-initial begin
-
-
-end
 
 
 endmodule
