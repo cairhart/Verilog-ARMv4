@@ -289,12 +289,6 @@ always @ (posedge clk) begin
     end
 end
 
-// Top Level initializaion
-initial begin
-
-
-end
-
 
 endmodule
 

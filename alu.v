@@ -11,8 +11,6 @@ module alu(
     assign ALU_Out = ALU_Result; // ALU out
 		assign NZCV = nzcv;
 
-    initial begin
-    end
 
     always @(*)
     begin
