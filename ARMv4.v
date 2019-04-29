@@ -25,13 +25,12 @@ module ARMv4(
 	input [31:0] ram_data_into_mcu,
 	input rst,
 
-	output [31:0] ram_data_in,
 	input ram_ready,
 	output cs, we, oe,
 	output [31:0] address,
   output [31:0] ir_out,
   output [63:0] cs_out,
-  output [15:0] dec_fam_out,
+// output [15:0] dec_fam_out, // for use with decoding
   output [1:0] data_size
 );
 
@@ -214,6 +213,7 @@ RegBankEncapsulation REG_BANK_ENCAP(
 	.clk(clk),  
 	.rst(rst),
 	.LATCH_REG(`CTRL_ST_LATCH_REG),
+	.WRITE_BACK(`CTRL_ST_WRITE_BACK),
     .IR_RD_MUX(`CTRL_ST_IR_RD_MUX),
     .IR_RN_MUX(`CTRL_ST_IR_RN_MUX),
 	.IR_RM_MUX(`CTRL_ST_IR_RM_MUX),
@@ -225,6 +225,9 @@ RegBankEncapsulation REG_BANK_ENCAP(
 	.IR(ir),
 	.ALU_BUS(alu_bus),
 	.REG_COUNTER(reg_counter_to_rb),    // TODO  will probably remove this signal
+	.is_DPI(decoder_fam_signals[0]),
+	.is_DPIS(decoder_fam_signals[1]),
+	.is_DPRS(decoder_fam_signals[2]),
 	.A_BUS(a_bus),
 	.B_BUS(b_bus),
 	.C_BUS(c_bus),

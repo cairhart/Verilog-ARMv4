@@ -3,13 +3,13 @@ module alu(
         input [3:0] ALU_Sel,// ALU Selection
         input rst,
         output [63:0] ALU_Out, // ALU 8-bit Output
-        output [3:0] NZCV
+        output [3:0] NZCV_out
 );
     reg [63:0] ALU_Result;
     reg [3:0] nzcv; // Carryout flag
 
     assign ALU_Out = ALU_Result; // ALU out
-		assign NZCV = nzcv;
+    assign NZCV_out = nzcv;
 
 
     always @(*)
