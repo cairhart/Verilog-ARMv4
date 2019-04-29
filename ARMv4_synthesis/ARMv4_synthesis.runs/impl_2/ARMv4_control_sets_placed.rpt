@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Fri Apr 26 06:58:48 2019
+| Date         : Sun Apr 28 13:03:56 2019
 | Host         : Thomas-MSI running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file ARMv4_control_sets_placed.rpt
 | Design       : ARMv4
@@ -68,23 +68,23 @@ Table of Contents
 |  clk_IBUF_BUFG            | STATE_MACHINE/address[4]_i_2__0_n_0 | STATE_MACHINE/address[4]_i_1__0_n_0 |                2 |              2 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/address[4]_i_2__0_n_0 | STATE_MACHINE/address[2]_i_1__0_n_0 |                1 |              3 |
 |  clk_IBUF_BUFG            | ir_out_OBUF[20]                     |                                     |                4 |              4 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_2          | rst_IBUF_inst/O                     |                5 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/E[0]                  |                                     |               25 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_2          | rst_IBUF_inst/O                     |                5 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/address_reg[0]_6[0]   | rst_IBUF_inst/O                     |               24 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/address_reg[0]_5[0]   | rst_IBUF_inst/O                     |               22 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[29]       |                                     |               21 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13][0]         |                                     |               24 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[15]_1[0]       |                                     |               27 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12][0]         |                                     |               22 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_0[0]       |                                     |               21 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_1[0]       |                                     |               19 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14][0]         |                                     |               23 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14]_0[0]       |                                     |               25 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[15]_2[0]       |                                     |               21 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14]_1[0]       |                                     |               25 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12][0]         |                                     |               22 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_0[0]       |                                     |               23 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_1[0]       |                                     |               19 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[12]_0[0]       |                                     |               21 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14]_0[0]       |                                     |               25 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14][0]         |                                     |               23 |             32 |
-|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14]_2[0]       |                                     |               27 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[15]_3[0]       |                                     |               23 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13]_0[0]       |                                     |               23 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[13][0]         |                                     |               24 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[14]_2[0]       |                                     |               27 |             32 |
+|  clk_IBUF_BUFG            | STATE_MACHINE/ir_reg[15]_1[0]       |                                     |               27 |             32 |
 |  cs_out_OBUF_BUFG[34]     |                                     |                                     |               13 |             32 |
 |  clk_IBUF_BUFG            | STATE_MACHINE/cs_out_OBUF[30]       |                                     |               22 |             50 |
 |  cs_out_OBUF_BUFG[46]     |                                     |                                     |               18 |             64 |

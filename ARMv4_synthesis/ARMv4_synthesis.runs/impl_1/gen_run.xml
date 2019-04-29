@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a35tiftg256-1L" LaunchTime="1556217657">
-  <File Type="PA-TCL" Name="ARMv4.tcl"/>
   <File Type="BITSTR-BMM" Name="ARMv4_bd.bmm"/>
-  <File Type="REPORTS-TCL" Name="ARMv4_reports.tcl"/>
+  <File Type="PA-TCL" Name="ARMv4.tcl"/>
   <File Type="OPT-DCP" Name="ARMv4_opt.dcp"/>
+  <File Type="REPORTS-TCL" Name="ARMv4_reports.tcl"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="ARMv4_incremental_reuse_pre_placed.rpt"/>
   <File Type="OPT-DRC" Name="ARMv4_drc_opted.rpt"/>
   <File Type="OPT-HWDEF" Name="ARMv4.hwdef"/>
   <File Type="PWROPT-DCP" Name="ARMv4_pwropt.dcp"/>
   <File Type="PLACE-DCP" Name="ARMv4_placed.dcp"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="ARMv4_incremental_reuse_pre_placed.rpt"/>
   <File Type="BG-BGN" Name="ARMv4.bgn"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="ARMv4_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="ARMv4.bin"/>
