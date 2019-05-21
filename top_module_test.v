@@ -83,7 +83,7 @@ file_to_ram FILE_TO_RAM(
 
 basic_ram BASIC_RAM(
 	.clk(clock),
-	.address(ram_addr),
+	.address(ram_addr[13:0]),
 	.data_output(ram_d_out),
 	.data_input(ram_d_in),
 	.mem_done_out(ram_m_ready),

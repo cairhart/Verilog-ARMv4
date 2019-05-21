@@ -30,10 +30,6 @@ module decodeFamily (
 
 wire [15:0] mask  = 16'h0001;
 
-initial begin 
-  f_signals = 16'h0000;
-  f_num = 0;
-end
 
 always @ (ir) 
     case (ir[27:25]) 

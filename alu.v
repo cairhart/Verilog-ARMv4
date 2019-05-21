@@ -1,18 +1,16 @@
 module alu(
-           input [31:0] A,B,  // ALU 8-bit Inputs                 
-           input [3:0] ALU_Sel,// ALU Selection
-           output [63:0] ALU_Out, // ALU 8-bit Output
-					 output [3:0] NZCV
-    );
+        input [31:0] A,B,  // ALU 8-bit Inputs                 
+        input [3:0] ALU_Sel,// ALU Selection
+        input rst,
+        output [63:0] ALU_Out, // ALU 8-bit Output
+        output [3:0] NZCV_out
+);
     reg [63:0] ALU_Result;
     reg [3:0] nzcv; // Carryout flag
 
     assign ALU_Out = ALU_Result; // ALU out
-		assign NZCV = nzcv;
+    assign NZCV_out = nzcv;
 
-    initial begin
-      nzcv = 4'b0000;
-    end
 
     always @(*)
     begin
@@ -51,6 +49,10 @@ module alu(
             ALU_Result = A;
           default: ALU_Result = A + B ; 
         endcase
+            if(rst) begin
+                nzcv = 4'b0000;
+            end
+            else begin
 				nzcv[3] = ALU_Result[31];
 				if(ALU_Result == 32'h0000)
 					nzcv[2] = 1;
@@ -64,5 +66,6 @@ module alu(
 					nzcv[1] = 1;
 				else
 				 	nzcv[0] = 0;
+            end
     end
 endmodule

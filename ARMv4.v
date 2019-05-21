@@ -12,7 +12,7 @@
 `include "state_machine.v"
 `include "memory_controller.v"
 `include "macro_definitions.v"
-
+`include "alu_op_mux.v"
 
 
 /**************************************************
@@ -25,13 +25,12 @@ module ARMv4(
 	input [31:0] ram_data_into_mcu,
 	input rst,
 
-	output [31:0] ram_data_in,
 	input ram_ready,
 	output cs, we, oe,
 	output [31:0] address,
   output [31:0] ir_out,
   output [63:0] cs_out,
-  output [15:0] dec_fam_out,
+// output [15:0] dec_fam_out, // for use with decoding
   output [1:0] data_size
 );
 
@@ -39,12 +38,19 @@ wire [31:0] address;
 wire [31:0] data_out;
 wire cs, we, oe;
 
-//C*O*D*E R*E*V*I*E*W
-//TODO Maybe we should add signals for this
-//assign cs = control_signals[40];
-assign cs = 1;
-assign we = 0;
-assign oe = 1;
+
+
+/**************************************************
+ ********         Control Signals       ***********
+ **************************************************/
+wire [63:0] control_signals; // Left generic to ease modificaiton.
+// Check the state machine spreadsheet to see descriptions of control signals
+// And use definitions from control_store_signal_defs.v
+
+
+assign cs = `CTRL_ST_CS;
+assign we = `CTRL_ST_WE;
+assign oe = `CTRL_ST_OE;
 assign data_out = mwdr;
 assign cs_out = control_signals;
 assign ir_out = ir;
@@ -56,12 +62,6 @@ reg [31:0] mrdr, mwdr; // Memory Read and Memory Write registers
 reg [31:0] ir; // Instruction register
 
 
-
-/**************************************************
- ********         Control Signals       ***********
- **************************************************/
-wire [63:0] control_signals; // Left generic to ease modificaiton.
-// Check the state machine spreadsheet to see descriptions of control signals
 
 
 
@@ -148,6 +148,7 @@ alu ALU(
     .A(a_bus),
     .B(am1_to_alu),
     .ALU_Sel(alu_operation),
+	.rst(rst),
     .ALU_Out({alu_bus_hi_UNUSED, alu_bus} ),
     .NZCV(nzcv_signals)
 
@@ -209,9 +210,10 @@ mul MUL(
 
 
 RegBankEncapsulation REG_BANK_ENCAP(
-	.clk(clk),     // TODO
-	.rst(rst),		// TODO
+	.clk(clk),  
+	.rst(rst),
 	.LATCH_REG(`CTRL_ST_LATCH_REG),
+	.WRITE_BACK(`CTRL_ST_WRITE_BACK),
     .IR_RD_MUX(`CTRL_ST_IR_RD_MUX),
     .IR_RN_MUX(`CTRL_ST_IR_RN_MUX),
 	.IR_RM_MUX(`CTRL_ST_IR_RM_MUX),
@@ -223,6 +225,9 @@ RegBankEncapsulation REG_BANK_ENCAP(
 	.IR(ir),
 	.ALU_BUS(alu_bus),
 	.REG_COUNTER(reg_counter_to_rb),    // TODO  will probably remove this signal
+	.is_DPI(decoder_fam_signals[0]),
+	.is_DPIS(decoder_fam_signals[1]),
+	.is_DPRS(decoder_fam_signals[2]),
 	.A_BUS(a_bus),
 	.B_BUS(b_bus),
 	.C_BUS(c_bus),
@@ -233,15 +238,14 @@ RegBankEncapsulation REG_BANK_ENCAP(
 
 
 StateMachine STATE_MACHINE(
-	.clk(clk),		// TODO
-	.rst(rst),		// TODO
+	.clk(clk),
+	.rst(rst),
 	.family_number(decoder_fam_num),
 	.COND(cond),
     .ST(ir[20]),
 	.PL(ir[24]),
 	.A(ir[21]),
 	.MEM_R(ram_ready),
-	.IR_20(ir[20]),
 	.CS_BITS(control_signals)
 );
 // D*E*B*U*G N*O*T*E
@@ -266,11 +270,6 @@ always @ (posedge clk) begin
     end
 end
 
-// Top Level initializaion
-initial begin
-
-
-end
 
 
 endmodule
